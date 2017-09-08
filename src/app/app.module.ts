@@ -10,15 +10,9 @@ import { Page2Component } from './page2/page2.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AppComponent } from './app.component';
+import { AppRouting } from './app.routing';
 
-import { RouterModule, Routes } from '@angular/router';
 
-const appRoutes: Routes = [
-  { path: '', component: Page1Component },
-  { path: 'page1', component: Page1Component },
-  { path: 'page2', component: Page2Component },
-  { path: '**', component: PageNotFoundComponent }
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +22,11 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    AppRouting,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
-    )
+    AppRouting
   ],
   providers: [],
   bootstrap: [AppComponent]
