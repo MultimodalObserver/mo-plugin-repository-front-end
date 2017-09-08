@@ -1,3 +1,27 @@
-<p>
-  page1 works!
-</p>
+<div *ngIf="status == 'LOADING'">
+    <i class="fa fa-spinner fa-spin"></i> Loading plugins...
+</div>
+
+<div *ngIf="status == 'OK' && plugins.length == 0">
+    <p>No results <i class="fa fa-frown-o"></i></p>
+</div>
+
+<div *ngIf="status == 'ERROR'">
+    <p>Error getting plugin list <i class="fa fa-frown-o"></i> <button (click)="fetchPlugins()" class="btn btn-primary">Try again</button> </p>
+</div>
+
+<div class="panel panel-default" *ngFor="let p of plugins">
+  <div class="panel-body">
+    <i class="fa fa-github"></i> <a target="_blank" href="{{ p.repository_url }}">{{ p.name }}</a>
+  </div>
+
+  <div class="panel-footer">
+    <p><i class="fa fa-home"></i> <a target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></p>
+
+    <p *ngIf="p.shortDescription">
+      {{ p.description | shortenLongString:maxLengthDescription }} 
+      <a href="#" (click)="p.shortDescription = false">Read more</a>
+    </p>
+    <p *ngIf="!p.shortDescription">{{ p.description }}</p>
+  </div>
+</div>

@@ -9,8 +9,12 @@ import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { ShortenLongStringPipe } from '../shorten-long-string.pipe';
+
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
+
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,10 +23,12 @@ import { AppRouting } from './app.routing';
     Page1Component,
     Page2Component,
     PageNotFoundComponent,
+    ShortenLongStringPipe
   ],
   imports: [
     BrowserModule,
     AppRouting,
+    HttpClientModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
