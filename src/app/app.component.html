@@ -3,13 +3,16 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+
+      <h3>Prueba de Bootstrap, dropdown, y tooltip. (CSS y JS)</h3>
+
       <div class="alert alert-success">Bootstrap</div>
       <code>Bootstrap instalado</code>
       <button class="btn btn-primary">Primary</button>
       <button class="btn btn-secondary">Secondary</button>
 
       <div class="dropdown" dropdown>
-        <button dropdownToggle class="btn btn-default">Bootstrap funciona?</button>
+        <button dropdownToggle class="btn btn-default">Bootstrap funciona? (click para el dropdown)</button>
         <div *dropdownMenu class="dropdown-menu">Si, funciona!</div>
       </div>
 
@@ -19,6 +22,19 @@
         </span>
       </p>
 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <h3>Prueba del enrutador</h3>
+
+      <p><a routerLink="/page1">Page 1</a></p>
+      <p><a routerLink="/page2">Page 2</a></p>
+      <p><a routerLink="/error-123456789-qwerty">(Pagina aleatoria, error 404)</a></p>
+
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
