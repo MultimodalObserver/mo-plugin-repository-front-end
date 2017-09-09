@@ -18,19 +18,22 @@ export class Page1Component implements OnInit {
 
     this.status = 'LOADING';
 
-    this.http.get('https://mo-plugin-repository.herokuapp.com/plugins').subscribe(
-      data => {
-        this.plugins = data;
+    this.plugins = [{
+      name: "plugin name",
+      home_page: "https://home.page/",
+      repository_url: "https://www.github.com/aaaa/bbbb",
+      description: "Description long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text"
+    },
+    {
+      name: "plugin name",
+      home_page: "https://home.page/",
+      repository_url: "https://www.github.com/aaaa/bbbb",
+      description: "Description long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text"
+    }];
 
-        // Shorten every description
-        this.plugins.map((e) => e.shortDescription = e.description.length > this.maxLengthDescription);
-        this.status = 'OK';
-      },
-      error => {
-        this.plugins = [];
-        this.status = 'ERROR';
-      }
-    );
+    // Shorten every description
+    this.plugins.map((e) => e.shortDescription = e.description.length > this.maxLengthDescription);
+    this.status = 'OK';
   }
 
   ngOnInit() {
