@@ -1,44 +1,40 @@
-<div class="container container-main">
-  <div class="row">
-    <div class="col-md-3">
+<div class="container-main">
+<aside class="sidebar-left">
 
+  <a class="company-logo" routerLink="/"><img src="assets/mo63x63.png"></a>
 
-
-      <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="assets/mo63x63.png"/></a>
-        <button class="navbar-toggler" (click)="collapse=!collapse" type="button" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse" (click)="collapse=true" [hidden]="collapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-
-          </ul>
-        </div>
-      </nav>
-
-
-
-
-
-
-
-
-      <p><a routerLink="/">Home</a></p>
-      <p><a routerLink="explore">Explore</a></p>
-      <p><a routerLink="page2">Publish plugin</a></p>
-      <p><a routerLink="error-123456789-qwerty">(Pagina aleatoria, error 404)</a></p>
-
-    </div>
-
-    <div class="col-md-6">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="sidebar-links">
+    <a class="link-blue" routerLink="/"><i class="fa fa-home"></i>Home</a>
+    <a class="link-red" routerLink="explore"><i class="fa fa-search"></i>Explore</a>
+    <a class="link-yellow" routerLink="publish"><i class="fa fa-share-alt"></i>Publish</a>
+    <a class="link-green" routerLink="profile"><i class="fa fa-user-o"></i>My Profile</a>
   </div>
+
+</aside>
+
+<div class="main-content">
+
+  <!--<div class="menu">-->
+
+  <router-outlet></router-outlet>
+
+  <!--</div>-->
+
 </div>
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+/*
+  $(function () {
+
+    var links = $('.sidebar-links > a');
+
+    links.on('click', function () {
+
+      links.removeClass('selected');
+      $(this).addClass('selected');
+
+    })
+  });*/
+</script>

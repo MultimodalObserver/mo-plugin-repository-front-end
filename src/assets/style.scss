@@ -1,16 +1,16 @@
 @import './global_variables.scss';
 
 $container-separation: 20px;
-
+/*
 @media (min-width: 1200px) {
     .container-main{
         max-width: 970px;
     }
 }
-
+*/
 
 body {
-  background-color: $mo-logo-background-color;
+  background-color: $background-color;
 }
 
 .header {
@@ -22,10 +22,11 @@ body {
 
 .container-main {
   background-color: white;
-  padding-top: $container-separation;
-  padding-bottom: $container-separation;
-  margin-top: $container-separation;
-  margin-bottom: $container-separation;
+  /*padding-top: $container-separation;
+  padding-bottom: $container-separation;*/
+  /*margin-top: $container-separation;
+  margin-bottom: $container-separation;*/
+  max-width: 970px;
   border: 1px solid $main-container-border;
 }
 
