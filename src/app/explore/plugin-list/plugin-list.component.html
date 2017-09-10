@@ -14,6 +14,8 @@
   <div class="panel-footer">
     <p><i class="fa fa-home"></i> <a target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></p>
 
+    <div class="tag" *ngFor="let c of p.categories"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>
+
     <p *ngIf="p.shortDescription">
       {{ p.description | shortenLongString:maxLengthDescription }}
       <a href="#" (click)="p.shortDescription = false">Read more</a>
