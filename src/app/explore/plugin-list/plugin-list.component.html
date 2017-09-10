@@ -10,7 +10,13 @@
   <div class="panel-body">
 
     <div class="plugin-item-line">
-      <i class="fa fa-{{ p.repo_type }}"></i> <b><a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a></b>
+      <i class="fa fa-{{ p.repo_type }}"></i>
+      <b><a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a></b>
+
+      <button class="btn btn-primary pull-right"><i class="fa fa-download"></i>
+        Install
+      </button>
+
     </div>
 
     <div class="plugin-item-line"><i *ngIf="p.home_page" class="fa fa-home"></i> <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></div>

@@ -21,6 +21,7 @@ import { AppRouting } from './app.routing';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PluginListComponent } from './explore/plugin-list/plugin-list.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PluginListComponent } from './explore/plugin-list/plugin-list.component
     PageNotFoundComponent,
     ShortenLongStringPipe,
     BuildRepoUrlPipe,
-    PluginListComponent
+    PluginListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

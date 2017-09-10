@@ -13,13 +13,20 @@ body {
   background-color: $mo-logo-background-color;
 }
 
+.header {
+  border-bottom: 1px solid $light-grey;
+  width: 100%;
+  display: block;
+  margin-bottom: $nice-bottom-margin;
+}
+
 .container-main {
   background-color: white;
   padding-top: $container-separation;
   padding-bottom: $container-separation;
   margin-top: $container-separation;
   margin-bottom: $container-separation;
-  border: 1px solid black;
+  border: 1px solid $main-container-border;
 }
 
 a {
