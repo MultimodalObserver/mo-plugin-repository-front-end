@@ -17,16 +17,16 @@ export enum Status {
 export class PluginListComponent implements OnInit {
 
   // Enum reference so the HTML can see it.
-  private Status = Status;
+  Status = Status;
 
-  private plugins: any[] = [];
+  plugins: any[] = [];
 
-  private currentStatus: Status;
-  private maxLengthDescription: number = 300;
-  private noMorePlugins: boolean;
-  private lastPageLoadedSuccessfully: number;
-  private paramSubscription: Subscription;
-  private categorySlug: string;
+  currentStatus: Status;
+  maxLengthDescription: number = 300;
+  noMorePlugins: boolean;
+  lastPageLoadedSuccessfully: number;
+  paramSubscription: Subscription;
+  categorySlug: string;
 
   constructor(private route: ActivatedRoute, private pluginService: PluginService, private searchParamsService: SearchParamsService) {
   }
