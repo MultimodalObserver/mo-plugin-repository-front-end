@@ -24,11 +24,11 @@ export class PluginService {
 
       if(params.categorySlug){
         // Filtered by category
-        url = this.urlService.getBaseUrl() + 'categories/' + params.categorySlug + '/plugins?page=' + params.page;
+        url = this.urlService.build(['categories', params.categorySlug, 'plugins'], { page: params.page });
 
       } else {
         // Not filtered by category
-        url = this.urlService.getBaseUrl() + 'plugins?page=' + params.page;
+        url = this.urlService.build(['plugins'], { page: params.page });
       }
 
       return this.http.get<T>(url);

@@ -10,7 +10,7 @@ export class CategoryService {
     }
 
     public getCategories() : Observable<any> {
-      return this.http.get(this.urlService.getBaseUrl() + '/categories');
+      return this.http.get(this.urlService.build(['categories']));
     }
 
 }
