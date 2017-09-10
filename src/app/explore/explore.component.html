@@ -14,7 +14,7 @@
 
 <div class="panel panel-default" *ngFor="let p of plugins">
   <div class="panel-body">
-    <i class="fa fa-github"></i> <a target="_blank" href="{{ p.repository_url }}">{{ p.name }}</a>
+    <i class="fa fa-github"></i> <a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a>
   </div>
 
   <div class="panel-footer">

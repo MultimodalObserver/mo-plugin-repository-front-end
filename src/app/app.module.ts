@@ -5,11 +5,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { Page1Component } from './page1/page1.component';
+import { ExploreComponent } from './explore/explore.component';
 import { Page2Component } from './page2/page2.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-import { ShortenLongStringPipe } from '../shorten-long-string.pipe';
+import { ShortenLongStringPipe } from '../pipes/shorten-long-string.pipe';
+import { BuildRepoUrlPipe } from '../pipes/build-repo-url.pipe';
+
+import { UrlService } from '../services/url.service';
+import { PluginService } from '../services/plugin.service';
+import { CategoryService } from '../services/category.service';
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
@@ -20,10 +25,11 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    Page1Component,
+    ExploreComponent,
     Page2Component,
     PageNotFoundComponent,
-    ShortenLongStringPipe
+    ShortenLongStringPipe,
+    BuildRepoUrlPipe
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     ModalModule.forRoot(),
     AppRouting
   ],
-  providers: [],
+  providers: [UrlService, PluginService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UrlService } from '../url.service';
+import { PluginService } from '../../services/plugin.service';
+import { CategoryService } from '../../services/category.service';
 import * as _ from "lodash";
-
 
 export enum Status {
   LOADING, OK, ERROR
 }
 
 @Component({
-  selector: 'app-page1',
-  templateUrl: './page1.component.html',
-  styleUrls: ['./page1.component.css'],
-  providers: [UrlService]
+  selector: 'app-explore',
+  templateUrl: './explore.component.html',
+  styleUrls: ['./explore.component.css']
 })
-export class Page1Component implements OnInit {
+export class ExploreComponent implements OnInit {
 
-  constructor(private http: HttpClient, private urlService: UrlService) {}
+  constructor(private http: HttpClient, private categoryService: CategoryService, private pluginService: PluginService) {}
 
   // Enum reference so the HTML can see it.
   Status = Status;
 
-  plugins: any[];
-  categories: any[];
+  plugins: any[] = [];
+  categories: any[] = [];
   currentStatus: Status;
   maxLengthDescription: number = 300;
   noMorePlugins: boolean;
@@ -43,7 +42,8 @@ export class Page1Component implements OnInit {
   }
 
   fetchCategories(){
-    this.http.get(this.urlService.getBaseUrl() + 'categories').subscribe(
+    this.categoryService.getCategories()
+    .subscribe(
       data => {
         this.categories = <Array<any>>data;
       },
@@ -55,17 +55,14 @@ export class Page1Component implements OnInit {
     this.currentStatus = Status.LOADING;
     var url: string;
 
-    if(this.categorySlug == null){
+    var params = {
+      categorySlug: this.categorySlug,
+      page: this.lastPageLoadedSuccessfully + 1
+    };
 
-      // Not filtered by category
-      url = this.urlService.getBaseUrl() + 'plugins?page=' + (this.lastPageLoadedSuccessfully + 1);
-    } else {
 
-      // Filtered by category
-      url = this.urlService.getBaseUrl() + 'categories/' + this.categorySlug + '/plugins?page=' + (this.lastPageLoadedSuccessfully + 1);
-    }
-
-    this.http.get(url).subscribe(
+    this.pluginService.getPlugins(params)
+    .subscribe(
       data => {
 
         if((<Array<any>>data).length == 0){
@@ -94,7 +91,6 @@ export class Page1Component implements OnInit {
 
   ngOnInit() {
     this.resetSearch();
-    this.categories = [];
     this.fetchPlugins();
     this.fetchCategories();
   }
