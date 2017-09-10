@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import { SearchParamsService } from './search-params.service';
 import { Subscription } from 'rxjs/Subscription';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-explore',

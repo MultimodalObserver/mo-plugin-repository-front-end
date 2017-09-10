@@ -9,7 +9,7 @@ export class CategoryService {
     constructor(private http: HttpClient, private urlService: UrlService ) {
     }
 
-    public getCategories() : Observable<any> {
+    public getCategories(): Observable<any> {
       return this.http.get(this.urlService.build(['categories']));
     }
 

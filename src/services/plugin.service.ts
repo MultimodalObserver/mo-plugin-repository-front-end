@@ -12,7 +12,7 @@ export class PluginService {
 
     public getPlugins<T>(params: any) : Observable<T> {
 
-      var url: string;
+      let url: string;
 
       if(!params.hasOwnProperty('page')){
         params.page = 1;

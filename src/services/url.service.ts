@@ -19,18 +19,18 @@ export class UrlService {
 
     for(let i=0; i<path.length; i++){
       if(i > 0)
-        url += "/";
+        url += '/';
 
       url += path[i];
     }
 
     if(queryParams){
-      url += "?";
+      url += '?';
       let first = true;
 
       _.forOwn(queryParams, function(value, key) {
         if(!first){
-          url += "&";
+          url += '&';
         }
 
         first = false;

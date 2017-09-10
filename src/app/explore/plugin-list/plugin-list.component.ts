@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { PluginService } from '../../../services/plugin.service';
 import { SearchParamsService } from '../search-params.service';
 import { Subscription } from 'rxjs/Subscription';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 export enum Status {
   LOADING, OK, ERROR
@@ -22,28 +22,28 @@ export class PluginListComponent implements OnInit {
   plugins: any[] = [];
 
   currentStatus: Status;
-  maxLengthDescription: number = 300;
+  maxLengthDescription = 300;
   noMorePlugins: boolean;
-  lastPageLoadedSuccessfully: number;
-  paramSubscription: Subscription;
-  categorySlug: string;
+  private lastPageLoadedSuccessfully: number;
+  private paramSubscription: Subscription;
+  private categorySlug: string;
 
   constructor(private route: ActivatedRoute, private pluginService: PluginService, private searchParamsService: SearchParamsService) {
   }
 
-  private resetSearch() : void{
+  private resetSearch() : void {
     this.noMorePlugins = false;
     this.lastPageLoadedSuccessfully = 0;
     this.plugins = [];
     this.categorySlug = null;
   }
 
-  private fetchPlugins() : void{
+  fetchPlugins() : void {
 
     this.currentStatus = Status.LOADING;
-    var url: string;
+    let url: string;
 
-    var params = {
+    const params = {
       categorySlug: this.categorySlug,
       page: this.lastPageLoadedSuccessfully + 1
     };
@@ -53,16 +53,16 @@ export class PluginListComponent implements OnInit {
     .subscribe(
       data => {
 
-        if((<Array<any>>data).length == 0){
+        if((<Array<any>>data).length === 0){
           // This means the last page visited doesn't have plugins.
-          // Which means that the "load more" button must disappear.
+          // Which means that the 'load more' button must disappear.
           this.noMorePlugins = true;
           this.currentStatus = Status.OK;
           return;
         }
 
         // Union = concatenate and remove duplicates
-        this.plugins = _.unionWith(this.plugins, <Array<any>>data, (a, b) => a.id == b.id);
+        this.plugins = _.unionWith(this.plugins, <Array<any>>data, (a, b) => a.id === b.id);
 
         // Shorten every description
         this.plugins.map((e) => e.shortDescription = e.description.length > this.maxLengthDescription);

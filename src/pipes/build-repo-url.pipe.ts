@@ -4,6 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class BuildRepoUrlPipe implements PipeTransform {
   transform(value: any): string {
 
-    return "https://www." + value.repo_type + ".com/" + value.repo_user + "/" + value.repo_name;
+    return 'https://www.' + value.repo_type + '.com/' + value.repo_user + '/' + value.repo_name;
   }
 }

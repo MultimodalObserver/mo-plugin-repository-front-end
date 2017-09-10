@@ -6,7 +6,7 @@ export class ShortenLongStringPipe implements PipeTransform {
 
     if(value.length <= length)
       return value;
-      
-    return value.substr(0, length).trim() + "...";
+
+    return value.substr(0, length).trim() + '...';
   }
 }
