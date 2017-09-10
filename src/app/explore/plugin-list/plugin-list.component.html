@@ -1,9 +1,9 @@
 <div *ngIf="currentStatus == Status.OK && plugins.length == 0">
-    <p>No results <i class="fa fa-frown-o"></i></p>
+    <p class="bare-message">No results <i class="fa fa-frown-o"></i></p>
 </div>
 
 <div *ngIf="currentStatus == Status.ERROR">
-    <p>Error getting plugin list <i class="fa fa-frown-o"></i> <button (click)="fetchPlugins()" class="btn btn-primary">Try again</button> </p>
+    <p class="bare-message">Error getting plugin list <i class="fa fa-frown-o"></i> <button (click)="fetchPlugins()" class="btn btn-primary">Try again</button> </p>
 </div>
 
 <div class="plugin-item panel panel-default" *ngFor="let p of plugins">
@@ -35,7 +35,7 @@
 
 
 <div *ngIf="currentStatus == Status.LOADING">
-    <i class="fa fa-spinner fa-spin"></i> Loading plugins...
+  <p class="bare-message"><i class="fa fa-spinner fa-spin"></i> Loading plugins...</p>
 </div>
 
 
