@@ -12,7 +12,7 @@ export enum Status {
 @Component({
   selector: 'app-plugin-list',
   templateUrl: './plugin-list.component.html',
-  styleUrls: ['./plugin-list.component.css']
+  styleUrls: ['./plugin-list.component.scss']
 })
 export class PluginListComponent implements OnInit {
 

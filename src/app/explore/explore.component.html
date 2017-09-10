@@ -1,6 +1,22 @@
-<div class="btn-group">
-  <a [ngClass]="{ active: currentCategory === null }" class="btn btn-secondary" [routerLink]="'.'">All</a>
-  <a *ngFor="let c of categories" [ngClass]="{ active: currentCategory === c.short_name }" class="btn btn-secondary" [routerLink]="[c.short_name]">{{ c.name }}</a>
+<input type="text" class="search-input" placeholder="Search plugins..."/>
+
+<div class="category-box">
+  <div class="row">
+    <div class="col-md-6">
+      <ul class="category-list">
+        <li><a [ngClass]="{ active: currentCategory === null }" [routerLink]="'.'">All</a></li>
+        <li *ngFor="let c of categories1"><a [ngClass]="{ active: currentCategory === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <ul class="category-list">
+        <li *ngFor="let c of categories2"><a [ngClass]="{ active: currentCategory === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
+      </ul>
+    </div>
+
+  </div>
 </div>
+
 
 <router-outlet></router-outlet>

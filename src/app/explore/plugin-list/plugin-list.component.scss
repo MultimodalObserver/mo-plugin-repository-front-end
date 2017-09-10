@@ -1,0 +1,25 @@
+@import '../../../assets/global_variables.scss';
+
+.tag {
+  display: inline;
+  background-color: $light-grey;
+  color: $medium-grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 3px 5px 3px 0;
+  font-size: $small-font;
+}
+
+.plugin-item {
+  border-bottom: $sweet-border;
+  margin: 5px 0;
+  padding: 5px 0;
+}
+
+.home-page {
+  font-size: $small-font;
+}
+
+.plugin-item-line {
+  margin-bottom: $nice-bottom-margin;
+}

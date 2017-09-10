@@ -1,0 +1,31 @@
+@import '../../assets/global_variables.scss';
+
+.active {
+  font-weight: bold;
+}
+
+@mixin param-box {
+  padding: 10px;
+  border: $sweet-border;
+  margin-bottom: $nice-bottom-margin;
+  width: 100%;
+}
+
+.search-input {
+  @include param-box;
+}
+
+.category-box {
+  @include param-box;
+}
+
+ul { padding-left:20px; list-style:none; }
+li { margin-bottom:10px; }
+
+.category-list li:before {
+  font-family: 'FontAwesome';
+  content: '\f02b';
+  margin: 0 5px 0 -15px;
+  color: $medium-grey;
+  font-size: $small-font;
+}

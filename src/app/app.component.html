@@ -1,13 +1,15 @@
-<div class="container">
+<div class="container container-main">
   <div class="row">
-    <div class="col-md-12">
-
-      <h3>Prueba del enrutador</h3>
+    <div class="col-md-3">
 
       <p><a routerLink="explore">Page 1</a></p>
       <p><a routerLink="page2">Page 2</a></p>
       <p><a routerLink="error-123456789-qwerty">(Pagina aleatoria, error 404)</a></p>
 
+
+    </div>
+
+    <div class="col-md-6">
       <router-outlet></router-outlet>
     </div>
   </div>

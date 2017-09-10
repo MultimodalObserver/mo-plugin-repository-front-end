@@ -1,0 +1,38 @@
+@import './global_variables.scss';
+
+$container-separation: 20px;
+
+@media (min-width: 1200px) {
+    .container-main{
+        max-width: 970px;
+    }
+}
+
+
+body {
+  background-color: $mo-logo-background-color;
+}
+
+.container-main {
+  background-color: white;
+  padding-top: $container-separation;
+  padding-bottom: $container-separation;
+  margin-top: $container-separation;
+  margin-bottom: $container-separation;
+  border: 1px solid black;
+}
+
+a {
+  color: $link-not-hover;
+  &:hover, &:focus {
+    color: $link-yes-hover;
+  }
+}
+
+
+.btn-primary{
+  background-color: $link-not-hover;
+  &:hover, &:focus {
+    background-color: $link-yes-hover;
+  }
+}

@@ -6,21 +6,24 @@
     <p>Error getting plugin list <i class="fa fa-frown-o"></i> <button (click)="fetchPlugins()" class="btn btn-primary">Try again</button> </p>
 </div>
 
-<div class="panel panel-default" *ngFor="let p of plugins">
+<div class="plugin-item panel panel-default" *ngFor="let p of plugins">
   <div class="panel-body">
-    <i class="fa fa-github"></i> <a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a>
-  </div>
 
-  <div class="panel-footer">
-    <p><i class="fa fa-home"></i> <a target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></p>
+    <div class="plugin-item-line">
+      <i class="fa fa-{{ p.repo_type }}"></i> <b><a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a></b>
+    </div>
 
-    <div class="tag" *ngFor="let c of p.categories"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>
+    <div class="plugin-item-line"><i *ngIf="p.home_page" class="fa fa-home"></i> <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></div>
 
-    <p *ngIf="p.shortDescription">
+    <div class="plugin-item-line">
+      <div class="tag" *ngFor="let c of p.categories"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>
+    </div>
+
+    <div class="plugin-item-line" *ngIf="p.shortDescription" (click)="p.shortDescription = false">
       {{ p.description | shortenLongString:maxLengthDescription }}
-      <a href="#" (click)="p.shortDescription = false">Read more</a>
-    </p>
-    <p *ngIf="!p.shortDescription">{{ p.description }}</p>
+      <a href="#">Read more</a>
+    </div>
+    <div class="plugin-item-line" *ngIf="!p.shortDescription">{{ p.description }}</div>
   </div>
 </div>
 
