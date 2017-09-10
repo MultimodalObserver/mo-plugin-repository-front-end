@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { PluginService } from '../../../services/plugin.service';
+import { SearchParamsService } from '../search-params.service';
+import { Subscription } from 'rxjs/Subscription';
 import * as _ from "lodash";
 
 export enum Status {
@@ -15,26 +17,28 @@ export enum Status {
 export class PluginListComponent implements OnInit {
 
   // Enum reference so the HTML can see it.
-  Status = Status;
+  private Status = Status;
 
-  plugins: any[] = [];
+  private plugins: any[] = [];
 
-  currentStatus: Status;
-  maxLengthDescription: number = 300;
-  noMorePlugins: boolean;
-  lastPageLoadedSuccessfully: number;
-  categorySlug:string = null;
+  private currentStatus: Status;
+  private maxLengthDescription: number = 300;
+  private noMorePlugins: boolean;
+  private lastPageLoadedSuccessfully: number;
+  private paramSubscription: Subscription;
+  private categorySlug: string;
 
-  constructor(private route: ActivatedRoute, private pluginService: PluginService) { }
+  constructor(private route: ActivatedRoute, private pluginService: PluginService, private searchParamsService: SearchParamsService) {
+  }
 
-  resetSearch(){
+  private resetSearch() : void{
     this.noMorePlugins = false;
     this.lastPageLoadedSuccessfully = 0;
     this.plugins = [];
     this.categorySlug = null;
   }
 
-  fetchPlugins(){
+  private fetchPlugins() : void{
 
     this.currentStatus = Status.LOADING;
     var url: string;
@@ -73,10 +77,13 @@ export class PluginListComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(){
+    this.paramSubscription.unsubscribe();
+  }
+
+
   ngOnInit() {
-
-    this.route.params.subscribe(params => {
-
+    this.paramSubscription = this.route.params.subscribe(params => {
       this.resetSearch();
 
       if(params.hasOwnProperty('categorySlug') && typeof params.categorySlug === 'string'){
@@ -85,9 +92,10 @@ export class PluginListComponent implements OnInit {
         this.categorySlug = null;
       }
 
+      this.searchParamsService.updateCategorySlug(this.categorySlug);
+
       this.fetchPlugins();
     });
-
   }
 
 }

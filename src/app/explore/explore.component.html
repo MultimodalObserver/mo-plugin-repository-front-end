@@ -1,6 +1,6 @@
 <div class="btn-group">
-  <a [ngClass]="{active: categorySlug===null}" class="btn btn-secondary" [routerLink]="'.'">All</a>
-  <a *ngFor="let c of categories" [ngClass]="{active: categorySlug===c.short_name}" class="btn btn-secondary" [routerLink]="c.short_name">{{ c.name }}</a>
+  <a [ngClass]="{ active: currentCategory === null }" class="btn btn-secondary" [routerLink]="'.'">All</a>
+  <a *ngFor="let c of categories" [ngClass]="{ active: currentCategory === c.short_name }" class="btn btn-secondary" [routerLink]="[c.short_name]">{{ c.name }}</a>
 </div>
 
 <router-outlet></router-outlet>
