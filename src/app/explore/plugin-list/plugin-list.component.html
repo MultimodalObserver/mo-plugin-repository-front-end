@@ -39,4 +39,4 @@
 </div>
 
 
-<button *ngIf="!noMorePlugins" class="btn btn-primary" (click)="fetchPlugins()">Load more</button>
+<button *ngIf="!noMorePlugins && currentStatus != Status.LOADING" class="btn btn-primary" (click)="fetchPlugins()">Load more</button>
