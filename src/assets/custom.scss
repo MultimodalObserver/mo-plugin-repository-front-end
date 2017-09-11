@@ -1,9 +1,8 @@
 @import './global_variables.scss';
 
-@media (min-width: $body-width) {
-    body {
-        padding-top: $top-padding;
-    }
+body {
+  background-color: $background-color;
+  padding-top: $top-padding;
 }
 
 .header {

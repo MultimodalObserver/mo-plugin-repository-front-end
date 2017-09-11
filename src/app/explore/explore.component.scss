@@ -4,20 +4,14 @@
   font-weight: bold;
 }
 
-@mixin param-box {
+.param-box {
   padding: 10px;
   border: $sweet-border;
   margin-bottom: $nice-bottom-margin;
   width: 100%;
 }
 
-.search-input {
-  @include param-box;
-}
 
-.category-box {
-  @include param-box;
-}
 
 ul { padding-left:20px; list-style:none; }
 li { margin-bottom:10px; }

@@ -1,13 +1,13 @@
-<div class="category-box">
+<div class="param-box">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 category-column">
       <ul class="category-list">
         <li><a [ngClass]="{ active: currentCategory === null }" [routerLink]="'.'">All</a></li>
         <li *ngFor="let c of categories1"><a [ngClass]="{ active: currentCategory === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
       </ul>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 category-column">
       <ul class="category-list">
         <li *ngFor="let c of categories2"><a [ngClass]="{ active: currentCategory === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
       </ul>
@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<input type="text" class="search-input" placeholder="Search plugins..."/>
+<input type="text" class="param-box" placeholder="Search plugins..."/>
 
 
 <router-outlet></router-outlet>
