@@ -15,16 +15,16 @@
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link link-blue" routerLink="/"><i class="fa fa-home"></i> Home</a>
+            <a class="nav-link link-blue" routerLink="/" (click)="isCollapsed = true"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-red" routerLink="explore"><i class="fa fa-search"></i> Explore</a>
+            <a class="nav-link link-red" routerLink="explore" (click)="isCollapsed = true"><i class="fa fa-search"></i> Explore</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-yellow" routerLink="publish"><i class="fa fa-share-alt"></i> Publish</a>
+            <a class="nav-link link-yellow" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-share-alt"></i> Publish</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-green" routerLink="publish"><i class="fa fa-user-o"></i> Account</a>
+            <a class="nav-link link-green" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-user-o"></i> Account</a>
           </li>
         </ul>
       </div>
