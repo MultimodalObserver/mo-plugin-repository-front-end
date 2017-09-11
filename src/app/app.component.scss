@@ -1,0 +1,41 @@
+@import './../assets/global_variables.scss';
+
+$container-separation: 20px;
+
+body {
+  background-color: $background-color;
+  padding-top: $top-padding;
+}
+
+
+.container-main {
+  background-color: white;
+  padding: $container-separation;
+  max-width: $body-width;
+  margin-bottom: $container-separation;
+  border: 1px solid $main-container-border;
+}
+
+@mixin link-color($color) {
+  .fa {
+    color: $color;
+    font-size: 20px;
+    padding: 5px;
+  }
+}
+
+.link-blue {
+	@include link-color(#487db2);
+}
+
+.link-red {
+	@include link-color(#da4545);
+}
+
+.link-yellow {
+	@include link-color(#d0d237);
+}
+
+.link-green {
+	@include link-color(#86be2e);
+}

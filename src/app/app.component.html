@@ -1,40 +1,55 @@
-<div class="container-main">
-<aside class="sidebar-left">
+<body>
 
-  <a class="company-logo" routerLink="/"><img src="assets/mo63x63.png"></a>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/"><img src="assets/mo63x63.png"></a>
+      <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="sidebar-links">
-    <a class="link-blue" routerLink="/"><i class="fa fa-home"></i>Home</a>
-    <a class="link-red" routerLink="explore"><i class="fa fa-search"></i>Explore</a>
-    <a class="link-yellow" routerLink="publish"><i class="fa fa-share-alt"></i>Publish</a>
-    <a class="link-green" routerLink="profile"><i class="fa fa-user-o"></i>My Profile</a>
+      <div class="collapse navbar-collapse"
+      (collapsed)="onCollapsed($event)"
+      (expanded)="onExpanded($event)"
+      [collapse]="isCollapsed">
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link link-blue" routerLink="/"><i class="fa fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-red" routerLink="explore"><i class="fa fa-search"></i> Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-yellow" routerLink="publish"><i class="fa fa-share-alt"></i> Publish</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-green" routerLink="publish"><i class="fa fa-user-o"></i> Account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container container-main">
+
+    <router-outlet></router-outlet>
+
   </div>
+  <!-- /.container -->
 
-</aside>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 
-<div class="main-content">
+  <!-- Bootstrap core JavaScript -->
+  <!--<script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper/popper.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>-->
 
-  <!--<div class="menu">-->
-
-  <router-outlet></router-outlet>
-
-  <!--</div>-->
-
-</div>
-
-</div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-/*
-  $(function () {
-
-    var links = $('.sidebar-links > a');
-
-    links.on('click', function () {
-
-      links.removeClass('selected');
-      $(this).addClass('selected');
-
-    })
-  });*/
-</script>
+</body>

@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PluginListComponent } from './explore/plugin-list/plugin-list.component';
 import { HomeComponent } from './home/home.component';
 
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { HomeComponent } from './home/home.component';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    CollapseModule.forRoot(),
     AppRouting
   ],
   providers: [UrlService, PluginService, CategoryService],
