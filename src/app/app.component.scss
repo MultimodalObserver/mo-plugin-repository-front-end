@@ -5,7 +5,6 @@ $container-separation: 20px;
 .container-main {
   background-color: white;
   padding: $container-separation;
-  max-width: $body-width;
   margin-bottom: $container-separation;
   border: 1px solid $main-container-border;
 }
