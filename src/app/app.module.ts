@@ -30,7 +30,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 
-import { MaterializeModule } from "angular2-materialize";
+//import { MaterializeModule } from "angular2-materialize";
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 
@@ -53,7 +53,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     BrowserModule,
     AppRouting,
     HttpModule,
-    MaterializeModule,
+    //MaterializeModule,
     HttpClientModule,
     RouterModule,
     BsDropdownModule.forRoot(),

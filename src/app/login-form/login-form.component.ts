@@ -3,8 +3,7 @@ import {Angular2TokenService} from "angular2-token";
 
 @Component({
   selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent implements OnInit {
 

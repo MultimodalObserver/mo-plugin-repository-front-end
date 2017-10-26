@@ -1,48 +1,5 @@
 <body>
 
-
-  <!-- Toolbar de login -->
-  <!--Navigation-->
-  <div class="navbar-fixed">
-
-    <nav  role="navigation">
-
-      <div class="nav-wrapper blue ">
-        <a [routerLink]="['']" id="logo-container" class="brand-logo">Rails & Angular Auth</a>
-
-        <ul class="right hide-on-med-and-down">
-
-          <li *ngIf="!tokenAuthService.userSignedIn()">
-            <a (click)="presentAuthDialog()" >LOGIN</a>
-          </li>
-          <li *ngIf="!tokenAuthService.userSignedIn()">
-            <a (click)="presentAuthDialog('register')">REGISTER</a>
-          </li>
-
-          <li *ngIf="tokenAuthService.userSignedIn()">
-            <a >PROFILE</a>
-          </li>
-          <li *ngIf="tokenAuthService.userSignedIn()">
-            <a (click)="tokenAuthService.signOut()">LOGOUT</a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </nav>
-
-  </div>
-
-  <app-auth-dialog #authDialog ></app-auth-dialog>
-
-  <!---->
-
-
-
-
-
-
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -66,33 +23,55 @@
           <li class="nav-item">
             <a class="nav-link link-yellow" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-share-alt"></i> Publish</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link link-green" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-user-o"></i> Account</a>
+
+          <!-- Not logged in -->
+
+          <li class="nav-item" *ngIf="!tokenAuthService.userSignedIn()">
+            <a class="nav-link link-green" [routerLink]="['']" (click)="openModal(loginModal)"><i class="fa fa-user-o"></i> Login</a>
           </li>
+
+          <!-- Logged in -->
+
+          <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
+            <a class="nav-link link-green" (click)="tokenAuthService.signOut()">Profile</a>
+          </li>
+
+          <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
+            <a class="nav-link link-red" (click)="tokenAuthService.signOut()">Logout</a>
+          </li>
+
+
         </ul>
       </div>
     </div>
   </nav>
 
+  <!-- Login/register modal -->
+  <ng-template #loginModal>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is a modal.
+    </div>
+  </ng-template>
+
+
   <!-- Page Content -->
   <div class="container container-main">
-
     <router-outlet></router-outlet>
-
   </div>
-  <!-- /.container -->
+
+
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
     </div>
-    <!-- /.container -->
   </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <!--<script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/popper/popper.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>-->
 
 </body>

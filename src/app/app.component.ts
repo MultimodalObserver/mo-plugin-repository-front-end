@@ -1,7 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import { Angular2TokenService } from "angular2-token";
 import { UrlService } from "../services/url.service";
 import { AuthDialogComponent } from "./auth-dialog/auth-dialog.component";
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +15,9 @@ export class AppComponent {
 
   isCollapsed: boolean = true;
 
-  title = 'app';
+  //title = 'app';
+
+  public modalRef: BsModalRef;
 
   @ViewChild('authDialog') authDialog: AuthDialogComponent;
 
@@ -28,7 +33,11 @@ export class AppComponent {
     this.authDialog.openDialog(mode);
   }
 
-  constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService){
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService, private modalService: BsModalService){
 
 /*
     this.authToken.init({
