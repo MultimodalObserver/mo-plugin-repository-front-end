@@ -4,8 +4,8 @@ import * as _ from "lodash";
 @Injectable()
 export class UrlService {
 
-  private _baseUrl = 'https://mo-plugin-repository.herokuapp.com/';
-  //private baseUrl = 'http://localhost:3000/';
+  //private _baseUrl = 'https://mo-plugin-repository.herokuapp.com/';
+  private _baseUrl = 'http://localhost:3000/';
 
 
   get baseUrl(): string{

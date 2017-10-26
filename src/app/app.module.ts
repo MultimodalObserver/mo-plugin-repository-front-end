@@ -25,6 +25,8 @@ import { HomeComponent } from './home/home.component';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
+import { Angular2TokenService } from 'angular2-token';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, CategoryService],
+  providers: [UrlService, PluginService, CategoryService, Angular2TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
