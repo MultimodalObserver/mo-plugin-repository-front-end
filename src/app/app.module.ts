@@ -28,6 +28,11 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { Angular2TokenService } from 'angular2-token';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+
+import { MaterializeModule } from "angular2-materialize";
+import { LoginFormComponent } from './login-form/login-form.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 
 @NgModule({
@@ -39,12 +44,16 @@ import { RouterModule } from '@angular/router';
     ShortenLongStringPipe,
     BuildRepoUrlPipe,
     PluginListComponent,
-    HomeComponent
+    HomeComponent,
+    AuthDialogComponent,
+    LoginFormComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
     AppRouting,
     HttpModule,
+    MaterializeModule,
     HttpClientModule,
     RouterModule,
     BsDropdownModule.forRoot(),

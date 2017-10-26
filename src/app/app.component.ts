@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Angular2TokenService } from "angular2-token";
 import { UrlService } from "../services/url.service";
+import { AuthDialogComponent } from "./auth-dialog/auth-dialog.component";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,12 @@ import { UrlService } from "../services/url.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  isCollapsed: boolean = true;
+
+  title = 'app';
+
+  @ViewChild('authDialog') authDialog: AuthDialogComponent;
 
   onExpanded(event): void {
 
@@ -17,8 +24,13 @@ export class AppComponent {
 
   }
 
-  constructor(private authToken: Angular2TokenService, private urlService: UrlService){
+  presentAuthDialog(mode?: 'login'| 'register'){
+    this.authDialog.openDialog(mode);
+  }
 
+  constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService){
+
+/*
     this.authToken.init({
       apiBase: this.urlService.baseUrl
     });
@@ -37,12 +49,9 @@ export class AppComponent {
           console.error('auth error:', err);
         }
     );
-
+*/
 
   }
 
-  isCollapsed: boolean = true;
-
-  title = 'app';
 
 }
