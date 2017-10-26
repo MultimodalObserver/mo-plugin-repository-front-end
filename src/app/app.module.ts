@@ -26,6 +26,8 @@ import { HomeComponent } from './home/home.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { Angular2TokenService } from 'angular2-token';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { Angular2TokenService } from 'angular2-token';
   imports: [
     BrowserModule,
     AppRouting,
+    HttpModule,
     HttpClientModule,
+    RouterModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
