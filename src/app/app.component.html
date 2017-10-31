@@ -9,8 +9,6 @@
       </button>
 
       <div class="collapse navbar-collapse"
-      (collapsed)="onCollapsed($event)"
-      (expanded)="onExpanded($event)"
       [collapse]="isCollapsed">
 
         <ul class="navbar-nav ml-auto">
@@ -20,24 +18,26 @@
           <li class="nav-item">
             <a class="nav-link link-red" routerLink="explore" (click)="isCollapsed = true"><i class="fa fa-search"></i> Explore</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link link-yellow" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-share-alt"></i> Publish</a>
-          </li>
+
 
           <!-- Not logged in -->
 
           <li class="nav-item" *ngIf="!tokenAuthService.userSignedIn()">
-            <a class="nav-link link-green" [routerLink]="['']" (click)="openModal(loginModal)"><i class="fa fa-user-o"></i> Login</a>
+            <a class="nav-link link-green" href="javascript:;" (click)="openModal(loginModal)"><i class="fa fa-user-o"></i> Login</a>
           </li>
 
           <!-- Logged in -->
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
-            <a class="nav-link link-green" (click)="tokenAuthService.signOut()">Profile</a>
+            <a class="nav-link link-yellow" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-share-alt"></i> Publish</a>
+          </li>
+
+          <li class="nav-item" *ngIf="tokenAuthService.userSignedIn() && tokenAuthService.currentUserData">
+            <a class="nav-link link-green" href="javascript:;" (click)="tokenAuthService.signOut()"><i class="fa fa-user-o"></i> {{ tokenAuthService.currentUserData.email }}</a>
           </li>
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
-            <a class="nav-link link-red" (click)="tokenAuthService.signOut()">Logout</a>
+            <a class="nav-link link-grey" href="javascript:;" (click)="tokenAuthService.signOut()"><i class="fa fa-sign-out"></i> Logout</a>
           </li>
 
 
@@ -49,13 +49,28 @@
   <!-- Login/register modal -->
   <ng-template #loginModal>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Modal</h4>
+      <h4 class="modal-title pull-left" *ngIf="isLoginMode()">Login</h4>
+      <h4 class="modal-title pull-left" *ngIf="isRegisterMode()">Create new account</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      This is a modal.
+
+      <app-login-form (onFormResult)="onLoginFormResult($event)" *ngIf="isLoginMode()"></app-login-form>
+      <app-register-form (onFormResult)="onRegisterFormResult($event)" *ngIf="isRegisterMode()"></app-register-form>
+
+      <div class="row">
+        <div class="col-md-12">
+          <span class="grey-text text-darken-2" *ngIf="isLoginMode()">
+            Need an account? <a href="javascript:;" (click)="authMode='register'">Click here to register.</a>
+          </span>
+          <span class="grey-text text-darken-2" *ngIf="isRegisterMode()">
+            Already have an account? <a href="javascript:;" (click)="authMode='login'">Click here to login.</a>
+          </span>
+        </div>
+      </div>
+
     </div>
   </ng-template>
 

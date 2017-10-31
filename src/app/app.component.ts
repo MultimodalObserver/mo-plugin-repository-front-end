@@ -1,7 +1,6 @@
-import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { Angular2TokenService } from "angular2-token";
 import { UrlService } from "../services/url.service";
-import { AuthDialogComponent } from "./auth-dialog/auth-dialog.component";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
@@ -15,51 +14,37 @@ export class AppComponent {
 
   isCollapsed: boolean = true;
 
-  //title = 'app';
-
   public modalRef: BsModalRef;
 
-  @ViewChild('authDialog') authDialog: AuthDialogComponent;
-
-  onExpanded(event): void {
-
+  onLoginFormResult(e){
+    if(e.signedIn){
+      this.modalRef.hide();
+    } else {
+      //alert(e);
+    }
   }
 
-  onCollapsed(event): void {
-
+  onRegisterFormResult(e){
+    if(e.signedIn){
+      this.modalRef.hide();
+    } else {
+      //alert(e);
+    }
   }
 
-  presentAuthDialog(mode?: 'login'| 'register'){
-    this.authDialog.openDialog(mode);
-  }
 
   public openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
+  authMode: 'login' | 'register' = 'login';
+  isLoginMode(){ return this.authMode == 'login' }
+  isRegisterMode(){ return this.authMode == 'register' }
+
   constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService, private modalService: BsModalService){
-
-/*
-    this.authToken.init({
-      apiBase: this.urlService.baseUrl
+    tokenAuthService.init({
+      apiBase: "http://localhost:3000"//this.urlService.baseUrl
     });
-
-
-    this.authToken.signIn({email: "aa@gmail.com", password: "12345678"}).subscribe(
-
-        res => {
-
-          console.log('auth response:', res);
-          console.log('auth response headers: ', res.headers.toJSON()); //log the response header to show the auth token
-          console.log('auth response body:', res.json()); //log the response body to show the user
-        },
-
-        err => {
-          console.error('auth error:', err);
-        }
-    );
-*/
-
   }
 
 

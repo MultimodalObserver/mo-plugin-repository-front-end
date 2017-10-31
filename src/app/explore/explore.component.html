@@ -1,15 +1,15 @@
 <div class="param-box">
   <div class="row">
-    <div class="col-md-6 category-column">
-      <ul class="category-list">
-        <li><a [ngClass]="{ active: currentCategory === null }" [routerLink]="'.'">All</a></li>
-        <li *ngFor="let c of categories1"><a [ngClass]="{ active: currentCategory === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
+    <div class="col-md-6">
+      <ul class="tag-list">
+        <li><a [ngClass]="{ active: currentTag === null }" [routerLink]="'.'">All</a></li>
+        <li *ngFor="let c of tags1"><a [ngClass]="{ active: currentTag === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
       </ul>
     </div>
 
-    <div class="col-md-6 category-column">
-      <ul class="category-list">
-        <li *ngFor="let c of categories2"><a [ngClass]="{ active: currentCategory === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
+    <div class="col-md-6">
+      <ul class="tag-list">
+        <li *ngFor="let c of tags2"><a [ngClass]="{ active: currentTag === c.short_name }" [routerLink]="[c.short_name]">{{ c.name }}</a></li>
       </ul>
     </div>
 

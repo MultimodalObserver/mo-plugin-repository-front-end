@@ -4,12 +4,12 @@ import { Subject, Observable } from 'rxjs';
 @Injectable()
 export class SearchParamsService {
 
-  private categorySlug: Subject<string> = new Subject<string>();
+  private tagSlug: Subject<string> = new Subject<string>();
 
-  categorySlug$ : Observable<string> = this.categorySlug.asObservable();
+  tagSlug$ : Observable<string> = this.tagSlug.asObservable();
 
-  updateCategorySlug(slug: string) {
-    this.categorySlug.next(slug);
+  updateTagSlug(slug: string) {
+    this.tagSlug.next(slug);
   }
 
 }

@@ -13,7 +13,7 @@
       <i class="fa fa-{{ p.repo_type }}"></i>
       <b><a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a></b>
 
-      <button class="btn btn-primary pull-right"><i class="fa fa-download"></i>
+      <button class="btn btn-primary pull-right" (click)="installPlugin(p)"><i class="fa fa-download"></i>
         Install
       </button>
 
@@ -22,7 +22,7 @@
     <div class="plugin-item-line"><i *ngIf="p.home_page" class="fa fa-home"></i> <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></div>
 
     <div class="plugin-item-line">
-      <div class="tag" *ngFor="let c of p.categories"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>
+      <div class="tag" *ngFor="let c of p.tags"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>
     </div>
 
     <div class="plugin-item-line" *ngIf="p.shortDescription" (click)="p.shortDescription = false">
@@ -40,3 +40,24 @@
 
 
 <button *ngIf="!noMorePlugins && currentStatus != Status.LOADING" class="btn btn-primary" (click)="fetchPlugins()">Load more</button>
+
+
+
+<ng-template #pluginModalTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Install plugin</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="pluginModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+
+
+    Instrucciones para bajar plugin
+
+    <code>{{ urlService.build(["plugins", currentPluginModal.short_name]) }}</code>
+
+
+  </div>
+</ng-template>

@@ -32,3 +32,8 @@ $container-separation: 20px;
 .link-green {
 	@include link-color(#86be2e);
 }
+
+
+.link-grey {
+	@include link-color(#949494);
+}

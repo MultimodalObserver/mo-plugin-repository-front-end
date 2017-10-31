@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
+import { TagService } from '../../services/tag.service';
 import { SearchParamsService } from './search-params.service';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
@@ -12,19 +12,19 @@ import * as _ from 'lodash';
 })
 export class ExploreComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService, private searchParamsService: SearchParamsService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private tagService: TagService, private searchParamsService: SearchParamsService, private changeDetectorRef: ChangeDetectorRef) {
   }
 
-  categories1: any[] = [];
+  tags1: any[] = [];
 
-  categories2: any[] = [];
+  tags2: any[] = [];
 
-  currentCategory: string;
+  currentTag: string;
 
   private paramSubscription: Subscription;
 
-  fetchCategories(){
-    this.categoryService.getCategories()
+  fetchTags(){
+    this.tagService.getTags()
     .subscribe(
       data => {
         const c = <Array<any>>data;
@@ -32,10 +32,10 @@ export class ExploreComponent implements OnInit {
 
         // Partition array
         if(c.length > 4){
-          this.categories2 = c;
-          this.categories1 = this.categories2.splice(Math.floor(c.length/2));
+          this.tags2 = c;
+          this.tags1 = this.tags2.splice(Math.floor(c.length/2));
         } else {
-          this.categories1 = c;
+          this.tags1 = c;
         }
       },
     );
@@ -48,11 +48,11 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit() {
 
-    this.fetchCategories();
+    this.fetchTags();
 
-    this.paramSubscription = this.searchParamsService.categorySlug$.subscribe(
+    this.paramSubscription = this.searchParamsService.tagSlug$.subscribe(
       slug => {
-        this.currentCategory = slug;
+        this.currentTag = slug;
 
         // This line avoids this problem:
         // https://stackoverflow.com/questions/34364880/expression-has-changed-after-it-was-checked

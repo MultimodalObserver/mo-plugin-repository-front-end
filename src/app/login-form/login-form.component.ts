@@ -7,29 +7,51 @@ import {Angular2TokenService} from "angular2-token";
 })
 export class LoginFormComponent implements OnInit {
 
+  loading: boolean = false;
+
+  errors: string = "";
+
   signInUser = {
     email: '',
     password: ''
   };
 
   @Output() onFormResult = new EventEmitter<any>();
-  constructor(private tokenAuthSerivce:Angular2TokenService) { }
+  constructor(private tokenAuthService:Angular2TokenService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.errors = "";
+  }
 
   onSignInSubmit(){
 
-    this.tokenAuthSerivce.signIn(this.signInUser).subscribe(
+    if(this.signInUser.email == ""){
+      this.errors = "Email missing.";
+      return;
+    }
+
+    if(this.signInUser.password == ""){
+      this.errors = "Password missing.";
+      return;
+    }
+
+    this.loading = true;
+
+    this.tokenAuthService.signIn(this.signInUser).subscribe(
 
         res => {
+          this.loading = false;
+
           if(res.status == 200){
+            this.errors = "";
             this.onFormResult.emit({signedIn: true, res});
           }
         },
 
         err => {
-          console.log('err:', err);
+          this.loading = false;
           this.onFormResult.emit({signedIn: false, err});
+          this.errors = "Incorrect email and/or password.";
         }
     )
 

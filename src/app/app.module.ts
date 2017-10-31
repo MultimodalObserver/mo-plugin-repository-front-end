@@ -14,7 +14,7 @@ import { BuildRepoUrlPipe } from '../pipes/build-repo-url.pipe';
 
 import { UrlService } from '../services/url.service';
 import { PluginService } from '../services/plugin.service';
-import { CategoryService } from '../services/category.service';
+import { TagService } from '../services/tag.service';
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
@@ -22,17 +22,17 @@ import { AppRouting } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { PluginListComponent } from './explore/plugin-list/plugin-list.component';
 import { HomeComponent } from './home/home.component';
+import { FormsModule } from '@angular/forms';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { Angular2TokenService } from 'angular2-token';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 
-//import { MaterializeModule } from "angular2-materialize";
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { PublishComponent } from './publish/publish.component';
 
 
 @NgModule({
@@ -45,15 +45,15 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     BuildRepoUrlPipe,
     PluginListComponent,
     HomeComponent,
-    AuthDialogComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    PublishComponent
   ],
   imports: [
     BrowserModule,
     AppRouting,
     HttpModule,
-    //MaterializeModule,
+    FormsModule,
     HttpClientModule,
     RouterModule,
     BsDropdownModule.forRoot(),
@@ -62,7 +62,7 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, CategoryService, Angular2TokenService],
+  providers: [UrlService, PluginService, TagService, Angular2TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,87 @@
+
+<h2>Publish a new plugin</h2>
+
+<div *ngIf="formStep == 1">
+
+  <div class="form-group row">
+    <label for="plugin-name-input" class="col-2 col-form-label">Plugin name</label>
+    <div class="col-10">
+      <input class="form-control" type="text" id="plugin-name-input" value="" [(ngModel)]="plugin.name">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="repository-url-input" class="col-2 col-form-label">Github repository</label>
+    <div class="col-10">
+      <input class="form-control" type="url" id="repository-url-input" placeholder="https://www.github.com/username/project_name" [(ngModel)]="plugin.repository">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="description-input" class="col-2 col-form-label">Description</label>
+    <div class="col-10">
+      <input class="form-control" type="url" id="description-input" placeholder="Include a short description (optional)" [(ngModel)]="plugin.description">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="homepage-input" class="col-2 col-form-label">URL</label>
+    <div class="col-10">
+      <input class="form-control" type="url" id="homepage-input" placeholder="Plugin homepage (optional)" [(ngModel)]="plugin.homepage">
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary" (click)="inputOk()" *ngIf="!fetchingGithubInfo">Publish plugin</button>
+  <button type="button" class="btn btn-primary" (click)="inputOk()" *ngIf="fetchingGithubInfo" disabled>Wait...</button>
+
+  <div class="alert alert-danger" *ngIf="errors">{{ errors }}</div>
+
+</div>
+
+
+<div *ngIf="formStep == 2">
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <p>{{ plugin.name }}</p>
+
+
+      <div class="form-group row">
+        <label for="slug-input" class="col-4 col-form-label">Slug</label>
+        <div class="col-8">
+          <input class="form-control" type="text" id="slug-input" [(ngModel)]="plugin.shortName">
+        </div>
+      </div>
+
+      <div>
+        <p>Your plugin will be available at</p>
+        <p><b>http://localhost:8080/plugin/{{ plugin.shortName }}</b></p>
+      </div>
+
+      <p *ngIf="plugin.description">{{ plugin.description }}</p>
+      <p *ngIf="plugin.homepage"><i class="fa fa-home"></i> <a target="_blank" href="{{plugin.homepage}}">{{ plugin.homepage }}</a></p>
+    </div>
+    <div class="col-md-6">
+      <i class="fa fa-spinner fa-spin" *ngIf="fetchingGithubInfo"></i>
+
+      <div *ngIf="!fetchingGithubInfo">
+        <p><i class="fa fa-github"></i> {{ githubInfo.fullName }}</p>
+
+        <img class="img-fluid" src="{{ githubInfo.avatar }}"/>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="alert alert-warning">Double check the plugin data before proceeding.</div>
+
+  <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="!creatingPlugin">Publish plugin</button>
+  <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="creatingPlugin" disabled>Wait...</button>
+
+
+</div>

@@ -1,45 +1,35 @@
+<form (ngSubmit)="onSignInSubmit()">
 
-login form
-<!--
-<form (ngSubmit)="onSignInSubmit()" #f="ngForm" >
-
-
-  <div class="row">
-
-    <div class="input-field col s12">
-      <input id="email"
+  <div class="form-group row">
+    <label for="email-input" class="col-2 col-form-label">Email</label>
+    <div class="col-10">
+      <input id="email-input"
              type="email"
              required
              name='email'
              [(ngModel)]="signInUser.email"
-             class="validate">
-
-      <label for="email">Email</label>
+             class="form-control"/>
     </div>
+  </div>
 
-
-    <div class="input-field col s12">
-      <input id="password"
+  <div class="form-group row">
+    <label for="password-input" class="col-2 col-form-label">Password</label>
+    <div class="col-10">
+      <input id="password-input"
              type="password"
              required
              name='password'
              [(ngModel)]="signInUser.password"
-             class="validate">
-
-      <label for="password">Password</label>
+             class="form-control"/>
     </div>
-
-    <div class="col s12 ">
-      <button type="submit"
-              [disabled]="!(f.valid)"
-              [ngClass]="{'disabled': !(f.valid)}"
-              class="waves-effect waves-light btn blue right"
-      >
-        Login </button>
-    </div>
-
-
   </div>
 
+
+
+  <button type="submit" class="btn btn-primary" *ngIf="!loading">Login</button>
+  <button type="submit" class="btn btn-primary" *ngIf="loading" disabled>Please wait...</button>
+  <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+
+  <div class="alert alert-danger" *ngIf="errors">{{ errors }}</div>
+
 </form>
--->

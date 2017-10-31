@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PluginService } from '../../../services/plugin.service';
+import { UrlService } from '../../../services/url.service';
 import { SearchParamsService } from '../search-params.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import * as _ from 'lodash';
 
 export enum Status {
@@ -21,21 +25,33 @@ export class PluginListComponent implements OnInit {
 
   plugins: any[] = [];
 
+  currentPluginModal = {};
+
+  public pluginModal: BsModalRef;
+
   currentStatus: Status;
   maxLengthDescription = 300;
   noMorePlugins: boolean;
   private lastPageLoadedSuccessfully: number;
   private paramSubscription: Subscription;
-  private categorySlug: string;
+  private tagSlug: string;
 
-  constructor(private route: ActivatedRoute, private pluginService: PluginService, private searchParamsService: SearchParamsService) {
+  @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
+
+
+  constructor(private urlService: UrlService, private route: ActivatedRoute, private pluginService: PluginService, private searchParamsService: SearchParamsService, private modalService: BsModalService) {
   }
 
   private resetSearch() : void {
     this.noMorePlugins = false;
     this.lastPageLoadedSuccessfully = 0;
     this.plugins = [];
-    this.categorySlug = null;
+    this.tagSlug = null;
+  }
+
+  installPlugin(plugin) : void{
+    this.currentPluginModal = plugin;
+    this.pluginModal = this.modalService.show(this.pluginModalTemplate);
   }
 
   fetchPlugins() : void {
@@ -44,7 +60,7 @@ export class PluginListComponent implements OnInit {
     let url: string;
 
     const params = {
-      categorySlug: this.categorySlug,
+      tagSlug: this.tagSlug,
       page: this.lastPageLoadedSuccessfully + 1
     };
 
@@ -86,13 +102,13 @@ export class PluginListComponent implements OnInit {
     this.paramSubscription = this.route.params.subscribe(params => {
       this.resetSearch();
 
-      if(params.hasOwnProperty('categorySlug') && typeof params.categorySlug === 'string'){
-        this.categorySlug = params.categorySlug;
+      if(params.hasOwnProperty('tagSlug') && typeof params.tagSlug === 'string'){
+        this.tagSlug = params.tagSlug;
       } else {
-        this.categorySlug = null;
+        this.tagSlug = null;
       }
 
-      this.searchParamsService.updateCategorySlug(this.categorySlug);
+      this.searchParamsService.updateTagSlug(this.tagSlug);
 
       this.fetchPlugins();
     });

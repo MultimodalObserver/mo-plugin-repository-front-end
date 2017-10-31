@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { UrlService } from './url.service';
 
 @Injectable()
-export class CategoryService {
+export class TagService {
 
     constructor(private http: HttpClient, private urlService: UrlService ) {
     }
 
-    public getCategories(): Observable<any> {
-      return this.http.get(this.urlService.build(['categories']));
+    public getTags(): Observable<any> {
+      return this.http.get(this.urlService.build(['tags']));
     }
 
 }
