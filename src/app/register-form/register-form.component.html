@@ -1,62 +1,50 @@
-register form
-<!--
-<form (ngSubmit)="onSignUpSubmit()" #f="ngForm" >
+<form (ngSubmit)="onSignUpSubmit()">
 
-
-  <div class="row">
-
-    <div class="input-field col s12">
-      <input id="email"
+  <div class="form-group row">
+    <label for="email-input" class="col-2 col-form-label">Email</label>
+    <div class="col-10">
+      <input id="email-input"
+             autocomplete="off"
              type="email"
              required
              name='email'
              [(ngModel)]="signUpUser.email"
-             class="validate">
-      <label for="email">Email</label>
+             class="form-control"/>
     </div>
+  </div>
 
-
-
-    <div class="input-field col s12">
-      <input id="password"
+  <div class="form-group row">
+    <label for="password-input" class="col-2 col-form-label">Password</label>
+    <div class="col-10">
+      <input id="password-input"
+             autocomplete="off"
              type="password"
              required
              name='password'
              [(ngModel)]="signUpUser.password"
-             class="validate">
-      <label for="password">Password</label>
+             class="form-control"/>
     </div>
+  </div>
 
-
-
-    <div class="input-field col s12">
-      <input id="password_confirmation"
+  <div class="form-group row">
+    <label for="confirm-password-input" class="col-2 col-form-label">Confirm password</label>
+    <div class="col-10">
+      <input id="confirm-password-input"
+             autocomplete="off"
              type="password"
              required
-             name='password_confirmation'
+             name='password'
              [(ngModel)]="signUpUser.passwordConfirmation"
-             class="validate">
-      <label for="password_confirmation">Password confirmation</label>
+             class="form-control"/>
     </div>
-
-    <span *ngIf="signUpUser.password != signUpUser.passwordConfirmation"
-          style="color:red">
-      Passwords must match
-    </span>
-
-
-    <div class="col s12">
-
-      <button type="submit"
-              [disabled]="!(f.valid) || !(signUpUser.password == signUpUser.passwordConfirmation)"
-              class="waves-effect waves-light btn blue right">
-        Sign up
-      </button>
-
-    </div>
-
   </div>
 
 
+
+  <button type="submit" class="btn btn-primary" *ngIf="!loading">Create account</button>
+  <button type="submit" class="btn btn-primary" *ngIf="loading" disabled>Please wait...</button>
+  <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+
+  <div class="alert alert-danger" *ngIf="errors">{{ errors }}</div>
+
 </form>
--->

@@ -1,0 +1,29 @@
+<div *ngIf="!loading && plugin != null">
+
+
+  <h1>{{ plugin.name }}</h1>
+
+  <p>{{ plugin.description }}</p>
+
+  <p><a target="_blank" href="https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}">https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}</a></p>
+
+  <h2>Install plugin</h2>
+
+  <p>Paste the following URL into MO and the plugin will begin downloading.</p>
+
+
+  <code>{{ urlService.build(["plugins", plugin.short_name]) }}</code>
+
+
+</div>
+
+
+<div *ngIf="!loading && plugin == null">
+
+  <h1>Plugin not found!</h1>
+
+</div>
+
+
+
+<p *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Loading plugins...</p>

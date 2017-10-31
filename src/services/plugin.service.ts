@@ -17,6 +17,11 @@ export class PluginService {
       return this.http.get<T>(repoApi);
     }
 
+    public showPlugin(pluginSlug: string): any{
+      let url = this.urlService.build(['plugins', pluginSlug]);
+      return this.http.get(url);
+    }
+
     public createPlugin(plugin: any): any{
       return this.tokenAuthService.post("plugins", plugin);
     }

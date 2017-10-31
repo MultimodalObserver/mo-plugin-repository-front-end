@@ -33,6 +33,7 @@ import { RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { PublishComponent } from './publish/publish.component';
+import { PluginComponent } from './plugin/plugin.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { PublishComponent } from './publish/publish.component';
     HomeComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    PublishComponent
+    PublishComponent,
+    PluginComponent
   ],
   imports: [
     BrowserModule,

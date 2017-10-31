@@ -4,6 +4,7 @@ import { UrlService } from "../services/url.service";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +26,16 @@ export class AppComponent {
   }
 
   onRegisterFormResult(e){
-    if(e.signedIn){
+    if(e.signedUp){
       this.modalRef.hide();
     } else {
       //alert(e);
     }
+  }
+
+  signOut(){
+    this.tokenAuthService.signOut();
+    this.router.navigateByUrl('/');
   }
 
 
@@ -41,7 +47,7 @@ export class AppComponent {
   isLoginMode(){ return this.authMode == 'login' }
   isRegisterMode(){ return this.authMode == 'register' }
 
-  constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService, private modalService: BsModalService){
+  constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService, private modalService: BsModalService, private router: Router){
     tokenAuthService.init({
       apiBase: "http://localhost:3000"//this.urlService.baseUrl
     });
