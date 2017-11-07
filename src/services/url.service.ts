@@ -4,18 +4,21 @@ import * as _ from "lodash";
 @Injectable()
 export class UrlService {
 
-  //private _baseUrl = 'https://mo-plugin-repository.herokuapp.com/';
-  private _baseUrl = 'http://localhost:3000/';
 
 
   get baseUrl(): string{
-		return this._baseUrl;
+
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1"){
+      return 'http://localhost:3000/';
+    }
+
+		return 'http://mo-plugin-repository.herokuapp.com/';
 	}
 
 
   build(path: string[], queryParams?: any): string {
 
-    let url: string = this._baseUrl;
+    let url: string = this.baseUrl;
 
     for(let i=0; i<path.length; i++){
       if(i > 0)
