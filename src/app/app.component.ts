@@ -48,8 +48,11 @@ export class AppComponent {
   isRegisterMode(){ return this.authMode == 'register' }
 
   constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService, private modalService: BsModalService, private router: Router){
+
+    let url = this.urlService.baseUrl;
+
     tokenAuthService.init({
-      apiBase: "http://localhost:3000"//this.urlService.baseUrl
+      apiBase: url.substr(0, url.length-1)
     });
   }
 
