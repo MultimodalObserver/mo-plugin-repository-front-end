@@ -15,6 +15,7 @@ import { BuildRepoUrlPipe } from '../pipes/build-repo-url.pipe';
 import { UrlService } from '../services/url.service';
 import { PluginService } from '../services/plugin.service';
 import { TagService } from '../services/tag.service';
+import { UserService } from '../services/user.service';
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
@@ -35,6 +36,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 import { PublishComponent } from './publish/publish.component';
 import { PluginComponent } from './plugin/plugin.component';
 
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +56,7 @@ import { PluginComponent } from './plugin/plugin.component';
   ],
   imports: [
     BrowserModule,
-    AppRouting,
+    Ng2AutoCompleteModule,
     HttpModule,
     FormsModule,
     HttpClientModule,
@@ -64,7 +67,7 @@ import { PluginComponent } from './plugin/plugin.component';
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, TagService, Angular2TokenService],
+  providers: [UrlService, PluginService, TagService, UserService, Angular2TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

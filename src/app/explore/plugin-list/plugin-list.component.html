@@ -11,7 +11,7 @@
 
     <div class="plugin-item-line">
       <i class="fa fa-{{ p.repo_type }}"></i>
-      <b><a target="_blank" href="{{ p | buildRepoUrl }}">{{ p.name }}</a></b>
+      <b><a [routerLink]="['..', 'plugin', p.short_name]">{{ p.name }}</a></b>
 
       <button class="btn btn-primary pull-right" (click)="installPlugin(p)"><i class="fa fa-download"></i>
         Install
@@ -25,21 +25,28 @@
       <div class="tag" *ngFor="let c of p.tags"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>
     </div>
 
-    <div class="plugin-item-line" *ngIf="p.shortDescription" (click)="p.shortDescription = false">
-      {{ p.description | shortenLongString:maxLengthDescription }}
-      <a href="#">Read more</a>
+    <div *ngIf="p.description">
+      <div class="plugin-item-line" *ngIf="p.shortDescription" (click)="p.shortDescription = false">
+        {{ p.description | shortenLongString:maxLengthDescription }}
+        <a href="#">Read more</a>
+      </div>
+      <div class="plugin-item-line" *ngIf="!p.shortDescription">{{ p.description }}</div>
     </div>
-    <div class="plugin-item-line" *ngIf="!p.shortDescription">{{ p.description }}</div>
+
+    <div *ngIf="!p.description">
+      <i>No description.</i>
+    </div>
+
   </div>
 </div>
 
 
-<div *ngIf="currentStatus == Status.LOADING">
+<div *ngIf="currentStatus == Status.PLUGINS_LOADING">
   <p class="bare-message"><i class="fa fa-spinner fa-spin"></i> Loading plugins...</p>
 </div>
 
 
-<button *ngIf="!noMorePlugins && currentStatus != Status.LOADING" class="btn btn-primary" (click)="fetchPlugins()">Load more</button>
+<button *ngIf="!noMorePlugins && currentStatus != Status.PLUGINS_LOADING" class="btn btn-primary" (click)="fetchPlugins()">Load more</button>
 
 
 
@@ -52,12 +59,9 @@
   </div>
   <div class="modal-body">
 
+    <p>In order to download, paste the following URL into MO.</p>
 
-
-    Instrucciones para bajar plugin
-
-    <code>{{ urlService.build(["plugins", currentPluginModal.short_name]) }}</code>
-
+    <input type="text" class="form-control" value='{{ urlService.build(["plugins", currentPluginModal.short_name]) }}' readonly onclick="this.select();"/>
 
   </div>
 </ng-template>

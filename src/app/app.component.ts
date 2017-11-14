@@ -51,9 +51,11 @@ export class AppComponent {
 
     let url = this.urlService.baseUrl;
 
-    tokenAuthService.init({
+    this.tokenAuthService.init({
       apiBase: url.substr(0, url.length-1)
     });
+
+
   }
 
 

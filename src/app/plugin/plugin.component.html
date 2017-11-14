@@ -1,20 +1,67 @@
-<div *ngIf="!loading && plugin != null">
+<div *ngIf="!loading">
+  <button *ngIf="ownPlugin && !editing" class="btn btn-primary" (click)="editing = true">Edit</button>
+
+  <button *ngIf="ownPlugin && editing" class="btn btn-primary" (click)="saveEdit()">Save</button>
+  <button *ngIf="ownPlugin && editing" class="btn btn-secondary" (click)="editing = false">Cancel</button>
+  <button *ngIf="ownPlugin" class="btn btn-danger">Delete</button>
+</div>
+
+<div *ngIf="!loading && plugin != null && !editing">
 
 
   <h1>{{ plugin.name }}</h1>
 
   <p>{{ plugin.description }}</p>
 
+  <div class="plugin-item-line">
+    <div class="tag" *ngFor="let c of plugin.tags">
+      <i class="fa fa-tag"></i>
+      <span>{{ c.short_name }}
+        <button *ngIf="ownPlugin" class="remove-button" (click)="removeTag(c.id)"><i class="fa fa-remove"></i></button>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="ownPlugin">
+
+    <input
+    auto-complete
+    class="form-control"
+    no-match-found-text=""
+    [list-formatter]="autocompleteFormatter"
+    [value-formatter]="autocompleteFormatter"
+    [(ngModel)]="newTag"
+    [source]="tagSearchURL" />
+
+    <button class="btn btn-primary" (click)="addTag()"><i class="fa fa-plus"></i> Add tag</button>
+  </div>
+
   <p><a target="_blank" href="https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}">https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}</a></p>
 
   <h2>Install plugin</h2>
 
-  <p>Paste the following URL into MO and the plugin will begin downloading.</p>
+  <p>In order to download, paste the following URL into MO.</p>
 
+  <input type="text" class="form-control" value='{{ urlService.build(["plugins", plugin.short_name]) }}' readonly onclick="this.select();"/>
 
-  <code>{{ urlService.build(["plugins", plugin.short_name]) }}</code>
+</div>
 
+<div *ngIf="editing">
 
+  <div class="form-group">
+    <label for="name">Plugin name</label>
+    <input type="text" class="form-control" [(ngModel)]="pluginEdit.name" id="name"/>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" [(ngModel)]="pluginEdit.description" id="description"/>
+  </div>
+
+  <div class="form-group">
+    <label for="homepage">Homepage</label>
+    <input type="text" class="form-control" [(ngModel)]="pluginEdit.home_page" id="homepage"/>
+  </div>
 </div>
 
 
@@ -26,4 +73,4 @@
 
 
 
-<p *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Loading plugins...</p>
+<p *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Loading plugin...</p>

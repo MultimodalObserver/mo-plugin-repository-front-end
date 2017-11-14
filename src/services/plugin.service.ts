@@ -22,6 +22,20 @@ export class PluginService {
       return this.http.get(url);
     }
 
+    public removeTag(pluginId: number, tagId: number){
+      return this.tokenAuthService.delete(`plugins/${pluginId}/tags/${tagId}`);
+    }
+
+    public addTag(pluginId: number, tagName: string){
+      return this.tokenAuthService.post(`plugins/${pluginId}/tags`, {
+        tag_name: tagName
+      });
+    }
+
+    public editPlugin(id: number, plugin: any): any{
+      return this.tokenAuthService.put(`plugins/${id}`, plugin);
+    }
+
     public createPlugin(plugin: any): any{
       return this.tokenAuthService.post("plugins", plugin);
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TagService } from '../../services/tag.service';
-import { SearchParamsService } from './search-params.service';
+//import { SearchParamsService } from './search-params.service';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
 
@@ -8,11 +8,11 @@ import * as _ from 'lodash';
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.scss'],
-  providers: [SearchParamsService]
+  providers: [/*SearchParamsService*/]
 })
 export class ExploreComponent implements OnInit {
 
-  constructor(private tagService: TagService, private searchParamsService: SearchParamsService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private tagService: TagService, /*private searchParamsService: SearchParamsService,*/ private changeDetectorRef: ChangeDetectorRef) {
   }
 
   tags1: any[] = [];
@@ -21,7 +21,7 @@ export class ExploreComponent implements OnInit {
 
   currentTag: string;
 
-  private paramSubscription: Subscription;
+  //private paramSubscription: Subscription;
 
   fetchTags(){
     this.tagService.getTags()
@@ -43,21 +43,21 @@ export class ExploreComponent implements OnInit {
 
 
   ngOnDestroy(){
-    this.paramSubscription.unsubscribe();
+    //this.paramSubscription.unsubscribe();
   }
 
   ngOnInit() {
 
     this.fetchTags();
 
-    this.paramSubscription = this.searchParamsService.tagSlug$.subscribe(
+    /*this.paramSubscription = this.searchParamsService.tagSlug$.subscribe(
       slug => {
         this.currentTag = slug;
 
         // This line avoids this problem:
         // https://stackoverflow.com/questions/34364880/expression-has-changed-after-it-was-checked
         this.changeDetectorRef.detectChanges();
-      });
+      });*/
 
   }
 
