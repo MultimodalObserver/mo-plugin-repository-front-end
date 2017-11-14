@@ -1,64 +1,106 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { TagService } from '../../services/tag.service';
-//import { SearchParamsService } from './search-params.service';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PluginService } from '../../services/plugin.service';
+import { UrlService } from '../../services/url.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import * as _ from 'lodash';
+
+export enum Status {
+  PLUGINS_LOADING, OK, ERROR
+}
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
-  styleUrls: ['./explore.component.scss'],
-  providers: [/*SearchParamsService*/]
+  styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
 
-  constructor(private tagService: TagService, /*private searchParamsService: SearchParamsService,*/ private changeDetectorRef: ChangeDetectorRef) {
+  // Enum reference so the HTML can see it.
+  Status = Status;
+
+  plugins: any[] = [];
+
+  currentPluginModal = {};
+
+  public pluginModal: BsModalRef;
+
+  currentStatus: Status;
+  maxLengthDescription = 300;
+  noMorePlugins: boolean;
+  private lastPageLoadedSuccessfully: number;
+  //private paramSubscription: Subscription;
+  private tagSlug: string;
+
+  @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
+
+
+  constructor(private urlService: UrlService, private route: ActivatedRoute, private pluginService: PluginService, /*private searchParamsService: SearchParamsService,*/ private modalService: BsModalService) {
   }
 
-  tags1: any[] = [];
+  private resetSearch() : void {
+    this.noMorePlugins = false;
+    this.lastPageLoadedSuccessfully = 0;
+    this.plugins = [];
+    this.tagSlug = null;
+  }
 
-  tags2: any[] = [];
+  installPlugin(plugin) : void{
+    this.currentPluginModal = plugin;
+    this.pluginModal = this.modalService.show(this.pluginModalTemplate);
+  }
 
-  currentTag: string;
+  fetchPlugins() : void {
 
-  //private paramSubscription: Subscription;
+    this.currentStatus = Status.PLUGINS_LOADING;
+    let url: string;
 
-  fetchTags(){
-    this.tagService.getTags()
+    const params = {
+      tagSlug: this.tagSlug,
+      page: this.lastPageLoadedSuccessfully + 1
+    };
+
+
+    this.pluginService.getPlugins(params)
     .subscribe(
       data => {
-        const c = <Array<any>>data;
 
-
-        // Partition array
-        if(c.length > 4){
-          this.tags2 = c;
-          this.tags1 = this.tags2.splice(Math.floor(c.length/2));
-        } else {
-          this.tags1 = c;
+        if((<Array<any>>data).length === 0){
+          // This means the last page visited doesn't have plugins.
+          // Which means that the 'load more' button must disappear.
+          this.noMorePlugins = true;
+          this.currentStatus = Status.OK;
+          return;
         }
+
+        // Union = concatenate and remove duplicates
+        this.plugins = _.unionWith(this.plugins, <Array<any>>data, (a, b) => a.id === b.id);
+
+        // Shorten every description
+        this.plugins.map((e) => e.description = e.description? e.description.trim() : "");
+        this.plugins.map((e) => e.shortDescription = e.description.length > this.maxLengthDescription);
+
+        this.currentStatus = Status.OK;
+        this.lastPageLoadedSuccessfully++;
       },
+      error => {
+        this.plugins = [];
+        this.currentStatus = Status.ERROR;
+        this.lastPageLoadedSuccessfully = 0;
+      }
     );
   }
 
-
   ngOnDestroy(){
-    //this.paramSubscription.unsubscribe();
   }
 
+
   ngOnInit() {
-
-    this.fetchTags();
-
-    /*this.paramSubscription = this.searchParamsService.tagSlug$.subscribe(
-      slug => {
-        this.currentTag = slug;
-
-        // This line avoids this problem:
-        // https://stackoverflow.com/questions/34364880/expression-has-changed-after-it-was-checked
-        this.changeDetectorRef.detectChanges();
-      });*/
-
+    this.resetSearch();
+    this.fetchPlugins();
   }
 
 }

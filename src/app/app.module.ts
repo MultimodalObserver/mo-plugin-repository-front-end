@@ -6,7 +6,6 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ExploreComponent } from './explore/explore.component';
-import { Page2Component } from './page2/page2.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { ShortenLongStringPipe } from '../pipes/shorten-long-string.pipe';
@@ -21,7 +20,6 @@ import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 
 import { HttpClientModule } from '@angular/common/http';
-import { PluginListComponent } from './explore/plugin-list/plugin-list.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 
@@ -43,11 +41,9 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
   declarations: [
     AppComponent,
     ExploreComponent,
-    Page2Component,
     PageNotFoundComponent,
     ShortenLongStringPipe,
     BuildRepoUrlPipe,
-    PluginListComponent,
     HomeComponent,
     LoginFormComponent,
     RegisterFormComponent,
