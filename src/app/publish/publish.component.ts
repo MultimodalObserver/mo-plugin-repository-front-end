@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publish',
@@ -55,7 +56,9 @@ export class PublishComponent implements OnInit {
 
     this.pluginService.createPlugin(p).subscribe(data => {
 
-      console.log(data);
+      console.log(data.json());
+      this.router.navigateByUrl('/plugin/' + data.json().short_name);
+
 
     });
 
@@ -96,7 +99,7 @@ export class PublishComponent implements OnInit {
     });
   }
 
-  constructor(private pluginService: PluginService) { }
+  constructor(private pluginService: PluginService, private router: Router) { }
 
   ngOnInit() {
 

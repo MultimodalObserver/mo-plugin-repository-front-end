@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { PluginService } from '../../services/plugin.service';
 import { UrlService } from '../../services/url.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -32,13 +31,12 @@ export class ExploreComponent implements OnInit {
   maxLengthDescription = 300;
   noMorePlugins: boolean;
   private lastPageLoadedSuccessfully: number;
-  //private paramSubscription: Subscription;
   private tagSlug: string;
 
   @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
 
 
-  constructor(private urlService: UrlService, private route: ActivatedRoute, private pluginService: PluginService, /*private searchParamsService: SearchParamsService,*/ private modalService: BsModalService) {
+  constructor(private urlService: UrlService, private pluginService: PluginService, private modalService: BsModalService) {
   }
 
   private resetSearch() : void {
