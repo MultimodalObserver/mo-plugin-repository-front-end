@@ -74,10 +74,11 @@ export class PublishComponent implements OnInit {
 
     }, err => {
 
+      console.log(err);
+
       try{
         this.notification.error("Error", err.json().short_name[0]);
       } catch(e){
-        console.log(e.json());
         this.notification.error("Error", "Plugin couldn't be added.");
       }
     });
