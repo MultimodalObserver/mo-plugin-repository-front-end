@@ -61,6 +61,9 @@
           <i class="fa fa-tag"></i>
           <span>{{ c.short_name }}</span>
         </div>
+
+        <div class="tag" *ngIf="p.tags.length == 0"><i class="fa fa-tag"></i> <span><i>Untagged</i></span></div>
+
       </div>
   </div>
 

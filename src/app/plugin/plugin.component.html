@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="alert alert-warning" *ngIf="ownPlugin && plugin.tags.length == 0"><b>Hint:</b> Help users find your plugin by adding tags.</div>
+  <div class="alert alert-warning" *ngIf="ownPlugin && hasNoTags()"><b>Hint:</b> Help users find your plugin by adding tags.</div>
 
   <div *ngIf="ownPlugin" class="mb-4">
 

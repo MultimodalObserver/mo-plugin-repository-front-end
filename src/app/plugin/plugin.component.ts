@@ -129,6 +129,14 @@ export class PluginComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  hasNoTags(){
+
+    if(this.plugin == null) return true;
+    if(!this.plugin.hasOwnProperty('tags')) return true;
+    if(!this.plugin.tags.hasOwnProperty('length')) return true;
+    return this.plugin.tags.length == 0;
+  }
+
 
   autocompleteFormatter(data: any): string {
     return data['short_name'];
@@ -163,6 +171,8 @@ export class PluginComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.plugin = null;
+    this.pluginEdit = null;
   }
 
 }
