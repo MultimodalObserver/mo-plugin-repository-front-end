@@ -60,7 +60,7 @@ export class RegisterFormComponent implements OnInit {
       },
 
       err => {
-        this.loading = false;        
+        this.loading = false;
 
         this.onFormResult.emit({signedUp: false, err})
 

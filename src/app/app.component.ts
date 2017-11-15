@@ -19,7 +19,6 @@ export class AppComponent {
   public modalRef: BsModalRef;
 
   public notificationOptions = {
-    //position: ["bottom", "left"],
     timeOut: 3000,
     lastOnBottom: true
   }
@@ -27,6 +26,7 @@ export class AppComponent {
   onLoginFormResult(e){
     if(e.signedIn){
       this.modalRef.hide();
+      this.notification.success("Logged in", "Welcome!");
     } else {
       //alert(e);
     }
@@ -35,6 +35,7 @@ export class AppComponent {
   onRegisterFormResult(e){
     if(e.signedUp){
       this.modalRef.hide();
+      this.notification.success("Successful registration!", "You're now logged in.");
     } else {
       //alert(e);
     }

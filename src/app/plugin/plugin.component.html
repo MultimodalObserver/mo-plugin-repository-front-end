@@ -1,9 +1,9 @@
-<div *ngIf="!loading">
+<div *ngIf="!loading" class="mb-4">
   <button *ngIf="ownPlugin && !editing" class="btn btn-primary" (click)="editing = true">Edit</button>
 
   <button *ngIf="ownPlugin && editing" class="btn btn-primary" (click)="saveEdit()">Save</button>
   <button *ngIf="ownPlugin && editing" class="btn btn-secondary" (click)="editing = false">Cancel</button>
-  <button *ngIf="ownPlugin" class="btn btn-danger">Delete</button>
+  <button *ngIf="ownPlugin" class="btn btn-danger" (click)="openModal(removeModal)">Delete</button>
 </div>
 
 <div *ngIf="!loading && plugin != null && !editing">
@@ -13,7 +13,7 @@
 
   <p>{{ plugin.description }}</p>
 
-  <div class="plugin-item-line">
+  <div class="plugin-item-line mb-4">
     <div class="tag" *ngFor="let c of plugin.tags">
       <i class="fa fa-tag"></i>
       <span>{{ c.short_name }}
@@ -22,21 +22,25 @@
     </div>
   </div>
 
-  <div *ngIf="ownPlugin">
+  <div class="alert alert-warning" *ngIf="ownPlugin && plugin.tags.length == 0"><b>Hint:</b> Help users find your plugin by adding tags.</div>
+
+  <div *ngIf="ownPlugin" class="mb-4">
 
     <input
+    type="text"
+    class="form-control mb-1"
+    [(ngModel)]="newTag"
     auto-complete
-    class="form-control"
     no-match-found-text=""
     [list-formatter]="autocompleteFormatter"
     [value-formatter]="autocompleteFormatter"
-    [(ngModel)]="newTag"
-    [source]="tagSearchURL" />
+    [source]="tagSearchURL">
 
-    <button class="btn btn-primary" (click)="addTag()"><i class="fa fa-plus"></i> Add tag</button>
+    <button class="btn btn-primary" (click)="addTag()"><i class="fa fa-tag"></i> Add tag</button>
+
   </div>
 
-  <p><a target="_blank" href="https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}">https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}</a></p>
+  <p><a target="_blank" href="https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}"><i class="fa fa-github"></i> https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}</a></p>
 
   <h2>Install plugin</h2>
 
@@ -71,6 +75,23 @@
 
 </div>
 
+
+<ng-template #removeModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Remove plugin?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <p>You are about to remove <b>{{ plugin.name }}</b> permanently. Proceed?</p>
+
+    <button class="btn btn-danger" (click)="removePlugin()">Remove permanently</button>
+    <button class="btn btn-primary" (click)="modalRef.hide()">Cancel</button>
+
+  </div>
+</ng-template>
 
 
 <p *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> Loading plugin...</p>

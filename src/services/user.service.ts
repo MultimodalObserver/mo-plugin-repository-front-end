@@ -16,5 +16,9 @@ export class UserService {
       return this.tokenAuthService.get("users/me");
     }
 
+    public getUserPlugins(): any{
+      return this.tokenAuthService.get("users/my_plugins");
+    }
+
 
 }

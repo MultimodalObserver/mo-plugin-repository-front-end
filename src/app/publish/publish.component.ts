@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-publish',
@@ -11,9 +12,6 @@ import { NotificationsService } from 'angular2-notifications';
 export class PublishComponent implements OnInit {
 
   formStep: number = 1;
-
-  errors: string = "";
-
 
   plugin: any = {
     name: "",
@@ -45,6 +43,17 @@ export class PublishComponent implements OnInit {
     };
   }
 
+  slugExists(slug: string, callback:any){
+    this.pluginService.showPlugin(slug).subscribe(
+      data => {
+        callback(true);
+      },
+      err => {
+        callback(false);
+      }
+    );
+  }
+
   createPlugin(){
 
     let p: any = {
@@ -63,6 +72,13 @@ export class PublishComponent implements OnInit {
       this.router.navigateByUrl('/plugin/' + data.json().short_name);
 
 
+    }, err => {
+
+      try{
+        this.notification.error("Error", err.json().short_name[0]);
+      } catch(e){
+        this.notification.error("Error", "Plugin couldn't be added.");
+      }
     });
 
   }
@@ -72,13 +88,14 @@ export class PublishComponent implements OnInit {
     this.fetchingGithubInfo = true;
 
     if(this.plugin.name.trim().length == 0){
-      this.errors = "Plugin name is empty.";
+      this.notification.error("Invalid plugin name", "Name can't be empty!.");
       this.fetchingGithubInfo = false;
       return;
     }
 
     if(this.parseGithubUserRepo(this.plugin.repository) == null){
-      this.errors = "Invalid Github URL.";
+
+      this.notification.error("Invalid repository", "You must use a valid Github repository.");
       this.fetchingGithubInfo = false;
       return;
     }
@@ -94,18 +111,18 @@ export class PublishComponent implements OnInit {
       this.fetchingGithubInfo = false;
       this.githubInfo.fullName = data.full_name;
       this.githubInfo.avatar = data.owner.avatar_url;
-      this.errors = "";
 
     }, error => {
-      this.errors = "Github repository wasn't found.";
+      this.notification.error("Invalid repository", "Repository wasn't found. Are you sure it exists?.");
       this.fetchingGithubInfo = false;
     });
   }
 
-  constructor(private pluginService: PluginService, private router: Router, private notification: NotificationsService) { }
+  constructor(private pluginService: PluginService, private router: Router, private notification: NotificationsService, private titleService: Title) { }
 
   ngOnInit() {
 
+    this.titleService.setTitle("MO Plugins | Publish plugin");
     this.formStep = 1;
 
   }

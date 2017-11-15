@@ -34,19 +34,14 @@
   <button type="button" class="btn btn-primary" (click)="inputOk()" *ngIf="!fetchingGithubInfo">Publish plugin</button>
   <button type="button" class="btn btn-primary" (click)="inputOk()" *ngIf="fetchingGithubInfo" disabled>Wait...</button>
 
-  <div class="alert alert-danger" *ngIf="errors">{{ errors }}</div>
-
 </div>
 
 
 <div *ngIf="formStep == 2">
 
-  <div class="row">
+  <div class="row mb-4">
 
     <div class="col-md-6">
-
-      <p>{{ plugin.name }}</p>
-
 
       <div class="form-group row">
         <label for="slug-input" class="col-4 col-form-label">Slug</label>
@@ -56,7 +51,7 @@
       </div>
 
       <div>
-        <p>Your plugin will be available at</p>
+        <p>Your plugin <b>{{ plugin.name }}</b> will be available at</p>
         <p><b>http://localhost:8080/plugin/{{ plugin.shortName }}</b></p>
       </div>
 
@@ -81,6 +76,7 @@
   <div class="alert alert-warning">Double check the plugin data before proceeding.</div>
 
   <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="!creatingPlugin">Publish plugin</button>
+  <button type="button" class="btn btn-secondary" (click)="formStep = 1" *ngIf="!creatingPlugin">Go back</button>
   <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="creatingPlugin" disabled>Wait...</button>
 
 

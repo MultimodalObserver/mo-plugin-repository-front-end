@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Angular2TokenService } from "angular2-token";
-import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login-form',
@@ -19,7 +18,7 @@ export class LoginFormComponent implements OnInit {
 
 
   @Output() onFormResult = new EventEmitter<any>();
-  constructor(private tokenAuthService:Angular2TokenService, private notification: NotificationsService) { }
+  constructor(private tokenAuthService:Angular2TokenService) { }
 
   ngOnInit() {
     this.errors = "";
@@ -46,9 +45,7 @@ export class LoginFormComponent implements OnInit {
 
           if(res.status == 200){
             this.errors = "";
-            this.notification.success("Logged in", "Welcome!");
             this.onFormResult.emit({signedIn: true, res});
-
           }
         },
 

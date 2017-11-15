@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -36,8 +36,10 @@ import { PluginComponent } from './plugin/plugin.component';
 
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
-import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { AccountComponent } from './account/account.component';
+
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginFormComponent,
     RegisterFormComponent,
     PublishComponent,
-    PluginComponent
+    PluginComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, TagService, UserService, Angular2TokenService],
+  providers: [UrlService, PluginService, TagService, UserService, Angular2TokenService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Title } from '@angular/platform-browser';
 import * as _ from 'lodash';
 
 export enum Status {
@@ -36,7 +37,7 @@ export class ExploreComponent implements OnInit {
   @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
 
 
-  constructor(private urlService: UrlService, private pluginService: PluginService, private modalService: BsModalService) {
+  constructor(private urlService: UrlService, private pluginService: PluginService, private modalService: BsModalService, private titleService: Title) {
   }
 
   private resetSearch() : void {
@@ -97,6 +98,7 @@ export class ExploreComponent implements OnInit {
 
 
   ngOnInit() {
+    this.titleService.setTitle("MO Plugins | Explore");
     this.resetSearch();
     this.fetchPlugins();
   }

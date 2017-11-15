@@ -26,6 +26,10 @@ export class PluginService {
       return this.tokenAuthService.delete(`plugins/${pluginId}/tags/${tagId}`);
     }
 
+    public removePlugin(pluginId: number){
+      return this.tokenAuthService.delete(`plugins/${pluginId}`);
+    }
+
     public addTag(pluginId: number, tagName: string){
       return this.tokenAuthService.post(`plugins/${pluginId}/tags`, {
         tag_name: tagName

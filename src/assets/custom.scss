@@ -23,8 +23,10 @@ a {
 
 .btn-primary{
   background-color: $link-not-hover;
+  border-color: $link-not-hover;
   &:hover, &:focus {
     background-color: $link-yes-hover;
+    border-color: $link-yes-hover;
   }
 }
 

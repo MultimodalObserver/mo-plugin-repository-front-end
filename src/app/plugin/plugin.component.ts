@@ -1,11 +1,16 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { NgZone } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
 import { UrlService } from '../../services/url.service';
 import { UserService } from '../../services/user.service';
 import { TagService } from '../../services/tag.service';
 import { Angular2TokenService } from "angular2-token";
+import { Title } from '@angular/platform-browser';
+import { NotificationsService } from 'angular2-notifications';
+import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
 @Component({
@@ -14,6 +19,7 @@ import * as _ from 'lodash';
 })
 export class PluginComponent implements OnInit {
 
+  public modalRef: BsModalRef;
   private sub: any;
   private pluginSlug: string;
   plugin = null;
@@ -34,7 +40,11 @@ export class PluginComponent implements OnInit {
     private pluginService: PluginService,
     private userService: UserService,
     private tagService: TagService,
+    private notification: NotificationsService,
     private zone: NgZone,
+    private modalService: BsModalService,
+    private titleService: Title,
+    private router: Router,
     private urlService: UrlService) {
 
 
@@ -59,6 +69,7 @@ export class PluginComponent implements OnInit {
        }, err => {
          this.plugin = null;
          this.loading = false;
+         this.titleService.setTitle("MO Plugins | Not Found");
        });
     });
   }
@@ -67,6 +78,7 @@ export class PluginComponent implements OnInit {
   setCurrentPluginData(plugin){
     this.plugin = _.clone(plugin);
     this.pluginEdit = _.clone(this.plugin);
+    this.titleService.setTitle("MO Plugins | " + this.plugin.name.trim());
   }
 
   removeTag(tagId: number){
@@ -113,6 +125,10 @@ export class PluginComponent implements OnInit {
 
   }
 
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
 
   autocompleteFormatter(data: any): string {
     return data['short_name'];
@@ -125,6 +141,19 @@ export class PluginComponent implements OnInit {
         this.setCurrentPluginData(data.json());
 
         this.editing = false;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  removePlugin(){
+    this.pluginService.removePlugin(this.plugin.id).subscribe(
+      data => {
+        this.notification.success(`${this.plugin.name} was deleted`);
+        this.modalRef.hide();
+        this.router.navigateByUrl('/explore');
       },
       err => {
         console.log(err);
