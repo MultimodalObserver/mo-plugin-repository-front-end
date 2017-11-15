@@ -1,4 +1,10 @@
-<input type="text" class="param-box" placeholder="Search plugins..."/>
+<div class="input-group mb-4">
+   <input type="text" class="form-control" placeholder="Search plugins..." (ngModelChange)="searchInputChanged($event)" [(ngModel)]="searchQuery"/>
+   <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i></button>
+   </span>
+</div>
+
 
 <div *ngIf="currentStatus == Status.OK && plugins.length == 0">
   <p class="bare-message">No results <i class="fa fa-frown-o"></i></p>
@@ -12,8 +18,9 @@
   <div class="panel-body">
 
     <div class="plugin-item-line">
-      <i class="fa fa-{{ p.repo_type }}"></i>
       <b><a [routerLink]="['..', 'plugin', p.short_name]">{{ p.name }}</a></b>
+
+      <button class="btn btn-flag pull-right left-right-margin"><i class="fa fa-flag"></i></button>
 
       <button class="btn btn-primary pull-right" (click)="installPlugin(p)"><i class="fa fa-download"></i>
         Install
@@ -21,7 +28,20 @@
 
     </div>
 
-    <div class="plugin-item-line"><i *ngIf="p.home_page" class="fa fa-home"></i> <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a></div>
+    <div class="plugin-item-line">
+      <i *ngIf="p.home_page" class="fa fa-home"></i>
+      <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a>
+    </div>
+
+
+    <div class="plugin-item-line">
+      <i class="fa fa-github"></i>
+      <a class="home-page"
+        target="_blank"
+        href="https://www.github.com/{{ p.repo_user }}/{{ p.repo_name }}">
+        https://www.github.com/{{ p.repo_user }}/{{ p.repo_name }}
+      </a>
+    </div>
 
     <div class="plugin-item-line">
       <div class="tag" *ngFor="let c of p.tags"><i class="fa fa-tag"></i> <span>{{ c.short_name }}</span></div>

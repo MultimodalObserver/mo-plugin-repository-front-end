@@ -1,50 +1,48 @@
 <form (ngSubmit)="onSignUpSubmit()">
 
-  <div class="form-group row">
-    <label for="email-input" class="col-2 col-form-label">Email</label>
-    <div class="col-10">
-      <input id="email-input"
-             autocomplete="off"
-             type="email"
-             required
-             name='email'
-             [(ngModel)]="signUpUser.email"
-             class="form-control"/>
+  <div class="input-group mb-2">
+    <div class="input-group-addon">
+      <i class="fa fa-user"></i>
     </div>
+    <input placeholder="Your e-mail"
+           autocomplete="off"
+           type="email"
+           required
+           name='email'
+           [(ngModel)]="signUpUser.email"
+           class="form-control"/>
   </div>
 
-  <div class="form-group row">
-    <label for="password-input" class="col-2 col-form-label">Password</label>
-    <div class="col-10">
-      <input id="password-input"
-             autocomplete="off"
-             type="password"
-             required
-             name='password'
-             [(ngModel)]="signUpUser.password"
-             class="form-control"/>
+  <div class="input-group mb-2">
+    <div class="input-group-addon">
+      <i class="fa fa-lock"></i>
     </div>
+    <input placeholder="Password"
+           autocomplete="off"
+           type="password"
+           required
+           name='password'
+           [(ngModel)]="signUpUser.password"
+           class="form-control"/>
   </div>
 
-  <div class="form-group row">
-    <label for="confirm-password-input" class="col-2 col-form-label">Confirm password</label>
-    <div class="col-10">
-      <input id="confirm-password-input"
-             autocomplete="off"
-             type="password"
-             required
-             name='password'
-             [(ngModel)]="signUpUser.passwordConfirmation"
-             class="form-control"/>
+  <div class="input-group mb-2">
+    <div class="input-group-addon">
+      <i class="fa fa-lock"></i>
     </div>
+    <input placeholder="Confirm password"
+           autocomplete="off"
+           type="password"
+           required
+           name='password'
+           [(ngModel)]="signUpUser.passwordConfirmation"
+           class="form-control"/>
   </div>
-
-
 
   <button type="submit" class="btn btn-primary" *ngIf="!loading">Create account</button>
   <button type="submit" class="btn btn-primary" *ngIf="loading" disabled>Please wait...</button>
   <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
 
-  <div class="alert alert-danger" *ngIf="errors">{{ errors }}</div>
+  <div class="alert alert-danger mt-4" *ngIf="errors">{{ errors }}</div>
 
 </form>

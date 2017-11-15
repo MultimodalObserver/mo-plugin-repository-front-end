@@ -26,45 +26,75 @@ export class ExploreComponent implements OnInit {
 
   currentPluginModal = {};
 
+  searchQuery: string = "";
+
   public pluginModal: BsModalRef;
 
   currentStatus: Status;
   maxLengthDescription = 300;
+  timeOut = null;
   noMorePlugins: boolean;
   private lastPageLoadedSuccessfully: number;
-  private tagSlug: string;
+
 
   @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
 
 
-  constructor(private urlService: UrlService, private pluginService: PluginService, private modalService: BsModalService, private titleService: Title) {
-  }
+  constructor(private urlService: UrlService, private pluginService: PluginService, private modalService: BsModalService, private titleService: Title) { }
 
   private resetSearch() : void {
     this.noMorePlugins = false;
     this.lastPageLoadedSuccessfully = 0;
     this.plugins = [];
-    this.tagSlug = null;
   }
 
-  installPlugin(plugin) : void{
+
+  searchInputChanged(query){
+
+    this.resetSearch();
+
+    this.currentStatus = Status.PLUGINS_LOADING;
+
+    if(this.timeOut != null){
+      clearTimeout(this.timeOut);
+    }
+
+    this.timeOut = setTimeout(function(){
+      this.search();
+    }.bind(this), 800);
+
+  }
+
+  search(){
+    this.resetSearch();
+    this.fetchPlugins();
+  }
+
+
+  installPlugin(plugin) : void {
     this.currentPluginModal = plugin;
     this.pluginModal = this.modalService.show(this.pluginModalTemplate);
   }
 
+
   fetchPlugins() : void {
+
+    clearTimeout(this.timeOut);
 
     this.currentStatus = Status.PLUGINS_LOADING;
     let url: string;
 
+    let query = this.searchQuery.trim();
+
     const params = {
-      tagSlug: this.tagSlug,
       page: this.lastPageLoadedSuccessfully + 1
     };
 
+    if(query.trim().length > 0){
+      params['q'] = query.trim();
+    }
 
-    this.pluginService.getPlugins(params)
-    .subscribe(
+    this.pluginService.getPlugins(params).subscribe(
       data => {
 
         if((<Array<any>>data).length === 0){
@@ -85,12 +115,11 @@ export class ExploreComponent implements OnInit {
         this.currentStatus = Status.OK;
         this.lastPageLoadedSuccessfully++;
       },
-      error => {
+      err => {
         this.plugins = [];
         this.currentStatus = Status.ERROR;
         this.lastPageLoadedSuccessfully = 0;
-      }
-    );
+      });
   }
 
   ngOnDestroy(){

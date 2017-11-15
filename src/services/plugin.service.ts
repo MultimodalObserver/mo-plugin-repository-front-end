@@ -44,6 +44,7 @@ export class PluginService {
       return this.tokenAuthService.post("plugins", plugin);
     }
 
+
     public getPlugins<T>(params: any) : Observable<T> {
 
       let url: string;
@@ -52,18 +53,13 @@ export class PluginService {
         params.page = 1;
       }
 
-      if(!params.hasOwnProperty('tagSlug')){
-        params.tagSlug = null;
+      // If it has a query param, also tell the backend to perform
+      // a plugin search by tags.
+      if(params.hasOwnProperty('q')){
+        params['include_tags_search'] = true;
       }
 
-      if(params.tagSlug){
-        // Filtered by tag
-        url = this.urlService.build(['tags', params.tagSlug, 'plugins'], { page: params.page });
-
-      } else {
-        // Not filtered by tag
-        url = this.urlService.build(['plugins'], { page: params.page });
-      }
+      url = this.urlService.build(['plugins'], params);
 
       return this.http.get<T>(url);
 
