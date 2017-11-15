@@ -9,7 +9,7 @@ import { UserService } from '../../services/user.service';
 import { TagService } from '../../services/tag.service';
 import { Angular2TokenService } from "angular2-token";
 import { Title } from '@angular/platform-browser';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService } from 'angular4-notifications';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
@@ -151,7 +151,7 @@ export class PluginComponent implements OnInit {
   removePlugin(){
     this.pluginService.removePlugin(this.plugin.id).subscribe(
       data => {
-        this.notification.success(`${this.plugin.name} was deleted`);
+        this.notification.success(`${this.plugin.name} was deleted`, null);
         this.modalRef.hide();
         this.router.navigateByUrl('/explore');
       },

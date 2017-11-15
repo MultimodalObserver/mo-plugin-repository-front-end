@@ -299,6 +299,10 @@ angular2-token@^0.2.0-beta.12:
   version "0.2.0-beta.12"
   resolved "https://registry.yarnpkg.com/angular2-token/-/angular2-token-0.2.0-beta.12.tgz#0a9271b081ebf9e41b598ea91c6139759a739b6d"
 
+angular4-notifications@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/angular4-notifications/-/angular4-notifications-0.0.2.tgz#deb2fefaa9f46d494edd8b236633f80d649c02f1"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"

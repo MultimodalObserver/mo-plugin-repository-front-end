@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
 import { Router } from '@angular/router';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService } from 'angular4-notifications';
 import { Title } from '@angular/platform-browser';
 
 @Component({

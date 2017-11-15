@@ -28,6 +28,7 @@
     "@types/lodash": "^4.14.74",
     "angular2-notifications": "^0.9.6",
     "angular2-token": "^0.2.0-beta.12",
+    "angular4-notifications": "^0.0.2",
     "bootstrap": "^4.0.0-beta",
     "core-js": "^2.4.1",
     "express": "^4.15.4",

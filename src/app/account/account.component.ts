@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Angular2TokenService } from "angular2-token";
 import { Title } from '@angular/platform-browser';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService } from 'angular4-notifications';
 
 @Component({
   selector: 'app-account',
@@ -24,6 +24,11 @@ export class AccountComponent implements OnInit {
 
   changePassword(){
 
+    if(this.passChange.new1 != this.passChange.new2){
+      this.notification.error("Error", "Passwords don't match");
+      return;
+    }
+
     this.tokenAuthService.updatePassword({
       password:             this.passChange.new1,
       passwordConfirmation: this.passChange.new2,
@@ -34,7 +39,6 @@ export class AccountComponent implements OnInit {
         this.notification.success("Password changed!", "Your password was updated.");
       },
       error => {
-        console.log(error);
         this.notification.error("Error", error.json().errors.full_messages[0]);
       }
     );

@@ -37,7 +37,7 @@ import { PluginComponent } from './plugin/plugin.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SimpleNotificationsModule } from 'angular4-notifications';
 import { AccountComponent } from './account/account.component';
 
 
