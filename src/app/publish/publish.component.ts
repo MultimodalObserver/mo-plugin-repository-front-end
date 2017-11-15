@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-publish',
@@ -57,6 +58,8 @@ export class PublishComponent implements OnInit {
     this.pluginService.createPlugin(p).subscribe(data => {
 
       console.log(data.json());
+      // go to 'show plugin'
+      this.notification.success("Plugin created", "Your plugin was added successfully.");
       this.router.navigateByUrl('/plugin/' + data.json().short_name);
 
 
@@ -99,7 +102,7 @@ export class PublishComponent implements OnInit {
     });
   }
 
-  constructor(private pluginService: PluginService, private router: Router) { }
+  constructor(private pluginService: PluginService, private router: Router, private notification: NotificationsService) { }
 
   ngOnInit() {
 

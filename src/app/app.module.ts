@@ -36,6 +36,9 @@ import { PluginComponent } from './plugin/plugin.component';
 
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -53,9 +56,11 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
   imports: [
     BrowserModule,
     Ng2AutoCompleteModule,
+    SimpleNotificationsModule.forRoot(),
     HttpModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),

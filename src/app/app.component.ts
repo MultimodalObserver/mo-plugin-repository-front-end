@@ -5,6 +5,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,12 @@ export class AppComponent {
   isCollapsed: boolean = true;
 
   public modalRef: BsModalRef;
+
+  public notificationOptions = {
+    //position: ["bottom", "left"],
+    timeOut: 3000,
+    lastOnBottom: true
+  }
 
   onLoginFormResult(e){
     if(e.signedIn){
@@ -36,6 +43,7 @@ export class AppComponent {
   signOut(){
     this.tokenAuthService.signOut();
     this.router.navigateByUrl('/');
+    this.notification.alert("Signed out");
   }
 
 
@@ -47,7 +55,11 @@ export class AppComponent {
   isLoginMode(){ return this.authMode == 'login' }
   isRegisterMode(){ return this.authMode == 'register' }
 
-  constructor(public tokenAuthService: Angular2TokenService, private urlService: UrlService, private modalService: BsModalService, private router: Router){
+  constructor(public tokenAuthService: Angular2TokenService,
+    private urlService: UrlService,
+    private modalService: BsModalService,
+    private router: Router,
+    private notification: NotificationsService){
 
     let url = this.urlService.baseUrl;
 
@@ -55,8 +67,5 @@ export class AppComponent {
       apiBase: url.substr(0, url.length-1)
     });
 
-
   }
-
-
 }
