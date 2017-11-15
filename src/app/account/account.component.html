@@ -1,6 +1,8 @@
 <div class="mb-4">
 
-  <h1>Your account</h1>
+  <div class="header">
+    <h1>My account</h1>
+  </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">E-mail</label>
@@ -10,19 +12,19 @@
   </div>
   <div class="form-group row">
     <label for="current-password" class="col-2 col-form-label">Current password</label>
-    <div class="col-10">
+    <div class="col-4">
       <input type="password" class="form-control" [(ngModel)]="passChange.old" id="current-password"/>
     </div>
   </div>
   <div class="form-group row">
     <label for="new-password1" class="col-2 col-form-label">New password</label>
-    <div class="col-10">
+    <div class="col-4">
       <input type="password" class="form-control" [(ngModel)]="passChange.new1" id="new-password1"/>
     </div>
   </div>
   <div class="form-group row">
     <label for="new-password2" class="col-2 col-form-label">Password confirmation</label>
-    <div class="col-10">
+    <div class="col-4">
       <input type="password" class="form-control" [(ngModel)]="passChange.new2" id="new-password2"/>
     </div>
   </div>
@@ -35,7 +37,9 @@
 
 <div class="mb-4">
 
-  <h1 class="mb-4">My plugins</h1>
+  <div class="header">
+    <h2>My plugins</h2>
+  </div>
 
   <div *ngIf="myPlugins == null">
     <i class="fa fa-spinner fa-spin"></i>
@@ -47,9 +51,11 @@
 
   </div>
 
-  <div *ngFor="let p of myPlugins" class="mb-3">
+  <div *ngFor="let p of myPlugins" class="mb-4">
 
-      <a [routerLink]="['..', 'plugin', p.short_name]">{{ p.name }}</a>
+      <div class="mb-1">
+        <a [routerLink]="['..', 'plugin', p.short_name]">{{ p.name }}</a>
+      </div>
       <div class="plugin-item-line">
         <div class="tag" *ngFor="let c of p.tags">
           <i class="fa fa-tag"></i>

@@ -1,15 +1,17 @@
 <div *ngIf="!loading" class="mb-4">
-  <button *ngIf="ownPlugin && !editing" class="btn btn-primary" (click)="editing = true">Edit</button>
+  <button *ngIf="ownPlugin && !editing" class="btn btn-primary" (click)="editing = true"><i class="fa fa-edit"></i></button>
 
   <button *ngIf="ownPlugin && editing" class="btn btn-primary" (click)="saveEdit()">Save</button>
   <button *ngIf="ownPlugin && editing" class="btn btn-secondary" (click)="editing = false">Cancel</button>
-  <button *ngIf="ownPlugin" class="btn btn-danger" (click)="openModal(removeModal)">Delete</button>
+  <button *ngIf="ownPlugin" class="btn btn-danger" (click)="openModal(removeModal)"><i class="fa fa-remove"></i></button>
 </div>
 
 <div *ngIf="!loading && plugin != null && !editing">
 
 
-  <h1>{{ plugin.name }}</h1>
+  <div class="header">
+    <h1>{{ plugin.name }}</h1>
+  </div>
 
   <p>{{ plugin.description }}</p>
 

@@ -6,8 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  templateUrl: './account.component.html'
 })
 export class AccountComponent implements OnInit {
 

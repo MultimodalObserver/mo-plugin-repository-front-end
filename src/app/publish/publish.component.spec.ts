@@ -2,7 +2,7 @@ import { PublishComponent } from './publish.component';
 
 function testParseGithubUserRepo(url: string, username: string = null, repo: string = null): boolean{
 
-  let comp:PublishComponent = new PublishComponent(null);
+  let comp:PublishComponent = new PublishComponent(null, null, null, null);
   let result = comp.parseGithubUserRepo(url);
 
   if(result == null && username == null && repo == null) return true;
@@ -36,5 +36,5 @@ describe('Publish component', () => {
     expect(testParseGithubUserRepo("  http://wWW.githuB.com/--34_/67/sdsd/sds/", "--34_", "67")).toEqual(true);
     expect(testParseGithubUserRepo("  http://githuB.com/--34_/67/fds/dfs/dfs/", "--34_", "67")).toEqual(true);
   });
-  
+
 });
