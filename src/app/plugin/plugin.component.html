@@ -13,6 +13,14 @@
     <h1>{{ plugin.name }}</h1>
   </div>
 
+  <div *ngIf="plugin.status == 'pending'" class="alert alert-warning">
+    <b>Pending moderation:</b> This plugin won't be listed publicly until it has been approved by a moderator, but it can still be downloaded by those who know its URL.
+  </div>
+
+  <div *ngIf="plugin.status == 'rejected'" class="alert alert-danger">
+    <b>Rejected plugin:</b> This plugin was rejected by a moderator.
+  </div>
+
   <p>{{ plugin.description }}</p>
 
   <p>

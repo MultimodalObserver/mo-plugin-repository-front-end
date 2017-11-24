@@ -18,8 +18,7 @@ export class PluginService {
     }
 
     public showPlugin(pluginSlug: string): any{
-      let url = this.urlService.build(['plugins', pluginSlug]);
-      return this.http.get(url);
+      return this.tokenAuthService.get(`plugins/${pluginSlug}`);
     }
 
     public removeTag(pluginId: number, tagId: number){

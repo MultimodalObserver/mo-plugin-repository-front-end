@@ -59,6 +59,7 @@ export class PluginComponent implements OnInit {
        this.pluginService.showPlugin(this.pluginSlug).subscribe(
 
         data => {
+          data = data.json();
           this.setCurrentPluginData(data);
           this.loading = false;
 
@@ -108,7 +109,16 @@ export class PluginComponent implements OnInit {
 
     if(!tagName) return;
 
+    tagName = tagName.trim();
+
     console.assert(typeof tagName === "string" && tagName.length > 0);
+
+    for(let i=0; i<this.plugin.tags.length; i++){
+      if(this.plugin.tags[i].short_name.toLowerCase() == tagName){
+        // Already exists
+        return;
+      }
+    }
 
     this.pluginService.addTag(this.plugin.id, tagName).subscribe(
       data => {
@@ -119,6 +129,7 @@ export class PluginComponent implements OnInit {
         this.newTag = "";
       },
       err => {
+        this.notification.error("Error", "Tag couldn't be added. Try using letters, numbers and dashes.");
         console.log(err);
       }
     );
