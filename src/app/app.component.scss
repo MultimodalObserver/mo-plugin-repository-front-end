@@ -1,6 +1,8 @@
 @import './../assets/global_variables.scss';
 
 $container-separation: 20px;
+$navbar-link-no-hover: #777777;
+$navbar-link-yes-hover: #ff871c;
 
 .container-main {
   background-color: white;
@@ -9,31 +11,21 @@ $container-separation: 20px;
   border: 1px solid $main-container-border;
 }
 
-@mixin link-color($color) {
-  .fa {
-    color: $color;
-    font-size: 20px;
-    padding: 5px;
+.nav-link {
+  color: $navbar-link-no-hover !important;
+  transition: all 0.5s;
+
+  &:hover {
+    color: $navbar-link-yes-hover !important;
   }
 }
 
-.link-blue {
-	@include link-color(#487db2);
-}
-
-.link-red {
-	@include link-color(#da4545);
-}
-
-.link-yellow {
-	@include link-color(#d0d237);
-}
-
-.link-green {
-	@include link-color(#86be2e);
+.toggle-button-custom {
+  background-color: $link-not-hover;
+  border: 1px solid $main-container-border;
 }
 
 
-.link-grey {
-	@include link-color(#949494);
+.nav-item {
+  margin: 5px 20px;
 }

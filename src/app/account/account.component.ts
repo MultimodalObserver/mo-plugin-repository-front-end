@@ -49,7 +49,13 @@ export class AccountComponent implements OnInit {
 
     this.titleService.setTitle("MO Plugins | Account");
 
-    this.user = this.tokenAuthService.currentAuthData;
+    this.userService.getUserMe().subscribe(
+      data => {
+        this.user = data.json();
+      }
+    );
+
+    //this.user = this.tokenAuthService.currentAuthData;
 
     this.userService.getUserPlugins().subscribe(
       data => {

@@ -15,6 +15,12 @@
 
   <p>{{ plugin.description }}</p>
 
+  <p>
+    <small class="plugin-item-line">
+      Published by {{ plugin.user.nickname }}
+    </small>
+  </p>
+
   <div class="plugin-item-line mb-4">
     <div class="tag" *ngFor="let c of plugin.tags">
       <i class="fa fa-tag"></i>
@@ -43,6 +49,7 @@
   </div>
 
   <p><i class="fa fa-github"></i> <a target="_blank" href="https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}">https://www.github.com/{{ plugin.repo_user }}/{{ plugin.repo_name }}</a></p>
+
 
   <h2>Install plugin</h2>
 

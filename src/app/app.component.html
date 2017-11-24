@@ -1,43 +1,44 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark mo-bar fixed-top">
     <div class="container">
       <a class="navbar-brand" routerLink="/"><img src="assets/mo63x63.png"></a>
-      <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+      <button class="navbar-toggler toggle-button-custom" type="button" (click)="isCollapsed = !isCollapsed">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+
 
       <div class="collapse navbar-collapse"
       [collapse]="isCollapsed">
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link link-blue" routerLink="/" (click)="isCollapsed = true"><i class="fa fa-home"></i> Home</a>
+            <a class="nav-link" routerLink="/" (click)="isCollapsed = true"><i class="fa fa-home"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-red" routerLink="explore" (click)="isCollapsed = true"><i class="fa fa-search"></i> Explore</a>
+            <a class="nav-link" routerLink="explore" (click)="isCollapsed = true"><i class="fa fa-search"></i> Explore</a>
           </li>
-
 
           <!-- Not logged in -->
 
           <li class="nav-item" *ngIf="!tokenAuthService.userSignedIn()">
-            <a class="nav-link link-green" href="javascript:;" (click)="openModal(loginModal)"><i class="fa fa-user-o"></i> Login</a>
+            <a class="nav-link" href="javascript:;" (click)="openModal(loginModal)"><i class="fa fa-user-o"></i> Login</a>
           </li>
 
           <!-- Logged in -->
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
-            <a class="nav-link link-yellow" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-share-alt"></i> Publish</a>
+            <a class="nav-link" routerLink="publish" (click)="isCollapsed = true"><i class="fa fa-share-alt"></i> Publish</a>
           </li>
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
-            <a class="nav-link link-green" routerLink="account" (click)="isCollapsed = true"><i class="fa fa-user-o"></i> Account</a>
+            <a class="nav-link" routerLink="account" (click)="isCollapsed = true"><i class="fa fa-user-o"></i> Account</a>
           </li>
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
-            <a class="nav-link link-grey" href="javascript:;" (click)="signOut()"><i class="fa fa-sign-out"></i> Logout</a>
+            <a class="nav-link" href="javascript:;" (click)="signOut()"><i class="fa fa-sign-out"></i> Logout</a>
           </li>
 
 

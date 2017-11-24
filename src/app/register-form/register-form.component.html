@@ -4,6 +4,19 @@
     <div class="input-group-addon">
       <i class="fa fa-user"></i>
     </div>
+    <input placeholder="Username"
+           autocomplete="off"
+           type="text"
+           required
+           name='username'           
+           [(ngModel)]="signUpUser.username"
+           class="form-control"/>
+  </div>
+
+  <div class="input-group mb-2">
+    <div class="input-group-addon">
+      <i class="fa fa-at"></i>
+    </div>
     <input placeholder="Your e-mail"
            autocomplete="off"
            type="email"

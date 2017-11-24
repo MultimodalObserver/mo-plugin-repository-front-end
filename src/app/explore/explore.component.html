@@ -33,7 +33,6 @@
       <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a>
     </div>
 
-
     <div class="plugin-item-line">
       <i class="fa fa-github"></i>
       <a class="home-page"
@@ -60,6 +59,10 @@
     <div *ngIf="!p.description">
       <i>No description.</i>
     </div>
+
+    <small class="plugin-item-line">
+      Published by {{ p.user.nickname }}
+    </small>
 
   </div>
 </div>

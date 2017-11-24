@@ -1,5 +1,9 @@
 @import './global_variables.scss';
 
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
 body {
   background-color: $background-color;
   padding-top: $top-padding;
@@ -27,6 +31,11 @@ a {
   &:hover, &:focus {
     color: $link-yes-hover;
   }
+}
+
+.mo-bar {
+  background-color: #ffffff;
+  border: 1px solid $main-container-border;
 }
 
 
