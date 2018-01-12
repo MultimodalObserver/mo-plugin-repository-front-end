@@ -1,3 +1,22 @@
+@import '../../assets/global_variables.scss';
+
+$status-box-font-color: #ffffff;
+
 .rejected-plugin {
-  color: #ee0000;
+  background-color: #d5a4a4;
+  color: $status-box-font-color;
+}
+
+.accepted-plugin {
+  background-color: #aaccb5;
+  color: $status-box-font-color;
+}
+
+.pending-plugin {
+  background-color: #ccccaa;
+  color: $status-box-font-color;
+}
+
+.plugin-status{
+  font-size: $small-font;
 }
