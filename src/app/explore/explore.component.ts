@@ -118,6 +118,8 @@ export class ExploreComponent implements OnInit {
     this.pluginService.getPlugins(params).subscribe(
       data => {
 
+        data = data.json();
+
         if((<Array<any>>data).length === 0){
           // This means the last page visited doesn't have plugins.
           // Which means that the 'load more' button must disappear.

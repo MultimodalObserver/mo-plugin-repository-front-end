@@ -114,7 +114,7 @@ export class PublishComponent implements OnInit {
 
     this.plugin.shortName = repo;
 
-    this.pluginService.getGithubInfo<any>(username, repo).subscribe(data => {
+    this.pluginService.getGithubInfo(username, repo).subscribe(data => {
 
       this.formStep = 2;
       this.fetchingGithubInfo = false;

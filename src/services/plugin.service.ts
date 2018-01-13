@@ -12,14 +12,14 @@ export class PluginService {
     constructor(private http: HttpClient, private urlService: UrlService, private tokenAuthService: Angular2TokenService) {
     }
 
-    public getGithubInfo<T>(username: string, repo: string): Observable<T>{
+    public getGithubInfo(username: string, repo: string): any{
       let repoApi = `https://api.github.com/repos/${username}/${repo}`;
-      return this.http.get<T>(repoApi);
+      return this.http.get(repoApi);
     }
 
-    public getLatestPlugins<T>(): Observable<T>{
+    public getLatestPlugins(): any{
       let url: string = this.urlService.build(['plugins'], { latest: true });
-      return this.http.get<T>(url);
+      return this.http.get(url);
     }
 
     public showPlugin(pluginSlug: string): any{
@@ -49,9 +49,9 @@ export class PluginService {
     }
 
 
-    public getPlugins<T>(params: any) : Observable<T> {
+    public getPlugins(params: any) : any {
 
-      let url: string;
+      //let url: string;
 
       if(!params.hasOwnProperty('page')){
         params.page = 1;
@@ -63,9 +63,9 @@ export class PluginService {
         params['include_tags_search'] = true;
       }
 
-      url = this.urlService.build(['plugins'], params);
+      //url = this.urlService.build(['plugins'], params);
 
-      return this.http.get<T>(url);
+      return this.tokenAuthService.get(`plugins`);
 
     }
 
