@@ -20,7 +20,7 @@
     <div class="plugin-item-line">
       <b><a [routerLink]="['..', 'plugin', p.short_name]">{{ p.name }}</a></b>
 
-      <button class="btn btn-flag pull-right left-right-margin"><i class="fa fa-flag"></i></button>
+      <a class="btn btn-edit pull-right left-right-margin" *ngIf="pluginOwnedByLoggedUser(p)" [routerLink]="['..', 'plugin', p.short_name]"><i class="fa fa-pencil"></i></a>
 
       <button class="btn btn-primary pull-right" (click)="installPlugin(p)"><i class="fa fa-download"></i>
         Install

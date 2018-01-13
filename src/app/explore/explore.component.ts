@@ -6,6 +6,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Title } from '@angular/platform-browser';
+import { Angular2TokenService } from "angular2-token";
+import { ActivatedRoute } from '@angular/router';
 import * as _ from 'lodash';
 
 export enum Status {
@@ -28,6 +30,8 @@ export class ExploreComponent implements OnInit {
 
   searchQuery: string = "";
 
+  private sub: any;
+
   public pluginModal: BsModalRef;
 
   currentStatus: Status;
@@ -40,7 +44,13 @@ export class ExploreComponent implements OnInit {
   @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
 
 
-  constructor(private urlService: UrlService, private pluginService: PluginService, private modalService: BsModalService, private titleService: Title) { }
+  constructor(
+    private tokenAuthService: Angular2TokenService,
+    private urlService: UrlService,
+    private pluginService: PluginService,
+    private modalService: BsModalService,
+    private route: ActivatedRoute,
+    private titleService: Title) { }
 
   private resetSearch() : void {
     this.noMorePlugins = false;
@@ -68,6 +78,17 @@ export class ExploreComponent implements OnInit {
   search(){
     this.resetSearch();
     this.fetchPlugins();
+  }
+
+  public pluginOwnedByLoggedUser(plugin) : boolean {
+
+    if(!this.tokenAuthService.userSignedIn()) return false;
+    if(plugin == null) return false;
+    if(typeof this.tokenAuthService.currentUserData === "undefined") return false;
+
+    let id1: number = this.tokenAuthService.currentUserData.id;
+    let id2: number = plugin.user_id;
+    return id1 == id2;
   }
 
 
@@ -123,13 +144,32 @@ export class ExploreComponent implements OnInit {
   }
 
   ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
 
   ngOnInit() {
     this.titleService.setTitle("MO Plugins | Explore");
-    this.resetSearch();
-    this.fetchPlugins();
+
+    this.sub = this.route.queryParams.subscribe(params => {
+
+      let query: string = params['q'] || "";
+
+      if(query.trim().length == 0){
+
+        // Normal search
+        this.resetSearch();
+        this.fetchPlugins();
+      }
+
+      this.searchQuery = query.trim();
+
+      if(this.searchQuery.length == 0) return;
+
+      this.search();
+
+    });
+
   }
 
 }

@@ -34,7 +34,11 @@
           </li>
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
-            <a class="nav-link" routerLink="account" (click)="isCollapsed = true"><i class="fa fa-user-o"></i> Account</a>
+            <a class="nav-link" routerLink="account" (click)="isCollapsed = true"><i class="fa fa-user-o"></i> {{ getNickName() }}</a>
+          </li>
+
+          <li class="nav-item" *ngIf="isAdmin()">
+            <a class="nav-link" routerLink="account" (click)="isCollapsed = true"><i class="fa fa-tasks"></i> Moderate</a>
           </li>
 
           <li class="nav-item" *ngIf="tokenAuthService.userSignedIn()">
@@ -46,6 +50,7 @@
       </div>
     </div>
   </nav>
+
 
   <!-- Login/register modal -->
   <ng-template #loginModal>

@@ -178,6 +178,10 @@
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.0.33.tgz#bc0b28356af46fe9ec64495588ee61503fd34ce5"
 
+"@types/grecaptcha@^2.0.33":
+  version "2.0.34"
+  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-2.0.34.tgz#6f6a3585f0f3b0eac2f46257da9ff7805af1e274"
+
 "@types/jasmine@*", "@types/jasmine@~2.5.53":
   version "2.5.54"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.54.tgz#a6b5f2ae2afb6e0307774e8c7c608e037d491c63"
@@ -3403,6 +3407,12 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+ng-recaptcha@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/ng-recaptcha/-/ng-recaptcha-3.0.3.tgz#2355e7875b94b92486cf21b674a28c9d0f000531"
+  optionalDependencies:
+    "@types/grecaptcha" "^2.0.33"
 
 ng2-auto-complete@^0.12.0:
   version "0.12.0"

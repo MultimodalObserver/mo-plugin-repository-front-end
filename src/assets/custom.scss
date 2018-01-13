@@ -48,17 +48,7 @@ a {
   }
 }
 
-.btn-flag{
-  opacity: .5;
-  transition: opacity .5s ease-out;
-  -moz-transition: opacity .5s ease-out;
-  -webkit-transition: opacity .5s ease-out;
-  -o-transition: opacity .5s ease-out;
 
-  &:hover {
-    opacity: 1;
-  }
-}
 
 .left-right-margin{
   margin: 0 5px;

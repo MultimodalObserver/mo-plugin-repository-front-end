@@ -48,9 +48,32 @@ export class AppComponent {
   }
 
 
-  public openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+  getNickName(): string{
+
+    let nickname: string = "Account";
+
+    try {
+      nickname = this.tokenAuthService.currentUserData.nickname;
+    } catch(e){
+
+    } finally {
+      return nickname;
+    }
+  }
+
+  isAdmin(): boolean{
+
+    if(!this.tokenAuthService.userSignedIn()) return false;
+    if(typeof this.tokenAuthService.currentUserData == "undefined") return false;
+    if((<any>this.tokenAuthService.currentUserData).role == "admin") return true;
+
+    return false;
+  }
+
 
   authMode: 'login' | 'register' = 'login';
   isLoginMode(){ return this.authMode == 'login' }

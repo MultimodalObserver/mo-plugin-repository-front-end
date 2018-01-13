@@ -120,7 +120,11 @@ export class PublishComponent implements OnInit {
     });
   }
 
-  constructor(private pluginService: PluginService, private router: Router, private notification: NotificationsService, private titleService: Title) { }
+  constructor(
+    private pluginService: PluginService,
+    private router: Router,
+    private notification: NotificationsService,
+    private titleService: Title) { }
 
   ngOnInit() {
 

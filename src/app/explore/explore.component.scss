@@ -11,7 +11,14 @@
   width: 100%;
 }
 
+.btn-edit{
+  background-color: $light-grey;
+  color: $medium-grey;
 
+  &:hover {
+    background-color: $light-medium-grey;
+  }
+}
 
 ul { padding-left:20px; list-style:none; }
 li { margin-bottom:10px; }

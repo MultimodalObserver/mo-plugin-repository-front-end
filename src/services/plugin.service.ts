@@ -17,6 +17,11 @@ export class PluginService {
       return this.http.get<T>(repoApi);
     }
 
+    public getLatestPlugins<T>(): Observable<T>{
+      let url: string = this.urlService.build(['plugins'], { latest: true });
+      return this.http.get<T>(url);
+    }
+
     public showPlugin(pluginSlug: string): any{
       return this.tokenAuthService.get(`plugins/${pluginSlug}`);
     }

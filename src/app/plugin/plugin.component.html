@@ -1,9 +1,9 @@
 <div *ngIf="!loading" class="mb-4">
-  <button *ngIf="ownPlugin && !editing" class="btn btn-primary" (click)="editing = true"><i class="fa fa-edit"></i></button>
+  <button *ngIf="isOwnPlugin() && !editing" class="btn btn-primary" (click)="editing = true"><i class="fa fa-edit"></i></button>
 
-  <button *ngIf="ownPlugin && editing" class="btn btn-primary" (click)="saveEdit()">Save</button>
-  <button *ngIf="ownPlugin && editing" class="btn btn-secondary" (click)="editing = false">Cancel</button>
-  <button *ngIf="ownPlugin" class="btn btn-danger" (click)="openModal(removeModal)"><i class="fa fa-remove"></i></button>
+  <button *ngIf="isOwnPlugin() && editing" class="btn btn-primary" (click)="saveEdit()">Save</button>
+  <button *ngIf="isOwnPlugin() && editing" class="btn btn-secondary" (click)="editing = false">Cancel</button>
+  <button *ngIf="isOwnPlugin()" class="btn btn-danger" (click)="openModal(removeModal)"><i class="fa fa-remove"></i></button>
 </div>
 
 <div *ngIf="!loading && plugin != null && !editing">
@@ -14,7 +14,7 @@
   </div>
 
   <div *ngIf="plugin.status == 'pending'" class="alert alert-warning">
-    <b>Pending moderation:</b> This plugin won't be listed publicly until it has been approved by a moderator, but it can still be downloaded by those who know its URL.
+    <b>Pending moderation:</b> This plugin won't be listed publicly until it has been approved by a moderator.
   </div>
 
   <div *ngIf="plugin.status == 'rejected'" class="alert alert-danger">
@@ -33,14 +33,14 @@
     <div class="tag" *ngFor="let c of plugin.tags">
       <i class="fa fa-tag"></i>
       <span>{{ c.short_name }}
-        <button *ngIf="ownPlugin" class="remove-button" (click)="removeTag(c.id)"><i class="fa fa-remove"></i></button>
+        <button *ngIf="isOwnPlugin()" class="remove-button" (click)="removeTag(c.id)"><i class="fa fa-remove"></i></button>
       </span>
     </div>
   </div>
 
-  <div class="alert alert-warning" *ngIf="ownPlugin && hasNoTags()"><b>Hint:</b> Help users find your plugin by adding tags.</div>
+  <div class="alert alert-warning" *ngIf="isOwnPlugin() && hasNoTags()"><b>Hint:</b> Help users find your plugin by adding tags.</div>
 
-  <div *ngIf="ownPlugin" class="mb-4">
+  <div *ngIf="isOwnPlugin()" class="mb-4">
 
     <input
     type="text"
@@ -102,7 +102,8 @@
   </div>
   <div class="modal-body">
 
-    <p>You are about to remove <b>{{ plugin.name }}</b> permanently. Proceed?</p>
+
+    <p *ngIf="plugin != null">You are about to remove <b>{{ plugin.name }}</b> permanently. Proceed?</p>
 
     <button class="btn btn-danger" (click)="removePlugin()">Remove permanently</button>
     <button class="btn btn-primary" (click)="modalRef.hide()">Cancel</button>

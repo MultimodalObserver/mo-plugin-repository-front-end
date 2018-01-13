@@ -1,6 +1,8 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { RecaptchaModule } from 'ng-recaptcha';
+
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -40,7 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular4-notifications';
 import { AccountComponent } from './account/account.component';
 
-
+import { NormalUserGuard } from "./guards/normal-user.guard";
+import { AdminGuard } from "./guards/admin.guard";
 
 @NgModule({
   declarations: [
@@ -58,6 +61,7 @@ import { AccountComponent } from './account/account.component';
   ],
   imports: [
     BrowserModule,
+    RecaptchaModule.forRoot(),
     Ng2AutoCompleteModule,
     SimpleNotificationsModule.forRoot(),
     HttpModule,
@@ -71,7 +75,7 @@ import { AccountComponent } from './account/account.component';
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, TagService, UserService, Angular2TokenService, Title],
+  providers: [UrlService, PluginService, TagService, UserService, NormalUserGuard, AdminGuard, Angular2TokenService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

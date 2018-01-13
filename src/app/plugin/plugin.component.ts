@@ -28,7 +28,6 @@ export class PluginComponent implements OnInit {
   editing: boolean = false;
   newTag: string = "";
 
-  ownPlugin: boolean = false;
 
   // http://mo.servidor.com/tags?q=:keyword
   tagSearchURL = this.urlService.build(["tags"], { q: ":keyword" });
@@ -50,6 +49,18 @@ export class PluginComponent implements OnInit {
 
   }
 
+  public isOwnPlugin(): boolean{
+
+    if(!this.tokenAuthService.userSignedIn()) return false;
+    if(this.plugin == null) return false;
+    if(typeof this.tokenAuthService.currentUserData === "undefined") return false;
+
+    let id1: number = this.tokenAuthService.currentUserData.id;
+    let id2: number = this.plugin.user_id;
+    return id1 == id2;
+
+  }
+
   ngOnInit() {
 
     this.loading = true;
@@ -62,10 +73,6 @@ export class PluginComponent implements OnInit {
           data = data.json();
           this.setCurrentPluginData(data);
           this.loading = false;
-
-          this.userService.getUserMe().subscribe(data => {
-            this.ownPlugin = this.plugin.user_id == data.json().id;
-          });
 
        }, err => {
          this.plugin = null;
