@@ -89,6 +89,9 @@ export class RegisterFormComponent implements OnInit {
           this.onFormResult.emit({signedUp: true, res})
           this.errors = "";
         }
+
+        // So that the user data is fetched right away after signing up
+        this.tokenAuthSerivce.validateToken();
       },
 
       err => {
