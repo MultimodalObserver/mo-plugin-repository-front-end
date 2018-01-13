@@ -20,6 +20,12 @@ export class RegisterFormComponent implements OnInit {
 
   usernameRegex: RegExp = new RegExp(/^[A-Za-z0-9\-]{2,25}$/);
 
+  captchaResponse: string = "";
+
+  resolved(captchaResponse: string) {
+    this.captchaResponse = captchaResponse;
+  }
+
   @Output() onFormResult = new EventEmitter<any>();
 
   constructor(private tokenAuthSerivce:Angular2TokenService) { }
@@ -73,7 +79,8 @@ export class RegisterFormComponent implements OnInit {
       nickname: this.signUpUser.username,
       email: this.signUpUser.email,
       password: this.signUpUser.password,
-      passwordConfirmation: this.signUpUser.passwordConfirmation
+      passwordConfirmation: this.signUpUser.passwordConfirmation,
+      'g-recaptcha-response': this.captchaResponse
     }).subscribe(
 
       res => {

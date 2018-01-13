@@ -58,6 +58,9 @@
 
       <p *ngIf="plugin.description">{{ plugin.description }}</p>
       <p *ngIf="plugin.homepage"><i class="fa fa-home"></i> <a target="_blank" href="{{plugin.homepage}}">{{ plugin.homepage }}</a></p>
+
+      <re-captcha (resolved)="resolved($event)" siteKey="6LcEiUAUAAAAAPnNOCGhm6rphB098cCZi9zCTiom"></re-captcha>
+
     </div>
     <div class="col-md-6">
       <i class="fa fa-spinner fa-spin" *ngIf="fetchingGithubInfo"></i>

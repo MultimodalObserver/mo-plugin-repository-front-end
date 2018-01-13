@@ -30,6 +30,11 @@ export class AccountComponent implements OnInit {
       return;
     }
 
+    if(this.passChange.new1.length == 0){
+      this.notification.error("Error", "New password can't be blank");
+      return;
+    }
+
     this.tokenAuthService.updatePassword({
       password:             this.passChange.new1,
       passwordConfirmation: this.passChange.new2,
@@ -37,6 +42,10 @@ export class AccountComponent implements OnInit {
       resetPasswordToken:   'resetPasswordToken',
     }).subscribe(
       res => {
+        console.log(res)
+        this.passChange.new1 = "";
+        this.passChange.new2 = "";
+        this.passChange.old = "";
         this.notification.success("Password changed!", "Your password was updated.");
       },
       error => {

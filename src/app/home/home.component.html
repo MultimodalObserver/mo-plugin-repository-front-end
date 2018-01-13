@@ -25,6 +25,10 @@
 
     <h3>Latest plugins</h3>
 
+    <p *ngIf="plugins == null">
+      <i class="fa fa-spinner fa-spin"></i>
+    </p>
+
     <p *ngFor="let p of plugins">
       <a [routerLink]="['..', 'plugin', p.short_name]">{{p.name}}</a>
     </p>

@@ -25,10 +25,16 @@ export class PublishComponent implements OnInit {
 
   creatingPlugin = false;
 
+  captchaResponse: string = "";
+
   githubInfo: any = {
     fullName: "",
     avatar: ""
   };
+
+  resolved(captchaResponse: string) {
+    this.captchaResponse = captchaResponse;
+  }
 
   parseGithubUserRepo(url: string){
     url = url.toLowerCase();
@@ -61,7 +67,8 @@ export class PublishComponent implements OnInit {
       short_name: this.plugin.shortName,
       repo_user: this.parseGithubUserRepo(this.plugin.repository).username,
       repo_name: this.parseGithubUserRepo(this.plugin.repository).repo,
-      repo_type: "github"
+      repo_type: "github",
+      'g-recaptcha-response': this.captchaResponse
     };
 
     this.pluginService.createPlugin(p).subscribe(data => {
