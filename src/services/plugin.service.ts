@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UrlService } from './url.service';
 import { Angular2TokenService } from "angular2-token";
 import { Response } from '@angular/http';
 import Utils from '../services/utils';
@@ -10,7 +9,7 @@ import Utils from '../services/utils';
 export class PluginService {
 
 
-    constructor(private http: HttpClient, private urlService: UrlService, private tokenAuthService: Angular2TokenService) {
+    constructor(private http: HttpClient, private tokenAuthService: Angular2TokenService) {
     }
 
     public getGithubInfo(username: string, repo: string): any{
@@ -19,8 +18,7 @@ export class PluginService {
     }
 
     public getLatestPlugins(): any{
-      let url: string = this.urlService.build(['plugins'], { latest: true });
-      return this.http.get(url);
+      return this.tokenAuthService.get(`plugins?latest=true`);
     }
 
     public showPlugin(pluginSlug: string): any{

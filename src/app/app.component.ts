@@ -1,11 +1,11 @@
 import { Component, TemplateRef } from '@angular/core';
 import { Angular2TokenService } from "angular2-token";
-import { UrlService } from "../services/url.service";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular4-notifications';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -82,15 +82,13 @@ export class AppComponent {
   isRegisterMode(){ return this.authMode == 'register' }
 
   constructor(public tokenAuthService: Angular2TokenService,
-    private urlService: UrlService,
     private modalService: BsModalService,
     private router: Router,
     private notification: NotificationsService){
 
-    let url = this.urlService.baseUrl;
 
     this.tokenAuthService.init({
-      apiBase: url.substr(0, url.length-1)
+      apiBase: environment.apiBase
     });
 
   }

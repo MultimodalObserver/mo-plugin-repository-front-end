@@ -52,7 +52,7 @@
            class="form-control"/>
   </div>
 
-  <re-captcha (resolved)="resolved($event)" siteKey="6LcEiUAUAAAAAPnNOCGhm6rphB098cCZi9zCTiom"></re-captcha>
+  <re-captcha *ngIf="recaptchaKey" (resolved)="resolved($event)" siteKey="{{ recaptchaKey }}"></re-captcha>
 
   <button type="submit" class="btn btn-primary" *ngIf="!loading">Create account</button>
   <button type="submit" class="btn btn-primary" *ngIf="loading" disabled>Please wait...</button>

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
 import { TagService } from '../../services/tag.service';
-import { UrlService } from '../../services/url.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -10,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { Angular2TokenService } from "angular2-token";
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { forkJoin } from "rxjs/observable/forkJoin";
+import { environment } from '../../environments/environment';
 import * as _ from 'lodash';
 
 export enum Status {
@@ -51,7 +50,6 @@ export class ExploreComponent implements OnInit {
 
   constructor(
     private tokenAuthService: Angular2TokenService,
-    private urlService: UrlService,
     private pluginService: PluginService,
     private tagService: TagService,
     private modalService: BsModalService,
@@ -77,6 +75,10 @@ export class ExploreComponent implements OnInit {
     this.currentTagFilterShortName = tagShortName;
     this.resetPlugins();
     this.fetchPlugins();
+  }
+
+  pluginUrl(pluginShortName: string) : string{
+    return environment.apiBase + "/plugins/" + pluginShortName;
   }
 
 

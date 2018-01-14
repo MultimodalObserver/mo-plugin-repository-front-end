@@ -13,7 +13,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ShortenLongStringPipe } from '../pipes/shorten-long-string.pipe';
 import { BuildRepoUrlPipe } from '../pipes/build-repo-url.pipe';
 
-import { UrlService } from '../services/url.service';
 import { PluginService } from '../services/plugin.service';
 import { TagService } from '../services/tag.service';
 import { UserService } from '../services/user.service';
@@ -78,7 +77,7 @@ import { AdminGuard } from "./guards/admin.guard";
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, TagService, UserService, AdminService, NormalUserGuard, AdminGuard, Angular2TokenService, Title],
+  providers: [PluginService, TagService, UserService, AdminService, NormalUserGuard, AdminGuard, Angular2TokenService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

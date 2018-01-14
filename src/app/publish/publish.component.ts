@@ -3,6 +3,7 @@ import { PluginService } from '../../services/plugin.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular4-notifications';
 import { Title } from '@angular/platform-browser';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-publish',
@@ -27,6 +28,8 @@ export class PublishComponent implements OnInit {
 
   captchaResponse: string = "";
 
+  recaptchaKey: string;
+
   githubInfo: any = {
     fullName: "",
     avatar: ""
@@ -34,6 +37,10 @@ export class PublishComponent implements OnInit {
 
   resolved(captchaResponse: string) {
     this.captchaResponse = captchaResponse;
+  }
+
+  pluginUrl(pluginShortName: string) : string{
+    return environment.apiBase + "/plugins/" + pluginShortName;
   }
 
   parseGithubUserRepo(url: string){
@@ -73,7 +80,6 @@ export class PublishComponent implements OnInit {
 
     this.pluginService.createPlugin(p).subscribe(data => {
 
-      console.log(data.json());
       // go to 'show plugin'
       this.notification.success("Plugin created", "Your plugin was added successfully.");
       this.router.navigateByUrl('/plugin/' + data.json().short_name);
@@ -131,7 +137,9 @@ export class PublishComponent implements OnInit {
     private pluginService: PluginService,
     private router: Router,
     private notification: NotificationsService,
-    private titleService: Title) { }
+    private titleService: Title) {
+      this.recaptchaKey = environment.recaptchaKey;
+    }
 
   ngOnInit() {
 

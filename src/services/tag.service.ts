@@ -1,20 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UrlService } from './url.service';
+import { Angular2TokenService } from "angular2-token";
 
 @Injectable()
 export class TagService {
 
-    constructor(private http: HttpClient, private urlService: UrlService ) {
+    constructor(private tokenAuthService: Angular2TokenService) {
     }
 
-    public getTags(): Observable<any> {
-      return this.http.get(this.urlService.build(['tags']));
-    }
 
     public searchTags(q: string): Observable<any> {
-      return this.http.get(this.urlService.build(['tags'], { q: q }));
+      return this.tokenAuthService.get(`tags?q=${q}`);
     }
 
 

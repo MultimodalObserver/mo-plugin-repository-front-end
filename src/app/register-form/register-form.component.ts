@@ -1,5 +1,6 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {Angular2TokenService} from "angular2-token";
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Angular2TokenService } from "angular2-token";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-register-form',
@@ -18,6 +19,8 @@ export class RegisterFormComponent implements OnInit {
 
   loading: boolean = false;
 
+  recaptchaKey: string;
+
   usernameRegex: RegExp = new RegExp(/^[A-Za-z0-9\-]{2,25}$/);
 
   captchaResponse: string = "";
@@ -28,7 +31,9 @@ export class RegisterFormComponent implements OnInit {
 
   @Output() onFormResult = new EventEmitter<any>();
 
-  constructor(private tokenAuthSerivce:Angular2TokenService) { }
+  constructor(private tokenAuthSerivce:Angular2TokenService) {
+    this.recaptchaKey = environment.recaptchaKey;
+  }
 
   ngOnInit() {}
 

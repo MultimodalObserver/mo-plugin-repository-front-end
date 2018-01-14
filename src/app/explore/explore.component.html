@@ -102,7 +102,7 @@
 
     <p>In order to download, paste the following URL into MO.</p>
 
-    <input type="text" class="form-control" value='{{ urlService.build(["plugins", currentPluginModal.short_name]) }}' readonly onclick="this.select();"/>
+    <input type="text" class="form-control" value='{{ pluginUrl(currentPluginModal.short_name) }}' readonly onclick="this.select();"/>
 
   </div>
 </ng-template>

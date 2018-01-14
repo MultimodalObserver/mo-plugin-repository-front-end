@@ -4,13 +4,13 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { NgZone } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
-import { UrlService } from '../../services/url.service';
 import { UserService } from '../../services/user.service';
 import { TagService } from '../../services/tag.service';
 import { Angular2TokenService } from "angular2-token";
 import { Title } from '@angular/platform-browser';
 import { NotificationsService } from 'angular4-notifications';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import * as _ from 'lodash';
 
 @Component({
@@ -29,9 +29,6 @@ export class PluginComponent implements OnInit {
   newTag: string = "";
 
 
-  // http://mo.servidor.com/tags?q=:keyword
-  tagSearchURL = this.urlService.build(["tags"], { q: ":keyword" });
-
 
   constructor(
     public tokenAuthService: Angular2TokenService,
@@ -43,10 +40,12 @@ export class PluginComponent implements OnInit {
     private zone: NgZone,
     private modalService: BsModalService,
     private titleService: Title,
-    private router: Router,
-    private urlService: UrlService) {
+    private router: Router) {
 
+  }
 
+  pluginUrl(pluginShortName: string) : string{
+    return environment.apiBase + "/plugins/" + pluginShortName;
   }
 
   public isOwnPlugin(): boolean{

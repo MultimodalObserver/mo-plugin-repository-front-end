@@ -53,13 +53,13 @@
 
       <div>
         <p>Your plugin <b>{{ plugin.name }}</b> will be available at</p>
-        <p><b>http://localhost:8080/plugin/{{ plugin.shortName }}</b></p>
+        <p><b>{{ pluginUrl(plugin.shortName) }}</b></p>
       </div>
 
       <p *ngIf="plugin.description">{{ plugin.description }}</p>
       <p *ngIf="plugin.homepage"><i class="fa fa-home"></i> <a target="_blank" href="{{plugin.homepage}}">{{ plugin.homepage }}</a></p>
 
-      <re-captcha (resolved)="resolved($event)" siteKey="6LcEiUAUAAAAAPnNOCGhm6rphB098cCZi9zCTiom"></re-captcha>
+      <re-captcha *ngIf="recaptchaKey" (resolved)="resolved($event)" siteKey="{{ recaptchaKey }}"></re-captcha>
 
     </div>
     <div class="col-md-6">

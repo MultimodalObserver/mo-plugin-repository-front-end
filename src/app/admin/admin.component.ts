@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
-import { UrlService } from '../../services/url.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -35,7 +34,6 @@ export class AdminComponent implements OnInit {
   public openModal(template: TemplateRef<any>, plugin) {
     this.currentPluginModal = plugin;
     this.modalRef = this.modalService.show(template);
-    console.log(plugin);
   }
 
   acceptPlugin(plugin: any) : void {
