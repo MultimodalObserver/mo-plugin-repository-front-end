@@ -5,12 +5,12 @@ import { environment } from '../../environments/environment';
   template: `
   <input type="text" class="form-control" value='{{ pluginUrl() }}' readonly onclick="this.select();"/>
   `,
-  selector: 'plugin-url',
+  selector: 'plugin-url'
 })
 export class PluginUrlComponent {
   @Input() shortName: string;
 
-  pluginUrl() : string{
+  private pluginUrl() : string{
     return environment.apiBase + "/plugins/" + this.shortName;
   }
 

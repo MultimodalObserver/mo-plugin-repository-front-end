@@ -24,13 +24,8 @@
       <button class="btn btn-danger" (click)="openModal(rejectModal, p)">Reject</button>
     </div>
 
-    <div class="tag accepted-plugin pull-right" *ngIf="p.status == 'confirmed'">
-      <i class="fa fa-globe"></i> Public
-    </div>
+    <plugin-status class="pull-right" *ngIf="p.status != 'pending'" [plugin]="p"></plugin-status>
 
-    <div class="tag rejected-plugin pull-right" *ngIf="p.status == 'rejected'">
-      <i class="fa fa-times"></i> Rejected
-    </div>
 
 
   </div>

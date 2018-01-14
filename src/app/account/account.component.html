@@ -80,12 +80,7 @@
 
         <!-- The following code doesn't have white space because it does impact the page presentation -->
 
-        <div class="tag accepted-plugin" *ngIf="p.status == 'confirmed'">
-          <i class="fa fa-globe"></i> Public
-        </div><div class="tag pending-plugin" *ngIf="p.status == 'pending'">
-          <i class="fa fa-warning"></i> Pending moderation
-        </div><div class="tag rejected-plugin" *ngIf="p.status == 'rejected'">
-          <i class="fa fa-times"></i> Rejected</div><div class="tag" *ngFor="let c of p.tags">
+        <plugin-status [plugin]="p"></plugin-status><div class="tag" *ngFor="let c of p.tags">
           <i class="fa fa-tag"></i>
           <span>{{ c.short_name }}</span>
         </div><div class="tag" *ngIf="p.tags.length == 0"><i class="fa fa-tag"></i> <span><i>Untagged</i></span></div>

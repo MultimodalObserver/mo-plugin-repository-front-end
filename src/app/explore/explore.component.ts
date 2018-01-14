@@ -32,16 +32,16 @@ export class ExploreComponent implements OnInit {
 
   searchQuery: string = "";
 
-  private sub: any;
+  sub: any;
 
-  public pluginModal: BsModalRef;
+  pluginModal: BsModalRef;
 
   currentTagFilterShortName: string = "";
   currentStatus: Status;
   maxLengthDescription = 300;
   timeOut = null;
   noMorePlugins: boolean;
-  private lastPageLoadedSuccessfully: number;
+  lastPageLoadedSuccessfully: number;
 
 
   @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
