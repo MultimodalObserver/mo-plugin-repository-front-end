@@ -2,17 +2,29 @@
 <div class="input-group mb-4">
    <input type="text" class="form-control" placeholder="Search plugins..." (ngModelChange)="searchInputChanged($event)" [(ngModel)]="searchQuery"/>
    <span class="input-group-btn">
-        <button class="btn btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i></button>
+        <button class="btn btn-primary" type="button" (click)="resetTags(); resetPlugins(); fetchTags(); fetchPlugins();"><i class="fa fa-search"></i></button>
    </span>
+</div>
+
+
+<div *ngIf="currentStatus == Status.ERROR">
+    <p class="bare-message">Error getting plugin list <i class="fa fa-frown-o"></i> <button (click)="fetchPlugins()" class="btn btn-primary">Try again</button> </p>
+</div>
+
+<div class="plugin-item-line" *ngIf="currentStatus != Status.ERROR && tags?.length > 0">
+
+  <span *ngFor="let t of tags">
+    <a class="tag tag-clickable" href="javascript:;" (click)="filterByTag(t.short_name)" [ngClass]="{ 'active-tag-filter': currentTagFilterShortName == t.short_name.trim() }">
+
+      <i class="fa fa-tag"></i> <span>{{ t.short_name }}</span>
+    </a>
+  </span>
+
 </div>
 
 
 <div *ngIf="currentStatus == Status.OK && plugins.length == 0">
   <p class="bare-message">No results <i class="fa fa-frown-o"></i></p>
-</div>
-
-<div *ngIf="currentStatus == Status.ERROR">
-    <p class="bare-message">Error getting plugin list <i class="fa fa-frown-o"></i> <button (click)="fetchPlugins()" class="btn btn-primary">Try again</button> </p>
 </div>
 
 <div class="plugin-item panel panel-default" *ngFor="let p of plugins">

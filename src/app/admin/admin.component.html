@@ -15,8 +15,9 @@
       {{ p.name }}
     </a>
 
-    <small>by {{ p.user.nickname }}</small>
-
+    <div>
+      <small>by {{ p.user.nickname }}</small>
+    </div>
 
     <div *ngIf="p.status == 'pending'" class="pull-right">
       <button class="btn btn-primary" (click)="openModal(acceptModal, p)">Accept</button>

@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UrlService } from './url.service';
-import {Angular2TokenService} from "angular2-token";
+import { Angular2TokenService } from "angular2-token";
 import { Response } from '@angular/http';
+import Utils from '../services/utils';
 
 @Injectable()
 export class PluginService {
@@ -49,29 +50,18 @@ export class PluginService {
     }
 
 
-    private jsonToQueryString(json) {
-    return '?' +
-        Object.keys(json).map(function(key) {
-            return encodeURIComponent(key) + '=' +
-                encodeURIComponent(json[key]);
-        }).join('&');
-      }
-
-
     public getPlugins(params: any) : any {
-
       if(!params.hasOwnProperty('page')){
         params.page = 1;
       }
 
-      // If it has a query param, also tell the backend to perform
-      // a plugin search by tags.
-      if(params.hasOwnProperty('q')){
-        params['include_tags_search'] = true;
+      params.limit = 10;
+
+      if(params.hasOwnProperty('filterTag')){
+        return this.tokenAuthService.get(`tags/${params['filterTag']}/plugins` + Utils.queryParamsObj(params));
+      } else {
+        return this.tokenAuthService.get(`plugins` + Utils.queryParamsObj(params));
       }
-
-
-      return this.tokenAuthService.get(`plugins` + this.jsonToQueryString(params));
 
     }
 

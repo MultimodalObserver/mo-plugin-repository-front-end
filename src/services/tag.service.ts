@@ -13,11 +13,9 @@ export class TagService {
       return this.http.get(this.urlService.build(['tags']));
     }
 
-    public searchTagsPartial(q: string): Observable<any>{
-      q = q.trim();
-      return this.http.get(this.urlService.build(['tags'], {
-        q: q
-      }));
+    public searchTags(q: string): Observable<any> {
+      return this.http.get(this.urlService.build(['tags'], { q: q }));
     }
+
 
 }

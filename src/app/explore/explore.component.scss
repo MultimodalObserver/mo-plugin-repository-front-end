@@ -42,3 +42,15 @@ li { margin-bottom:10px; }
 .bare-message {
   margin: $nice-bottom-margin 0;
 }
+
+.tag-clickable {
+
+  &:hover, &:active, &:focus {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.active-tag-filter {
+  background-color: $light-medium-grey;
+}

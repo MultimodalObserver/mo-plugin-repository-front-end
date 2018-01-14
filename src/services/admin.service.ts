@@ -1,19 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {Angular2TokenService} from "angular2-token";
+import { Angular2TokenService } from "angular2-token";
+import Utils from '../services/utils';
 
 @Injectable()
 export class AdminService {
-
-  private jsonToQueryString(json) {
-  return '?' +
-      Object.keys(json).map(function(key) {
-          return encodeURIComponent(key) + '=' +
-              encodeURIComponent(json[key]);
-      }).join('&');
-    }
-
 
     constructor(private http: HttpClient, private tokenAuthService: Angular2TokenService) {
     }
@@ -34,7 +26,7 @@ export class AdminService {
         params["last_id"] = lastId;
       }
 
-      return this.tokenAuthService.get(`admin/pending` + this.jsonToQueryString(params));
+      return this.tokenAuthService.get(`admin/pending` + Utils.queryParamsObj(params));
     }
 
 

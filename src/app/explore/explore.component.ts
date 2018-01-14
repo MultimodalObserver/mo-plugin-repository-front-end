@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PluginService } from '../../services/plugin.service';
+import { TagService } from '../../services/tag.service';
 import { UrlService } from '../../services/url.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -8,6 +9,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Title } from '@angular/platform-browser';
 import { Angular2TokenService } from "angular2-token";
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { forkJoin } from "rxjs/observable/forkJoin";
 import * as _ from 'lodash';
 
 export enum Status {
@@ -25,6 +28,7 @@ export class ExploreComponent implements OnInit {
   Status = Status;
 
   plugins: any[] = [];
+  tags: any[] = [];
 
   currentPluginModal = {};
 
@@ -34,6 +38,7 @@ export class ExploreComponent implements OnInit {
 
   public pluginModal: BsModalRef;
 
+  currentTagFilterShortName: string = "";
   currentStatus: Status;
   maxLengthDescription = 300;
   timeOut = null;
@@ -48,20 +53,37 @@ export class ExploreComponent implements OnInit {
     private tokenAuthService: Angular2TokenService,
     private urlService: UrlService,
     private pluginService: PluginService,
+    private tagService: TagService,
     private modalService: BsModalService,
     private route: ActivatedRoute,
     private titleService: Title) { }
 
-  private resetSearch() : void {
+  private resetPlugins() : void {
     this.noMorePlugins = false;
     this.lastPageLoadedSuccessfully = 0;
     this.plugins = [];
   }
 
+  private resetTags() : void{
+    this.currentTagFilterShortName = "";
+    this.tags = [];
+  }
+
+  filterByTag(tagShortName: string){
+
+    if(this.currentTagFilterShortName == tagShortName)
+      return;
+
+    this.currentTagFilterShortName = tagShortName;
+    this.resetPlugins();
+    this.fetchPlugins();
+  }
+
 
   searchInputChanged(query){
 
-    this.resetSearch();
+    this.resetPlugins();
+    this.resetTags();
 
     this.currentStatus = Status.PLUGINS_LOADING;
 
@@ -70,14 +92,12 @@ export class ExploreComponent implements OnInit {
     }
 
     this.timeOut = setTimeout(function(){
-      this.search();
+      this.resetPlugins();
+      this.resetTags();
+      this.fetchTags();
+      this.fetchPlugins();
     }.bind(this), 800);
 
-  }
-
-  search(){
-    this.resetSearch();
-    this.fetchPlugins();
   }
 
 
@@ -98,6 +118,21 @@ export class ExploreComponent implements OnInit {
     this.pluginModal = this.modalService.show(this.pluginModalTemplate);
   }
 
+  fetchTags(): void {
+
+    let query = this.searchQuery.trim().toLowerCase();
+    if(query.length == 0){
+      this.tags = [];
+      return;
+    }
+
+    this.tagService.searchTags(query).subscribe(
+      data => {
+        this.tags = data;
+      }
+    );
+  }
+
 
   fetchPlugins() : void {
 
@@ -112,17 +147,21 @@ export class ExploreComponent implements OnInit {
       page: this.lastPageLoadedSuccessfully + 1
     };
 
+
     if(query.trim().length > 0){
       params['q'] = query.trim();
     }
 
+    if(this.currentTagFilterShortName.length > 0){
+      params['filterTag'] = this.currentTagFilterShortName;
+    }
 
-    this.pluginService.getPlugins(params).subscribe(
-      data => {
+    let pluginsObs: Observable<any> = this.pluginService.getPlugins(params).subscribe(
+      results => {
 
-        data = data.json();
+        let plugins: any[] = results.json();
 
-        if((<Array<any>>data).length === 0){
+        if((<Array<any>>plugins).length === 0){
           // This means the last page visited doesn't have plugins.
           // Which means that the 'load more' button must disappear.
           this.noMorePlugins = true;
@@ -131,7 +170,7 @@ export class ExploreComponent implements OnInit {
         }
 
         // Union = concatenate and remove duplicates
-        this.plugins = _.unionWith(this.plugins, <Array<any>>data, (a, b) => a.id === b.id);
+        this.plugins = _.unionWith(this.plugins, <Array<any>>plugins, (a, b) => a.id === b.id);
 
         // Shorten every description
         this.plugins.map((e) => e.description = e.description? e.description.trim() : "");
@@ -139,12 +178,16 @@ export class ExploreComponent implements OnInit {
 
         this.currentStatus = Status.OK;
         this.lastPageLoadedSuccessfully++;
+
       },
       err => {
         this.plugins = [];
         this.currentStatus = Status.ERROR;
         this.lastPageLoadedSuccessfully = 0;
-      });
+      }
+
+    );
+
   }
 
   ngOnDestroy(){
@@ -162,15 +205,20 @@ export class ExploreComponent implements OnInit {
       if(query.trim().length == 0){
 
         // Normal search
-        this.resetSearch();
+        this.resetPlugins();
+        this.resetTags();
         this.fetchPlugins();
+        this.fetchTags();
       }
 
       this.searchQuery = query.trim();
 
       if(this.searchQuery.length == 0) return;
 
-      this.search();
+      this.resetPlugins();
+      this.resetTags();
+      this.fetchPlugins();
+      this.fetchTags();
 
     });
 
