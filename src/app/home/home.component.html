@@ -6,16 +6,6 @@
 
   <div class="col-md-6">
 
-    <p>MO project is an open source initiative intended to provide a low-cost solution for researchers and other professionals working with multimodal data. The MO project starts from a modular and scalable system that can aid the research process in the data collection, visualization, and analyses stages.</p>
-
-    <p>MO's architecture is based on plugins developed for different devices and data types. These plugins are integrated in a common environment, which enable users to work with multiple sources easily.</p>
-
-    <p>Through the MO project we invite developers, researchers, and professionals to contribute with ideas and plugins in order to produce an ecosystem of research tools for different purporses.</p>
-
-  </div>
-
-  <div class="col-md-6">
-
     <div class="input-group mb-4">
        <input type="text" class="form-control" placeholder="Search plugins..." [(ngModel)]="searchQuery"/>
        <span class="input-group-btn">
@@ -34,6 +24,16 @@
     </p>
 
     <p *ngIf="plugins != null && plugins.length == 0"><i>No plugins lately...</i></p>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <p>MO project is an open source initiative intended to provide a low-cost solution for researchers and other professionals working with multimodal data. The MO project starts from a modular and scalable system that can aid the research process in the data collection, visualization, and analyses stages.</p>
+
+    <p>MO's architecture is based on plugins developed for different devices and data types. These plugins are integrated in a common environment, which enable users to work with multiple sources easily.</p>
+
+    <p>Through the MO project we invite developers, researchers, and professionals to contribute with ideas and plugins in order to produce an ecosystem of research tools for different purporses.</p>
 
   </div>
 
