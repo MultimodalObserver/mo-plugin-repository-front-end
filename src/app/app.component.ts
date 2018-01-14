@@ -65,15 +65,6 @@ export class AppComponent {
     }
   }
 
-  isAdmin(): boolean{
-
-    if(!this.tokenAuthService.userSignedIn()) return false;
-    if(typeof this.tokenAuthService.currentUserData == "undefined") return false;
-    if((<any>this.tokenAuthService.currentUserData).role == "admin") return true;
-
-    return false;
-  }
-
 
   authMode: 'login' | 'register' = 'login';
   isLoginMode(){ return this.authMode == 'login' }

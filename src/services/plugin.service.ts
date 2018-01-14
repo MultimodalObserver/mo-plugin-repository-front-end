@@ -26,6 +26,10 @@ export class PluginService {
       return this.tokenAuthService.get(`plugins/${pluginSlug}`);
     }
 
+    public acceptPlugin(id: number): any{
+      return this.tokenAuthService.post(`plugins/${id}/accept`, null);
+    }
+
     public removeTag(pluginId: number, tagId: number){
       return this.tokenAuthService.delete(`plugins/${pluginId}/tags/${tagId}`);
     }
@@ -49,9 +53,16 @@ export class PluginService {
     }
 
 
-    public getPlugins(params: any) : any {
+    private jsonToQueryString(json) {
+    return '?' +
+        Object.keys(json).map(function(key) {
+            return encodeURIComponent(key) + '=' +
+                encodeURIComponent(json[key]);
+        }).join('&');
+      }
 
-      //let url: string;
+
+    public getPlugins(params: any) : any {
 
       if(!params.hasOwnProperty('page')){
         params.page = 1;
@@ -63,9 +74,8 @@ export class PluginService {
         params['include_tags_search'] = true;
       }
 
-      //url = this.urlService.build(['plugins'], params);
 
-      return this.tokenAuthService.get(`plugins`);
+      return this.tokenAuthService.get(`plugins` + this.jsonToQueryString(params));
 
     }
 
