@@ -53,8 +53,6 @@ export class PluginService {
         params.page = 1;
       }
 
-      params.limit = 10;
-
       if(params.hasOwnProperty('filterTag')){
         return this.tokenAuthService.get(`tags/${params['filterTag']}/plugins` + Utils.queryParamsObj(params));
       } else {

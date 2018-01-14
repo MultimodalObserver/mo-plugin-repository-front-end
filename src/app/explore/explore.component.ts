@@ -125,7 +125,7 @@ export class ExploreComponent implements OnInit {
 
     this.tagService.searchTags(query).subscribe(
       data => {
-        this.tags = data;
+        this.tags = data.json();
       }
     );
   }
