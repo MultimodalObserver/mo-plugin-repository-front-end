@@ -17,6 +17,7 @@ import { UrlService } from '../services/url.service';
 import { PluginService } from '../services/plugin.service';
 import { TagService } from '../services/tag.service';
 import { UserService } from '../services/user.service';
+import { AdminService } from '../services/admin.service';
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
@@ -35,6 +36,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { PublishComponent } from './publish/publish.component';
 import { PluginComponent } from './plugin/plugin.component';
+import { AdminComponent } from './admin/admin.component';
 
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
@@ -57,7 +59,8 @@ import { AdminGuard } from "./guards/admin.guard";
     RegisterFormComponent,
     PublishComponent,
     PluginComponent,
-    AccountComponent
+    AccountComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,7 @@ import { AdminGuard } from "./guards/admin.guard";
     CollapseModule.forRoot(),
     AppRouting
   ],
-  providers: [UrlService, PluginService, TagService, UserService, NormalUserGuard, AdminGuard, Angular2TokenService, Title],
+  providers: [UrlService, PluginService, TagService, UserService, AdminService, NormalUserGuard, AdminGuard, Angular2TokenService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,13 +6,6 @@
    </span>
 </div>
 
-<div *ngIf="isAdmin()">
-  <label class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" [(ngModel)]="onlyPending" (ngModelChange)="onFilterPendingChange($event)">
-    <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">See only pending plugins</span>
-  </label>
-</div>
 
 <div *ngIf="currentStatus == Status.OK && plugins.length == 0">
   <p class="bare-message">No results <i class="fa fa-frown-o"></i></p>
@@ -27,11 +20,6 @@
 
     <div class="plugin-item-line">
       <b><a [routerLink]="['..', 'plugin', p.short_name]">{{ p.name }}</a></b>
-
-
-      <div *ngIf="isAdmin() && p.status == 'pending'">
-        <button (click)="acceptPlugin(p)">Accept plugin</button>
-      </div>
 
 
       <a class="btn btn-edit pull-right left-right-margin" *ngIf="pluginOwnedByLoggedUser(p)" [routerLink]="['..', 'plugin', p.short_name]"><i class="fa fa-pencil"></i></a>

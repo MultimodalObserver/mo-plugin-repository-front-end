@@ -40,8 +40,6 @@ export class ExploreComponent implements OnInit {
   noMorePlugins: boolean;
   private lastPageLoadedSuccessfully: number;
 
-  onlyPending: boolean = false;
-
 
   @ViewChild('pluginModalTemplate') pluginModalTemplate: ElementRef;
 
@@ -82,18 +80,6 @@ export class ExploreComponent implements OnInit {
     this.fetchPlugins();
   }
 
-  onFilterPendingChange(){
-    this.search();
-  }
-
-  isAdmin(): boolean{
-
-    if(!this.tokenAuthService.userSignedIn()) return false;
-    if(typeof this.tokenAuthService.currentUserData == "undefined") return false;
-    if((<any>this.tokenAuthService.currentUserData).role == "admin") return true;
-
-    return false;
-  }
 
   public pluginOwnedByLoggedUser(plugin) : boolean {
 
@@ -110,15 +96,6 @@ export class ExploreComponent implements OnInit {
   installPlugin(plugin) : void {
     this.currentPluginModal = plugin;
     this.pluginModal = this.modalService.show(this.pluginModalTemplate);
-  }
-
-
-  acceptPlugin(plugin: any) : void {
-    this.pluginService.acceptPlugin(plugin.id).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
   }
 
 
@@ -139,9 +116,6 @@ export class ExploreComponent implements OnInit {
       params['q'] = query.trim();
     }
 
-    if(this.onlyPending){
-      params['only_pending'] = true;
-    }
 
     this.pluginService.getPlugins(params).subscribe(
       data => {

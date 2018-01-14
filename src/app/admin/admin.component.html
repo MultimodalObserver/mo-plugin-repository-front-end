@@ -1,0 +1,93 @@
+<div class="header">
+  <h1>Administration</h1>
+</div>
+
+
+<div *ngIf="pendingPlugins?.length == 0">
+  No pending plugins.
+</div>
+
+<div class="mb-4">
+
+  <div *ngFor="let p of pendingPlugins" class="pending-plugin-item">
+
+    <a [routerLink]="['..', 'plugin', p.short_name]" target="_blank">
+      {{ p.name }}
+    </a>
+
+    <small>by {{ p.user.nickname }}</small>
+
+
+    <div *ngIf="p.status == 'pending'" class="pull-right">
+      <button class="btn btn-primary" (click)="openModal(acceptModal, p)">Accept</button>
+      <button class="btn btn-danger" (click)="openModal(rejectModal, p)">Reject</button>
+    </div>
+
+    <div class="tag accepted-plugin pull-right" *ngIf="p.status == 'confirmed'">
+      <i class="fa fa-globe"></i> Public
+    </div>
+
+    <div class="tag rejected-plugin pull-right" *ngIf="p.status == 'rejected'">
+      <i class="fa fa-times"></i> Rejected
+    </div>
+
+
+  </div>
+</div>
+
+
+<div *ngIf="loadingMore">
+  <i class="fa fa-spinner fa-spin"></i> Loading plugins...
+</div>
+
+<button (click)="loadMore()" class="btn btn-primary" *ngIf="hasMore && !loadingMore">Load more</button>
+
+
+
+<ng-template #rejectModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Reject Plugin?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <p>Reject plugin <b>{{ currentPluginModal.name }}</b>?</p>
+
+    <div *ngIf="!changingStatus">
+      <button class="btn btn-danger" (click)="rejectPlugin()">Reject</button>
+      <button class="btn btn-secondary" (click)="modalRef.hide()">Cancel</button>
+    </div>
+
+    <div *ngIf="changingStatus">
+      <i class="fa fa-spinner fa-spin"></i> Please wait...
+    </div>
+
+  </div>
+</ng-template>
+
+
+
+<ng-template #acceptModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Accept plugin?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <p>Accept plugin <b>{{ currentPluginModal.name }}</b>?</p>
+
+    <div *ngIf="!changingStatus">
+      <button class="btn btn-primary" (click)="acceptPlugin()">Accept</button>
+      <button class="btn btn-secondary" (click)="modalRef.hide()">Cancel</button>
+    </div>
+
+    <div *ngIf="changingStatus">
+      <i class="fa fa-spinner fa-spin"></i> Please wait...
+    </div>
+
+  </div>
+</ng-template>

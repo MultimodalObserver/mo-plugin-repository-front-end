@@ -1,4 +1,10 @@
 @import '../../assets/global_variables.scss';
+
+.pending-plugin-item{
+  padding-top: 30px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid $light-grey;
+}
 $status-box-font-color: #ffffff;
 
 .rejected-plugin {

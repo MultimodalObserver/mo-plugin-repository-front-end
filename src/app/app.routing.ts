@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { PluginComponent } from './plugin/plugin.component';
 import { AccountComponent } from './account/account.component';
 import { PublishComponent } from './publish/publish.component';
+import { AdminComponent } from './admin/admin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { Angular2TokenService } from 'angular2-token';
 import { NormalUserGuard } from "./guards/normal-user.guard";
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [NormalUserGuard] },
   { path: 'plugin/:pluginSlug', component: PluginComponent },
   { path: 'publish', component: PublishComponent, canActivate: [NormalUserGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

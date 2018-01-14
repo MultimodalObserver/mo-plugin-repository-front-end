@@ -26,10 +26,6 @@ export class PluginService {
       return this.tokenAuthService.get(`plugins/${pluginSlug}`);
     }
 
-    public acceptPlugin(id: number): any{
-      return this.tokenAuthService.post(`plugins/${id}/accept`, null);
-    }
-
     public removeTag(pluginId: number, tagId: number){
       return this.tokenAuthService.delete(`plugins/${pluginId}/tags/${tagId}`);
     }

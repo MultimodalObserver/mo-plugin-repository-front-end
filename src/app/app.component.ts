@@ -32,6 +32,8 @@ export class AppComponent {
     }
   }
 
+
+
   onRegisterFormResult(e){
     if(e.signedUp){
       this.modalRef.hide();
@@ -39,6 +41,15 @@ export class AppComponent {
     } else {
       //alert(e);
     }
+  }
+
+  isAdmin(): boolean{
+
+    if(!this.tokenAuthService.userSignedIn()) return false;
+    if(typeof this.tokenAuthService.currentUserData == "undefined") return false;
+    if((<any>this.tokenAuthService.currentUserData).role == "admin") return true;
+
+    return false;
   }
 
   signOut(){
