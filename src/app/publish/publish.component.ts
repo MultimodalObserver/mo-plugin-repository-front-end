@@ -39,9 +39,6 @@ export class PublishComponent implements OnInit {
     this.captchaResponse = captchaResponse;
   }
 
-  pluginUrl(pluginShortName: string) : string{
-    return environment.apiBase + "/plugins/" + pluginShortName;
-  }
 
   parseGithubUserRepo(url: string){
     url = url.toLowerCase();

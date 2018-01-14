@@ -6,12 +6,14 @@
 
   <div class="col-md-6">
 
-    <div class="input-group mb-4">
-       <input type="text" class="form-control" placeholder="Search plugins..." [(ngModel)]="searchQuery"/>
-       <span class="input-group-btn">
-          <button class="btn btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i></button>
-       </span>
-    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="input-group mb-4">
+         <input type="text" class="form-control" placeholder="Search plugins..." [(ngModel)]="searchQuery" name="query"/>
+         <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary" type="button" (click)="search()"><i class="fa fa-search"></i></button>
+         </span>
+      </div>
+    </form>
 
     <h3>Latest plugins</h3>
 

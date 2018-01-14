@@ -53,7 +53,8 @@
 
       <div>
         <p>Your plugin <b>{{ plugin.name }}</b> will be available at</p>
-        <p><b>{{ pluginUrl(plugin.shortName) }}</b></p>
+
+        <plugin-url [shortName]="plugin.shortName"></plugin-url>
       </div>
 
       <p *ngIf="plugin.description">{{ plugin.description }}</p>

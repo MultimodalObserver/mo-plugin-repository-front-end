@@ -63,7 +63,7 @@
 
   <p>In order to download, paste the following URL into MO.</p>
 
-  <input type="text" class="form-control" value='{{ pluginUrl(plugin.short_name) }}' readonly onclick="this.select();"/>
+  <plugin-url [shortName]="plugin.short_name"></plugin-url>
 
 </div>
 

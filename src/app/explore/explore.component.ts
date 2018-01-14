@@ -9,7 +9,6 @@ import { Title } from '@angular/platform-browser';
 import { Angular2TokenService } from "angular2-token";
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
 import * as _ from 'lodash';
 
 export enum Status {
@@ -75,10 +74,6 @@ export class ExploreComponent implements OnInit {
     this.currentTagFilterShortName = tagShortName;
     this.resetPlugins();
     this.fetchPlugins();
-  }
-
-  pluginUrl(pluginShortName: string) : string{
-    return environment.apiBase + "/plugins/" + pluginShortName;
   }
 
 

@@ -46,6 +46,8 @@ import { AccountComponent } from './account/account.component';
 import { NormalUserGuard } from "./guards/normal-user.guard";
 import { AdminGuard } from "./guards/admin.guard";
 
+import { PluginUrlComponent } from "./UIcomponents/plugin-url.component";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +61,7 @@ import { AdminGuard } from "./guards/admin.guard";
     PublishComponent,
     PluginComponent,
     AccountComponent,
+    PluginUrlComponent,
     AdminComponent
   ],
   imports: [

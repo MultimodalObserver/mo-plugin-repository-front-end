@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private titleService: Title, private router: Router, private pluginService: PluginService) { }
 
-  search(){
+  onSubmit(){
     this.router.navigate(['explore'], { queryParams: { q: this.searchQuery }});
   }
 
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle("MO Plugins | Home");
 
     this.pluginService.getLatestPlugins().subscribe(res => {
-      this.plugins = <any[]>res;
+      this.plugins = <any[]>(res.json());
     });
 
   }

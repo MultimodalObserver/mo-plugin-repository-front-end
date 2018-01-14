@@ -10,7 +10,6 @@ import { Angular2TokenService } from "angular2-token";
 import { Title } from '@angular/platform-browser';
 import { NotificationsService } from 'angular4-notifications';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
 import * as _ from 'lodash';
 
 @Component({
@@ -44,9 +43,6 @@ export class PluginComponent implements OnInit {
 
   }
 
-  pluginUrl(pluginShortName: string) : string{
-    return environment.apiBase + "/plugins/" + pluginShortName;
-  }
 
   public isOwnPlugin(): boolean{
 
