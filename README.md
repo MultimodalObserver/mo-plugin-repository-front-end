@@ -39,4 +39,4 @@ Modificar el archivo de configuracion de variables de entorno (punto de entrada 
 docker exec -it mospanginx vim.tiny /usr/share/nginx/html/prod.config.js
 ```
 
-**Nota**: Al configurar el archivo `prod.config.js` y poner la URL de la API, se debe colocar no URLs de servidores de aplicacion independientes, sino que la URL de la API como esta configurada en Nginx, para que asi haya balanceamiento de carga (en otras palabras, no poner ninguna en puerto de Rails 3000, sino que debe ser el puerto por defecto http o https).
+**Nota**: Al configurar el archivo `prod.config.js` y poner la URL de la API, se debe colocar no URLs de servidores de aplicacion independientes, sino que la URL de la API como esta configurada en Nginx, para que asi haya balanceamiento de carga (en otras palabras, no poner ninguna en puerto de Rails 3000, sino que debe ser el puerto por defecto http o https en caso que este disponible).
