@@ -1,5 +1,3 @@
-FROM nginx
-
 # Empezar con Nginx y borrar sus archivos HTML iniciales y pasar configuracion
 
 FROM nginx
