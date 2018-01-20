@@ -4,7 +4,7 @@
 
 ## Docker
 
-Crear la imagen.
+Crear la imagen. Antes de hacerlo es necesario que exista la carpeta `/dist`, la cual se puede compilar usando el comando para compilacion de produccion descrito mas abajo, aunque este repositorio incluye esa carpeta por lo que no es necesario.
 
 ```bash
 docker build -t mospanginx .
@@ -23,6 +23,8 @@ Modificar el archivo de configuracion de variables de entorno (punto de entrada 
 ```
 docker exec -it mospanginx vim.tiny /usr/share/nginx/html/prod.config.js
 ```
+
+La API Key de Recaptcha debe hacerse primero registrando el sitio en Recaptcha (servicio gratuito de Google), y copiando la llave pública.
 
 **Nota**: Al configurar el archivo `prod.config.js` y poner la URL de la API, se debe colocar no URLs de servidores de aplicacion independientes, sino que la URL de la API como esta configurada en los `location` de Nginx, para que asi haya balanceamiento de carga (en otras palabras, no poner ninguna en puerto 3000 de Rails).
 
