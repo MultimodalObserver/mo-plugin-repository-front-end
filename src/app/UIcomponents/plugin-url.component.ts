@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class PluginUrlComponent {
   @Input() shortName: string;
 
-  private pluginUrl() : string{
+  public pluginUrl() : string{
     return environment.apiBase + "/plugins/" + this.shortName;
   }
 

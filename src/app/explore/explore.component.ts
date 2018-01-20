@@ -55,13 +55,13 @@ export class ExploreComponent implements OnInit {
     private route: ActivatedRoute,
     private titleService: Title) { }
 
-  private resetPlugins() : void {
+  public resetPlugins() : void {
     this.noMorePlugins = false;
     this.lastPageLoadedSuccessfully = 0;
     this.plugins = [];
   }
 
-  private resetTags() : void{
+  public resetTags() : void{
     this.currentTagFilterShortName = "";
     this.tags = [];
   }
