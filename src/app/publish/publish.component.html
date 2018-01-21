@@ -80,9 +80,9 @@
 
   <div class="alert alert-warning">Double check the plugin data before proceeding.</div>
 
-  <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="!creatingPlugin">Publish plugin</button>
+  <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="!creatingPlugin" [disabled]="captchaResponse?.length == 0">Publish plugin</button>
   <button type="button" class="btn btn-secondary" (click)="formStep = 1" *ngIf="!creatingPlugin">Go back</button>
-  <button type="button" class="btn btn-primary" (click)="createPlugin()" *ngIf="creatingPlugin" disabled>Wait...</button>
+  <button type="button" class="btn btn-primary" *ngIf="creatingPlugin" disabled>Wait...</button>
 
 
 </div>

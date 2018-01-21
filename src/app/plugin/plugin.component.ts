@@ -10,6 +10,7 @@ import { Angular2TokenService } from "angular2-token";
 import { Title } from '@angular/platform-browser';
 import { NotificationsService } from 'angular4-notifications';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import * as _ from 'lodash';
 
 @Component({
@@ -27,7 +28,7 @@ export class PluginComponent implements OnInit {
   editing: boolean = false;
   newTag: string = "";
 
-
+  tagSearchURL = environment.apiBase + "/tags?q=:keyword";
 
   constructor(
     public tokenAuthService: Angular2TokenService,
@@ -139,6 +140,7 @@ export class PluginComponent implements OnInit {
   }
 
   public openModal(template: TemplateRef<any>) {
+    try { document.activeElement['blur'](); } catch(e){}
     this.modalRef = this.modalService.show(template);
   }
 

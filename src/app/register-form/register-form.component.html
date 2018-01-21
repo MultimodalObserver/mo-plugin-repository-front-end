@@ -54,7 +54,7 @@
 
   <re-captcha *ngIf="recaptchaKey" (resolved)="resolved($event)" siteKey="{{ recaptchaKey }}"></re-captcha>
 
-  <button type="submit" class="btn btn-primary" *ngIf="!loading">Create account</button>
+  <button type="submit" class="btn btn-primary" *ngIf="!loading" [disabled]="captchaResponse?.length == 0">Create account</button>
   <button type="submit" class="btn btn-primary" *ngIf="loading" disabled>Please wait...</button>
   <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
 

@@ -111,6 +111,7 @@ export class ExploreComponent implements OnInit {
 
 
   installPlugin(plugin) : void {
+    try { document.activeElement['blur'](); } catch(e){}
     this.currentPluginModal = plugin;
     this.pluginModal = this.modalService.show(this.pluginModalTemplate);
   }

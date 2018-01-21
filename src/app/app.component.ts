@@ -46,8 +46,10 @@ export class AppComponent {
   isAdmin(): boolean{
 
     if(!this.tokenAuthService.userSignedIn()) return false;
-    if(typeof this.tokenAuthService.currentUserData == "undefined") return false;
-    if((<any>this.tokenAuthService.currentUserData).role == "admin") return true;
+    if(!this.tokenAuthService.hasOwnProperty('currentUserData')) return false;
+    if(this.tokenAuthService.currentUserData == null) return false;
+
+    if((<any>this.tokenAuthService.currentUserData)['role'] == "admin") return true;
 
     return false;
   }
@@ -60,6 +62,7 @@ export class AppComponent {
 
 
   openModal(template: TemplateRef<any>) {
+    try { document.activeElement['blur'](); } catch(e){}
     this.modalRef = this.modalService.show(template);
   }
 

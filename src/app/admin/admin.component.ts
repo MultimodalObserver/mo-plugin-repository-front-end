@@ -32,6 +32,7 @@ export class AdminComponent implements OnInit {
     private modalService: BsModalService){}
 
   public openModal(template: TemplateRef<any>, plugin) {
+    try { document.activeElement['blur'](); } catch(e){}
     this.currentPluginModal = plugin;
     this.modalRef = this.modalService.show(template);
   }

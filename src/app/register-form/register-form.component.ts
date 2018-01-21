@@ -26,7 +26,7 @@ export class RegisterFormComponent implements OnInit {
   captchaResponse: string = "";
 
   resolved(captchaResponse: string) {
-    this.captchaResponse = captchaResponse;
+    this.captchaResponse = captchaResponse == null? "" : captchaResponse;
   }
 
   @Output() onFormResult = new EventEmitter<any>();
@@ -91,24 +91,33 @@ export class RegisterFormComponent implements OnInit {
       res => {
         this.loading = false;
         if (res.status == 200){
+
+          // So that the user data is fetched right away after signing up
+          this.tokenAuthSerivce.validateToken();
+
           this.onFormResult.emit({signedUp: true, res})
           this.errors = "";
         }
-
-        // So that the user data is fetched right away after signing up
-        this.tokenAuthSerivce.validateToken();
       },
 
       err => {
+        console.log("JSON:");
+        console.log(err);
         this.loading = false;
 
-        this.onFormResult.emit({signedUp: false, err})
+        this.onFormResult.emit({signedUp: false, err});
 
-        if(err.json().errors.full_messages[0]){
+        this.errors = "There was an unknown error while creating your account.";
+
+        try {
           this.errors = err.json().errors.full_messages[0];
-        } else {
-          this.errors = "There was an unknown error while creating your account.";
+        } catch(e){
+          try {
+            this.errors = err.json().errors[0];
+          } catch(e2){
+          }
         }
+
       });
 
   }

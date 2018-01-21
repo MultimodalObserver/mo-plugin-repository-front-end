@@ -36,7 +36,7 @@ export class PublishComponent implements OnInit {
   };
 
   resolved(captchaResponse: string) {
-    this.captchaResponse = captchaResponse;
+    this.captchaResponse = captchaResponse == null? "" : captchaResponse;
   }
 
 
@@ -75,7 +75,11 @@ export class PublishComponent implements OnInit {
       'g-recaptcha-response': this.captchaResponse
     };
 
-    this.pluginService.createPlugin(p).subscribe(data => {
+    this.creatingPlugin = true;
+
+    this.pluginService.createPlugin(p).subscribe(
+
+      data => {
 
       // go to 'show plugin'
       this.notification.success("Plugin created", "Your plugin was added successfully.");
@@ -85,6 +89,7 @@ export class PublishComponent implements OnInit {
     }, err => {
 
       console.log(err);
+      this.creatingPlugin = false;
 
       try{
         this.notification.error("Error", err.json().short_name[0]);
