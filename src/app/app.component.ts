@@ -46,9 +46,7 @@ export class AppComponent {
   isAdmin(): boolean{
 
     if(!this.tokenAuthService.userSignedIn()) return false;
-    if(!this.tokenAuthService.hasOwnProperty('currentUserData')) return false;
     if(this.tokenAuthService.currentUserData == null) return false;
-
     if((<any>this.tokenAuthService.currentUserData)['role'] == "admin") return true;
 
     return false;
