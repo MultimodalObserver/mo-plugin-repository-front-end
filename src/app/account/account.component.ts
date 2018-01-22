@@ -15,6 +15,8 @@ export class AccountComponent implements OnInit {
 
   user = null;
 
+  changingPassword: boolean = false;
+
   passChange = {
     new1: "",
     new2: "",
@@ -35,6 +37,8 @@ export class AccountComponent implements OnInit {
       return;
     }
 
+    this.changingPassword = true;
+
     this.tokenAuthService.updatePassword({
       password:             this.passChange.new1,
       passwordConfirmation: this.passChange.new2,
@@ -42,6 +46,7 @@ export class AccountComponent implements OnInit {
       resetPasswordToken:   'resetPasswordToken',
     }).subscribe(
       res => {
+        this.changingPassword = false;
         console.log(res)
         this.passChange.new1 = "";
         this.passChange.new2 = "";
@@ -49,6 +54,7 @@ export class AccountComponent implements OnInit {
         this.notification.success("Password changed!", "Your password was updated.");
       },
       error => {
+        this.changingPassword = false;
         this.notification.error("Error", error.json().errors.full_messages[0]);
       }
     );
