@@ -52,7 +52,15 @@ export class LoginFormComponent implements OnInit {
         err => {
           this.loading = false;
           this.onFormResult.emit({signedIn: false, err});
-          this.errors = "Incorrect email and/or password.";
+
+          let defaultError = "Incorrect email and/or password.";
+
+          try {
+            this.errors = err.json().errors[0] || defaultError;
+          } catch(e){
+            this.errors = defaultError;
+          }
+
         }
     )
 

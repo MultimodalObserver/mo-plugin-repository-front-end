@@ -23,7 +23,7 @@
           <!-- Not logged in -->
 
           <li class="nav-item" *ngIf="!tokenAuthService.userSignedIn()">
-            <a class="nav-link" href="javascript:;" (click)="openModal(loginModal)"><i class="fa fa-user-o"></i> Login</a>
+            <a class="nav-link" href="javascript:;" (click)="openModal()"><i class="fa fa-user-o"></i> Login</a>
           </li>
 
           <!-- Logged in -->
@@ -56,6 +56,7 @@
     <div class="modal-header">
       <h4 class="modal-title pull-left" *ngIf="isLoginMode()"><i class="fa fa-sign-in"></i> Login</h4>
       <h4 class="modal-title pull-left" *ngIf="isRegisterMode()"><i class="fa fa-user"></i> Create new account</h4>
+      <h4 class="modal-title pull-left" *ngIf="isResetPasswordMode()"><i class="fa fa-lock"></i> Reset password</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -66,18 +67,37 @@
 
         <app-login-form (onFormResult)="onLoginFormResult($event)" *ngIf="isLoginMode()"></app-login-form>
         <app-register-form (onFormResult)="onRegisterFormResult($event)" *ngIf="isRegisterMode()"></app-register-form>
+        <app-reset-password
+        (onResetPasswordInstructionsSentResult)="onResetPasswordInstructionsSentResult($event)"
+        (onResetPasswordChanged)="onResetPasswordChanged($event)"
+        *ngIf="isResetPasswordMode()"></app-reset-password>
 
       </div>
 
       <div class="row">
-        <div class="col-md-12">
+
+        <div class="col-md-12" *ngIf="authMode != 'resetPassword'">
           <span class="grey-text text-darken-2" *ngIf="isLoginMode()">
-            Need an account? <a href="javascript:;" (click)="authMode='register'">Click here to register.</a>
+            <p>
+              Need an account? <a href="javascript:;" (click)="authMode='register'">Click here to register</a>
+            </p>
+
+            <p>
+              Forgot your password? <a href="javascript:;" (click)="authMode='resetPassword'">Reset password</a>
+            </p>
           </span>
+
           <span class="grey-text text-darken-2" *ngIf="isRegisterMode()">
-            Already have an account? <a href="javascript:;" (click)="authMode='login'">Click here to login.</a>
+            Already have an account? <a href="javascript:;" (click)="authMode='login'">Click here to login</a>
           </span>
         </div>
+
+        <div class="col-md-12" *ngIf="authMode == 'resetPassword'">
+          <span class="grey-text text-darken-2">
+            <a href="javascript:;" (click)="authMode='login'">Back</a>
+          </span>
+        </div>
+
       </div>
 
     </div>
