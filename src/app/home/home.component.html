@@ -49,9 +49,12 @@
 
 <p>The INTERACTION research group is part of the Departamento de Ingeniería Informática at Universidad de Santiago de Chile, and it is formed by undergraduate, master, and doctoral students.</p>
 
+<div *ngIf="moRepoUrl?.length > 0">
 
-<div class="header">
-  <h2>Github repository</h2>
+  <div class="header">
+    <h2>Github repository</h2>
+  </div>
+
+  <p>Download MO from its official <a [href]="moRepoUrl" target="_blank"><i class="fa fa-github"></i> Github repository</a>.</p>
+
 </div>
-
-<p>Download MO from its official <a href="https://github.com/rgonzal/mo" target="_blank"><i class="fa fa-github"></i> Github repository</a>.</p>

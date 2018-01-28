@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiBase: "http://localhost:3000",
-  recaptchaKey: "6LcEiUAUAAAAAPnNOCGhm6rphB098cCZi9zCTiom"
+  recaptchaKey: "6LcEiUAUAAAAAPnNOCGhm6rphB098cCZi9zCTiom",
+  moRepo: "https://github.com/rgonzal/mo"
 };
