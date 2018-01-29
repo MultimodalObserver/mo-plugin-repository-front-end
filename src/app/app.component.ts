@@ -42,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if(e.emailSent){
       this.modalRef.hide();
       this.notification.success("Check your email", e.res.json().message);
+      this.authMode = 'login';
     } else {
       //alert(e);
     }
@@ -51,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if(e.changed){
       this.modalRef.hide();
       this.notification.success("Password updated", "Log in again");
+      this.authMode = 'login';
     } else {
       this.modalRef.hide();
       this.notification.error("There was an error", "There was an error updating your password");
@@ -62,17 +64,16 @@ export class AppComponent implements OnInit, OnDestroy {
     if(e.signedUp){
       this.modalRef.hide();
       this.notification.success("Successful registration!", "Please see your e-mail");
+      this.authMode = 'login';
     } else {
       //alert(e);
     }
   }
 
   isAdmin(): boolean{
-
     if(!this.tokenAuthService.userSignedIn()) return false;
     if(this.tokenAuthService.currentUserData == null) return false;
     if((<any>this.tokenAuthService.currentUserData)['role'] == "admin") return true;
-
     return false;
   }
 
@@ -80,6 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.tokenAuthService.signOut();
     this.router.navigateByUrl('/');
     this.notification.success("Signed out", null);
+    this.authMode = 'login';
   }
 
 
@@ -112,12 +114,22 @@ export class AppComponent implements OnInit, OnDestroy {
     this.sub = this.route.queryParams.subscribe(params => {
 
       if(params['account_confirmation_success'] == 'true'){
-        this.notification.success("Successful confirmation!", "Now you can log in.");
+        this.tokenAuthService.validateToken().subscribe(
+          res => {
+            this.notification.success("Successful confirmation!", "You are now logged in!");
+            console.log(res);
+          },
+          err => {
+            this.notification.success("Successful confirmation!", "Now log in!");
+            console.log(err);
+          }
+        );
       }
 
       if(params['reset_password'] == 'true'){
         this.authMode = 'resetPassword';
         this.openModal();
+        this.tokenAuthService.validateToken();
       }
 
     });
@@ -135,7 +147,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private notification: NotificationsService){
 
     this.tokenAuthService.init({
-      apiBase: environment.apiBase
+      apiBase: environment.apiBase,
+      registerAccountCallback: window.location.href
     });
 
   }

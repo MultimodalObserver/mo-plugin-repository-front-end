@@ -16,6 +16,9 @@ export class AccountComponent implements OnInit {
   user = null;
 
   changingPassword: boolean = false;
+  changingUsername: boolean = false;
+  changingUsernameLoading: boolean = false;
+  usernameInput: string;
 
   passChange = {
     new1: "",
@@ -24,6 +27,45 @@ export class AccountComponent implements OnInit {
   };
 
   constructor(private userService: UserService, public tokenAuthService: Angular2TokenService, private titleService: Title, private notification: NotificationsService) { }
+
+  changeUsername(){
+
+    if(this.usernameInput === this.user.nickname){
+      this.changingUsername = false;
+      return;
+    }
+
+    this.changingUsernameLoading = true;
+
+    this.userService.updateUsername(this.usernameInput).subscribe(
+      data => {
+        let newUser = data.json();
+        this.user = newUser;
+        this.notification.success("Username updated correctly", "Your new username is " + this.user.nickname);
+      },
+      err => {
+
+        this.changingUsernameLoading = false;
+
+        let defaultError: string = "There was an error."
+        let error: string;
+
+        try {
+          error = err.json()['nickname'][0];
+        } catch(e){
+          error = defaultError;
+        }
+
+        this.notification.error("Error", error);
+
+      },
+      () => {
+        this.changingUsernameLoading = false;
+        this.changingUsername = false;
+      }
+    );
+  }
+
 
   changePassword(){
 

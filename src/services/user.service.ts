@@ -19,5 +19,9 @@ export class UserService {
       return this.tokenAuthService.get("users/my_plugins");
     }
 
+    public updateUsername(username: string): any{
+      return this.tokenAuthService.put("users/change_username", { new_username: username });
+    }
+
 
 }

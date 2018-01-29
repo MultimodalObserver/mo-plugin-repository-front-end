@@ -33,11 +33,13 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  constructor(private tokenAuthSerivce:Angular2TokenService, private route: ActivatedRoute){ }
+  constructor(private tokenAuthSerivce:Angular2TokenService, private route: ActivatedRoute){
+  }
 
 
   changePassword(){
@@ -74,12 +76,12 @@ export class ResetPasswordComponent implements OnInit {
           }
         }
     );
-
   }
 
 
   requestPassword(){
     this.loading = true;
+
     this.tokenAuthSerivce.resetPassword({ email: this.accountEmail })
     .subscribe(
         res => {
