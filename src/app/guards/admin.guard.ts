@@ -14,6 +14,7 @@ export class AdminGuard extends Guard implements CanActivate {
   }
 
   canActivate() : Observable<boolean> | boolean {
+
     if(this.authTokenService.userSignedIn()){
 
       return this.authTokenService.validateToken().map(res => {

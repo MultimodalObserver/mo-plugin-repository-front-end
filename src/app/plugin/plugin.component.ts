@@ -27,6 +27,7 @@ export class PluginComponent implements OnInit {
   loading: boolean = false;
   editing: boolean = false;
   newTag: string = "";
+  addingTag: boolean = false;
 
   tagSearchURL = environment.apiBase + "/tags?q=:keyword";
 
@@ -81,6 +82,11 @@ export class PluginComponent implements OnInit {
 
   setCurrentPluginData(plugin){
     this.plugin = _.clone(plugin);
+    for(let i=0; i<this.plugin.tags.length; i++){
+
+      this.plugin.tags[i]['removing'] = false;
+
+    }
     this.pluginEdit = _.clone(this.plugin);
     this.titleService.setTitle("MO Plugins | " + this.plugin.name.trim());
   }
@@ -123,8 +129,11 @@ export class PluginComponent implements OnInit {
       }
     }
 
+    this.addingTag = true;
+
     this.pluginService.addTag(this.plugin.id, tagName).subscribe(
       data => {
+        this.addingTag = false;
         let addedTag = data.json();
         let plugin = this.plugin;
         plugin.tags.push(addedTag);
@@ -132,6 +141,7 @@ export class PluginComponent implements OnInit {
         this.newTag = "";
       },
       err => {
+        this.addingTag = false;
         this.notification.error("Error", "Tag couldn't be added. Try using letters, numbers and dashes.");
         console.log(err);
       }

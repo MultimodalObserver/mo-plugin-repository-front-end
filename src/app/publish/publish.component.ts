@@ -71,6 +71,8 @@ export class PublishComponent implements OnInit {
       short_name: this.plugin.shortName,
       repo_user: this.parseGithubUserRepo(this.plugin.repository).username,
       repo_name: this.parseGithubUserRepo(this.plugin.repository).repo,
+      description: this.plugin.description,
+      home_page: this.plugin.homepage,
       repo_type: "github",
       'g-recaptcha-response': this.captchaResponse
     };

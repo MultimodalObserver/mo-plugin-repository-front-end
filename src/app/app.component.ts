@@ -6,6 +6,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NotificationsService } from 'angular4-notifications';
 import { environment } from '../environments/environment';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -111,17 +112,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
     this.sub = this.route.queryParams.subscribe(params => {
 
       if(params['account_confirmation_success'] == 'true'){
         this.tokenAuthService.validateToken().subscribe(
           res => {
             this.notification.success("Successful confirmation!", "You are now logged in!");
-            console.log(res);
+            //console.log(res);
           },
           err => {
             this.notification.success("Successful confirmation!", "Now log in!");
-            console.log(err);
+            //console.log(err);
           }
         );
       }
@@ -143,12 +145,17 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(public tokenAuthService: Angular2TokenService,
     private modalService: BsModalService,
     private router: Router,
+    private platformLocation: PlatformLocation,
     private route: ActivatedRoute,
     private notification: NotificationsService){
 
+
+    let baseSPAUrl = (platformLocation as any).location.origin;
+
     this.tokenAuthService.init({
       apiBase: environment.apiBase,
-      registerAccountCallback: window.location.href
+      registerAccountCallback: baseSPAUrl,
+      resetPasswordCallback: baseSPAUrl
     });
 
   }

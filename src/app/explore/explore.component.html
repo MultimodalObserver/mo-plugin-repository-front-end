@@ -42,10 +42,11 @@
 
     </div>
 
-    <div class="plugin-item-line">
-      <i *ngIf="p.home_page" class="fa fa-home"></i>
+    <div class="plugin-item-line" *ngIf="p.home_page">
+      <i class="fa fa-home"></i>
       <a class="home-page" target="_blank" href="{{ p.home_page }}">{{ p.home_page }}</a>
     </div>
+
 
     <div class="plugin-item-line">
       <i class="fa fa-github"></i>
